@@ -8,6 +8,8 @@ class LoginPage extends ILoginPage {
   @override
   Widget build(BuildContext context) {
     return SignInScreen(
+      headerBuilder: (context, constraints, shrinkOffset) =>
+          Image.asset("assets/images/logo.png"),
       providerConfigs: providers,
       actions: actions,
     );
