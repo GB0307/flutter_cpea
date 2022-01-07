@@ -1,7 +1,7 @@
 import 'package:cpea/src/core/interfaces/module.dart';
 import 'package:cpea/src/core/utils/env_variables.dart';
-import 'package:cpea/src/features/login/domain/get_current_user.dart';
-import 'package:cpea/src/features/login/domain/is_logged_in.dart';
+import 'package:cpea/src/features/login/domain/usecases/get_current_user.dart';
+import 'package:cpea/src/features/login/domain/usecases/is_logged_in.dart';
 import 'package:flutterfire_ui/auth.dart';
 import 'package:get/get.dart';
 
