@@ -1,6 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gbx_core/gbx_core.dart';
-import 'package:gbx_firebase/gbx_firebase.dart';
 import 'package:gbx_login/data/datasources/cached_user_data_datasource.dart';
 import 'package:gbx_login/data/datasources/user_data_datasource.dart';
 import 'package:gbx_login/domain/errors/exceptions.dart';
@@ -54,10 +52,8 @@ class UserDataRepository<T> extends IUserDataRepository<T> {
       result = UserNotLoggedInFailure();
     } on UserDataNotFoundException {
       result = UserDataNotFoundFailure();
-    } on FirebaseAuthException catch (e) {
-      result = FirebaseAuthFailure(e);
-    } on FirebaseException catch (e) {
-      result = FirebaseFailure(e);
+    } on Exception catch (e) {
+      result = GeneralFailure(e);
     }
 
     return DResponse.from(result);

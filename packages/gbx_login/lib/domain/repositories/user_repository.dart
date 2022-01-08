@@ -6,5 +6,5 @@ abstract class IUserRepository<T extends GbxUser> {
   DResponse<bool> isLoggedIn();
   DResponse<String> getUserId();
 
-  Stream<T> getUserStream();
+  Stream<T?> getUserStream();
 }

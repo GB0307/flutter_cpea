@@ -21,7 +21,7 @@ class UserRepository<T extends GbxUser> extends IUserRepository {
   DResponse<bool> isLoggedIn() => runCatching(() => _dataSource.isLoggedIn());
 
   @override
-  Stream<GbxUser> getUserStream() {
+  Stream<GbxUser?> getUserStream() {
     return _dataSource.getUserStream();
   }
 
