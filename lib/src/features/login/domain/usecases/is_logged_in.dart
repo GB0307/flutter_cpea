@@ -4,8 +4,8 @@ import 'package:cpea/src/features/login/domain/usecases/get_current_user.dart';
 
 class IsLoggedIn extends IUseCase<bool, NoParams> {
   @override
-  Response<bool> call([NoParams params = const NoParams()]) {
+  DResponse<bool> call([NoParams params = const NoParams()]) {
     var currentUser = GetCurrentUser().call();
-    return Response<bool>.from(currentUser.data != null);
+    return DResponse<bool>.from(currentUser.data != null);
   }
 }

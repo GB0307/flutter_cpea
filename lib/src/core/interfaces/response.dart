@@ -1,9 +1,9 @@
 import 'package:cpea/src/core/interfaces/failure.dart';
 import 'package:dartz/dartz.dart';
 
-class Response<T> {
-  const Response(this._data);
-  Response.from(dynamic data)
+class DResponse<T> {
+  const DResponse(this._data);
+  DResponse.from(dynamic data)
       : _data = data is T
             ? Right(data)
             : data is IFailure

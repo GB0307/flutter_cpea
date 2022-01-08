@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class GetCurrentUser extends IUseCase<User?, NoParams> {
   @override
-  Response<User?> call([NoParams params = const NoParams()]) {
-    return Response<User?>.from(FirebaseAuth.instance.currentUser);
+  DResponse<User?> call([NoParams params = const NoParams()]) {
+    return DResponse<User?>.from(FirebaseAuth.instance.currentUser);
   }
 }
