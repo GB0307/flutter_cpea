@@ -1,7 +1,5 @@
 library gbx_core;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+export './core/interfaces/index.dart';
+export './core/errors/exceptions.dart';
+export './core/errors/failures.dart';
