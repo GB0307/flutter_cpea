@@ -1,18 +1,18 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gbx_core/gbx_core.dart';
 import 'package:gbx_login/data/datasources/user_datasource.dart';
+import 'package:gbx_login/domain/entity/user.dart';
 import 'package:gbx_login/domain/errors/exceptions.dart';
 import 'package:gbx_login/domain/errors/failures.dart';
 import 'package:gbx_login/domain/repositories/user_repository.dart';
 
-// TODO: USER ENTITY (remove firestore dependency)
-class UserRepository extends IUserRepository {
+class UserRepository<T extends GbxUser> extends IUserRepository {
   UserRepository(this._dataSource);
 
-  final IUserDataSource _dataSource;
+  final IUserDataSource<T> _dataSource;
 
   @override
-  DResponse<User> getCurrentUser() =>
+  DResponse<T> getCurrentUser() =>
       runCatching(() => _dataSource.getCurrentUser());
 
   @override

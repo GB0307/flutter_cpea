@@ -1,7 +1,5 @@
 library gbx_login;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+// TODO: IMPLEMENT AUTH_BUILDER AND USER DATA BUILDER
+// TODO: CREATE gbx_firebase_login
+// TODO: CREATE GbxUserImplementation of User
