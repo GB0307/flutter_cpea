@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gbx_core/gbx_core.dart';
 import 'package:gbx_login/data/datasources/user_datasource.dart';
 import 'package:gbx_login/domain/entity/user.dart';
@@ -20,6 +19,11 @@ class UserRepository<T extends GbxUser> extends IUserRepository {
 
   @override
   DResponse<bool> isLoggedIn() => runCatching(() => _dataSource.isLoggedIn());
+
+  @override
+  Stream<GbxUser> getUserStream() {
+    return _dataSource.getUserStream();
+  }
 
   DResponse<T> runCatching<T>(T Function() callback) {
     dynamic result;

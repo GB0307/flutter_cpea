@@ -1,10 +1,10 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gbx_login/domain/entity/user.dart';
-import 'package:gbx_login/domain/errors/exceptions.dart';
 
 abstract class IUserDataSource<T extends GbxUser> {
   T getCurrentUser();
   bool isLoggedIn();
+
+  Stream<T> getUserStream();
 }
 
 //class FirebaseUserDataSource extends IUserDataSource<GbxUser> {

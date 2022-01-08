@@ -8,7 +8,6 @@ class LoginPage extends ILoginPage {
 
   @override
   Widget build(BuildContext context) {
-    print("CTX ${Get.context}");
     return SignInScreen(
       headerBuilder: (context, constraints, shrinkOffset) =>
           Image.asset("assets/images/logo.png"),
