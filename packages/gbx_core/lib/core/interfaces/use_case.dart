@@ -1,5 +1,5 @@
-import 'package:cpea/src/core/interfaces/response.dart';
 import 'package:equatable/equatable.dart';
+import 'package:gbx_core/core/interfaces/response.dart';
 
 abstract class IUseCase<Type, Params> {
   const IUseCase();

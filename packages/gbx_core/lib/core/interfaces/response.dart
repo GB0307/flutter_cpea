@@ -1,5 +1,5 @@
-import 'package:cpea/src/core/interfaces/failure.dart';
 import 'package:dartz/dartz.dart';
+import 'failure.dart';
 
 class DResponse<T> {
   const DResponse(this._data);
