@@ -17,4 +17,18 @@ class DResponse<T> {
 
   T get data => (_data as Right<IFailure, T>).value;
   IFailure get failure => (_data as Left<IFailure, T>).value;
+
+  DResponse<V> map<V>(V Function(T v) mapper) {
+    return didSuccess
+        ? DResponse<V>.from(mapper(data))
+        : DResponse<V>.from(failure);
+  }
+
+  dynamic on({Function(T data)? success, Function(IFailure failure)? failure}) {
+    if (didFail) {
+      return failure?.call(this.failure);
+    } else {
+      return success?.call(data);
+    }
+  }
 }

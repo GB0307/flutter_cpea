@@ -1,30 +1,31 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cpea/src/features/login/domain/entities/user_data.dart';
 import 'package:cpea/src/features/login/domain/errors/exceptions.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class IUserDataDataSource {
+  const IUserDataDataSource();
+
   /// Gets the current user data from the database
   ///
   /// throws NoUserDataException if there is no data available
   /// throws UserNotLoggedInException if the user is not logged in
-  Future<UserData> getUserData();
+  Future<UserData> getUserData(String uid);
 
   /// Updates the current user data from the database
   ///
   /// throws UserNotLoggedInException if the user is not logged in
-  Future<UserData> updateUserData(UserData updatedUser, [String? userId]);
+  Future<UserData> updateUserData(String userId, UserData updatedUser);
 }
 
 class UserDataDataSource extends IUserDataDataSource {
+  const UserDataDataSource();
+
   CollectionReference<Map<String, dynamic>> get col =>
       FirebaseFirestore.instance.collection("users");
 
   @override
-  Future<UserData> getUserData() async {
-    var userId = FirebaseAuth.instance.currentUser?.uid;
-    if (userId == null) throw UserNotLoggedInException();
-    var data = await col.doc(userId).get();
+  Future<UserData> getUserData(String uid) async {
+    var data = await col.doc(uid).get();
 
     if (!data.exists) throw UserDataNotFoundException();
 
@@ -32,12 +33,8 @@ class UserDataDataSource extends IUserDataDataSource {
   }
 
   @override
-  Future<UserData> updateUserData(UserData updatedUser,
-      [String? userId]) async {
-    var uid = userId ?? FirebaseAuth.instance.currentUser?.uid;
-    if (uid == null) throw UserNotLoggedInException();
-
-    await col.doc(uid).update(updatedUser.toJson());
+  Future<UserData> updateUserData(String userId, UserData updatedUser) async {
+    await col.doc(userId).update(updatedUser.toJson());
     return updatedUser;
   }
 }

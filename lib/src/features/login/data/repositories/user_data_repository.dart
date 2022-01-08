@@ -20,14 +20,17 @@ class UserDataRepository extends IUserDataRepository {
   }
 
   @override
-  Future<DResponse<UserData>> getUserData() {
-    return runCatchingAsync(() => _dataSource.getUserData());
+  Future<DResponse<UserData>> getUserData(String uid) {
+    return runCatchingAsync(() => _dataSource.getUserData(uid));
   }
 
   @override
-  Future<DResponse<UserData>> updateUserData(UserData updatedUser,
-      [String? userId]) {
-    return runCatchingAsync(() => _dataSource.updateUserData(updatedUser));
+  Future<DResponse<UserData>> updateUserData(
+    String userId,
+    UserData updatedUser,
+  ) {
+    return runCatchingAsync(
+        () => _dataSource.updateUserData(userId, updatedUser));
   }
 
   DResponse<T> runCatching<T>(T Function() callback) {

@@ -7,8 +7,7 @@ import '../../LoginModule.dart';
 abstract class ILoginPage extends StatelessWidget {
   ILoginPage({Key? key}) : super(key: key);
 
-  List<ProviderConfiguration> get providers =>
-      LoginModule.instance.loginProviders;
+  List<ProviderConfiguration> get providers => LoginModule.loginProviders;
 
   final List<FlutterFireUIAction> actions = [
     AuthStateChangeAction<SignedIn>((context, signedIn) {
