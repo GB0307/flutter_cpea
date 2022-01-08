@@ -3,7 +3,7 @@ import 'package:cpea/src/core/interfaces/use_case.dart';
 import 'package:cpea/src/features/login/domain/repositories/user_repository.dart';
 import 'package:cpea/src/features/login/domain/usecases/get_current_user.dart';
 
-class IsLoggedIn extends IUseCase<bool, NoParams> {
+class IsLoggedIn extends IResponseUseCase<bool, NoParams> {
   IsLoggedIn(this._repo);
 
   final IUserRepository _repo;

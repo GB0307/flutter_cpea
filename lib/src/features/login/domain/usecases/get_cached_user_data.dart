@@ -3,7 +3,7 @@ import 'package:cpea/src/core/interfaces/use_case.dart';
 import 'package:cpea/src/features/login/domain/entities/user_data.dart';
 import 'package:cpea/src/features/login/domain/repositories/user_data_repository.dart';
 
-class GetCachedUserData extends IUseCase<UserData, String?> {
+class GetCachedUserData extends IResponseUseCase<UserData, String?> {
   const GetCachedUserData(this._repo);
 
   final IUserDataRepository _repo;
