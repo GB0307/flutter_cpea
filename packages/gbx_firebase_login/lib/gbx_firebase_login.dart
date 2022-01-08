@@ -2,6 +2,7 @@ library gbx_firebase_login;
 
 import 'package:gbx_core/core/interfaces/index.dart';
 import 'package:gbx_firebase_login/data/datasources/firestore_user_datasource.dart';
+import 'package:gbx_firebase_login/domain/firebase_login_module.dart';
 import 'package:gbx_login/data/datasources/cached_user_data_datasource.dart';
 import 'package:gbx_login/data/repositories/user_data_repository.dart';
 import 'package:gbx_login/data/repositories/user_repository.dart';
@@ -29,4 +30,6 @@ Future<void> initializeWith<T>({
     cachedUserDataDataSource ??
         const GetxCachedUserDataDataSource(tag: "cached_user_data"),
   );
+
+  await FirebaseLoginModule<T>(userRepo, userDataRepo).initialize();
 }

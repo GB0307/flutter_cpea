@@ -25,7 +25,7 @@ class UserRepository<T extends GbxUser> extends IUserRepository {
     return _dataSource.getUserStream();
   }
 
-  DResponse<T> runCatching<T>(T Function() callback) {
+  DResponse<V> runCatching<V>(V Function() callback) {
     dynamic result;
     try {
       result = callback();

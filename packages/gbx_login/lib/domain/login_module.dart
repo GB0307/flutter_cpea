@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:gbx_core/gbx_core.dart';
 import 'package:gbx_login/domain/entity/user.dart';
 import 'package:gbx_login/domain/repositories/user_data_repository.dart';
@@ -10,8 +11,6 @@ import 'package:get/get.dart';
 
 import 'usecases/get_cached_user_data.dart';
 import 'usecases/get_user_data.dart';
-
-// TODO: CHECK POSSIBILITY OF REPLACING MODULE BY CUBITS
 
 class LoginModule<UD, U extends GbxUser> extends IModule {
   static LoginModule get instance => Get.find<LoginModule>();
@@ -36,6 +35,11 @@ class LoginModule<UD, U extends GbxUser> extends IModule {
     updateUserData = UpdateUserData(_userDataRepo, _userRepo);
     getUserData = GetUserData(_userDataRepo, _userRepo);
 
+    Get.put<LoginModule>(this, permanent: true);
+  }
+
+  @protected
+  void injectSelf() {
     Get.put<LoginModule>(this, permanent: true);
   }
 }

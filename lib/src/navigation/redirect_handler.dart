@@ -1,4 +1,4 @@
-import 'package:cpea/src/features/login/LoginModule.dart';
+import 'package:cpea/src/features/login/login_module.dart';
 import 'package:cpea/src/navigation/routes.dart';
 import 'package:go_router/go_router.dart';
 

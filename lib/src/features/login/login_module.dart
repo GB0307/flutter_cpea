@@ -11,8 +11,6 @@ import 'package:get/get.dart';
 
 import 'domain/usecases/get_user_data.dart';
 
-// TODO: CHECK POSSIBILITY OF REPLACING MODULE BY CUBITS
-
 class LoginModule extends IModule {
   static LoginModule get instance => Get.find<LoginModule>();
 
@@ -21,7 +19,7 @@ class LoginModule extends IModule {
   static final List<ProviderConfiguration> loginProviders = [
     const EmailProviderConfiguration(),
     GoogleProviderConfiguration(
-      clientId: EnvVariables.GOOGLE_CLIENT_ID,
+      clientId: EnvVariables.googleClientId,
     ),
   ];
 
