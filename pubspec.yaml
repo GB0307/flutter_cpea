@@ -29,6 +29,11 @@ dependencies:
   flutter_dotenv: ^5.0.2
   json_serializable: ^6.1.3
 
+  gbx_core:
+    path: packages/gbx_core
+  gbx_firebase:
+    path: packages/gbx_firebase
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

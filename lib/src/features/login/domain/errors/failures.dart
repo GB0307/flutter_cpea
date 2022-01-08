@@ -1,4 +1,4 @@
-import 'package:cpea/src/core/interfaces/failure.dart';
+import 'package:gbx_core/gbx_core.dart';
 
 class UserNotLoggedInFailure extends IFailure {}
 

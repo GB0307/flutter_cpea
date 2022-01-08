@@ -1,9 +1,9 @@
-import 'package:cpea/src/core/interfaces/response.dart';
 import 'package:cpea/src/features/login/data/datasources/user_datasource.dart';
 import 'package:cpea/src/features/login/domain/errors/exceptions.dart';
 import 'package:cpea/src/features/login/domain/errors/failures.dart';
 import 'package:cpea/src/features/login/domain/repositories/user_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:gbx_core/gbx_core.dart';
 
 class UserRepository extends IUserRepository {
   UserRepository(this._dataSource);

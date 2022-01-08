@@ -1,5 +1,5 @@
-import 'package:cpea/src/core/interfaces/response.dart';
 import 'package:cpea/src/features/login/domain/entities/user_data.dart';
+import 'package:gbx_core/gbx_core.dart';
 
 abstract class IUserDataRepository {
   const IUserDataRepository();
