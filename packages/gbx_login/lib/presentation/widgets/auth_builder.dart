@@ -7,8 +7,8 @@ import 'package:gbx_login/presentation/bloc/user_data_cubit.dart';
 typedef UserWidgetBuilder<U, UD> = Widget Function(
     BuildContext ctx, U? user, UD? data);
 
-class AuthConsumer<U extends GbxUser, UD> extends StatelessWidget {
-  const AuthConsumer({Key? key, required this.builder}) : super(key: key);
+class AuthBuilder<U extends GbxUser, UD> extends StatelessWidget {
+  const AuthBuilder({Key? key, required this.builder}) : super(key: key);
 
   final UserWidgetBuilder<U, UserState<UD>> builder;
 
