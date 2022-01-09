@@ -26,6 +26,7 @@ class FirebaseUserDataSource extends IUserDataSource<GbxUser> {
       email: user.email,
       phoneNumber: user.phoneNumber,
       displayName: user.displayName,
+      photoUrl: user.photoURL,
     );
   }
 

@@ -13,6 +13,7 @@ class UserData with _$UserData {
     int? telefone,
     required String nascimento,
     required String cpf,
+    String? photoUrl,
   }) = _UserData;
 
   factory UserData.fromJson(Map<String, dynamic> json) =>

@@ -14,6 +14,7 @@ _$_UserData _$$_UserDataFromJson(Map<String, dynamic> json) => _$_UserData(
       telefone: json['telefone'] as int?,
       nascimento: json['nascimento'] as String,
       cpf: json['cpf'] as String,
+      photoUrl: json['photoUrl'] as String?,
     );
 
 Map<String, dynamic> _$$_UserDataToJson(_$_UserData instance) =>
@@ -25,4 +26,5 @@ Map<String, dynamic> _$$_UserDataToJson(_$_UserData instance) =>
       'telefone': instance.telefone,
       'nascimento': instance.nascimento,
       'cpf': instance.cpf,
+      'photoUrl': instance.photoUrl,
     };
