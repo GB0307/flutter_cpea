@@ -2,6 +2,8 @@
     "appTitle": "cpea",
     "@appTitle": {
       "description": "The title of the application"
-    }
+    },
+
+    "welcome": "Bem-vindo"
 }
   

@@ -11,12 +11,11 @@ class L18n {
   static const LocalizationsDelegate<AppLocalizations> delegate =
       AppLocalizations.delegate;
 
-  static AppLocalizations? of(BuildContext context) {
-    return AppLocalizations.of(context);
+  static AppLocalizations of(BuildContext context) {
+    return AppLocalizations.of(context)!;
   }
 
-  static AppLocalizations? get tr {
-    var ctx = Get.context;
-    return ctx == null ? null : of(ctx);
+  static AppLocalizations get tr {
+    return of(Get.context!);
   }
 }

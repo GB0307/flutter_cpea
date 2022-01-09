@@ -1,4 +1,4 @@
-import 'package:cpea/src/core/errors/profile_header.dart';
+import 'package:cpea/src/features/home/presentation/widgets/cpea_header.dart';
 import 'package:flutter/material.dart';
 import 'package:gbx_login/gbx_login.dart';
 
@@ -11,7 +11,9 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
-        children: [const ProfileHeader()],
+        children: const [
+          CpeaHeader(),
+        ],
       ),
     );
   }
