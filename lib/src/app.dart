@@ -1,6 +1,7 @@
 import 'package:cpea/src/core/utils/l18n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:gbx_firebase_login/gbx_firebase_login.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:go_router/go_router.dart';
 

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 class FirebaseLoginModule<T> extends LoginModule<T, GbxUser> {
   static FirebaseLoginModule<V> instance<V>() =>
-      Get.find<FirebaseLoginModule<V>>();
+      Get.find<LoginModule>() as FirebaseLoginModule<V>;
 
   FirebaseLoginModule(
       IUserRepository<GbxUser> userRepo, IUserDataRepository<T> userDataRepo)
@@ -11,6 +11,6 @@ class FirebaseLoginModule<T> extends LoginModule<T, GbxUser> {
 
   @override
   void injectSelf() {
-    Get.put<FirebaseLoginModule<T>>(this, permanent: true);
+    Get.put<LoginModule>(this, permanent: true);
   }
 }

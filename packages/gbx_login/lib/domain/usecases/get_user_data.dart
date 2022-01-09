@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:gbx_core/gbx_core.dart';
 import 'package:gbx_login/domain/repositories/user_data_repository.dart';
 import 'package:gbx_login/domain/repositories/user_repository.dart';
@@ -13,15 +14,12 @@ class GetUserData<T> extends IAsyncUseCase<T, String?> {
   Future<DResponse<T>> call([String? userId]) async {
     var uid = userId ?? "";
 
-    if (uid.isEmpty) {
+    if (userId == null) {
       var resp = _userRepo.getUserId();
-      var failedResp = resp.on(
-        success: (data) => uid = data,
-        failure: (failure) => DResponse<T>.from(failure),
-      );
-      if (failedResp != null) {
-        return failedResp;
+      if (resp.didFail) {
+        return DResponse(Left<IFailure, T>(resp.failure));
       }
+      uid = resp.data;
     }
 
     return await _repo.getUserData(uid);

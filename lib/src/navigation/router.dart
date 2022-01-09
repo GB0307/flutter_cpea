@@ -1,4 +1,8 @@
+import 'package:cpea/src/features/login/domain/entities/user_data.dart';
+import 'package:cpea/src/features/login/presentation/pages/login_guard_page.dart';
 import 'package:cpea/src/navigation/redirect_handler.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:gbx_firebase_login/presentation/widgets/firebase_auth_provider.dart';
 
 import './routes.dart';
 import 'package:go_router/go_router.dart';
@@ -11,5 +15,7 @@ class AppRouter extends GoRouter {
           urlPathStrategy: UrlPathStrategy.path,
           initialLocation: Routes.initialRoute,
           redirect: (state) => RedirectHandler.redirect(state),
+          navigatorBuilder: (context, state, child) =>
+              FirebaseAuthProvider<UserData>(child: child),
         );
 }

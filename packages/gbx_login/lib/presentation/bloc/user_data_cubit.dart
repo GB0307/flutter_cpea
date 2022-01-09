@@ -3,10 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gbx_login/domain/login_module.dart';
 import 'package:gbx_login/domain/entity/user.dart';
 import 'package:gbx_login/domain/usecases/update_user_data.dart';
-import 'package:get/get.dart';
 
 class UserDataCubit<T> extends Cubit<UserState<T>> {
-  UserDataCubit([this.tag]) : super(Get.find<UserState<T>>(tag: tag));
+  UserDataCubit([this.tag]) : super(const UserState(null)) {
+    getUserData();
+  }
 
   LoginModule get _module => (LoginModule.instance as LoginModule<T, GbxUser>);
 

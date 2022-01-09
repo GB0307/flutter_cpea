@@ -33,6 +33,10 @@ dependencies:
     path: packages/gbx_core
   gbx_firebase:
     path: packages/gbx_firebase
+  gbx_login:
+    path: packages/gbx_login
+  gbx_firebase_login:
+    path: packages/gbx_firebase_login
 
 dev_dependencies:
   flutter_test:

@@ -1,0 +1,29 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"name": "main",
+			"path": "lib"
+		},
+		{
+			"name": "gbx_core",
+			"path": "packages\\gbx_core\\lib"
+		},
+		{
+			"name": "gbx_login",
+			"path": "packages\\gbx_login\\lib"
+		},
+		{
+			"name": "gbx_firebase",
+			"path": "packages\\gbx_firebase\\lib"
+		},
+		{
+			"name": "gbx_firebase_login",
+			"path": "packages\\gbx_firebase_login\\lib"
+		}
+	],
+	"settings": {
+	}
+}

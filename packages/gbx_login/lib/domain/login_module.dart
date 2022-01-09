@@ -34,8 +34,9 @@ class LoginModule<UD, U extends GbxUser> extends IModule {
     getCachedUserData = GetCachedUserData(_userDataRepo);
     updateUserData = UpdateUserData(_userDataRepo, _userRepo);
     getUserData = GetUserData(_userDataRepo, _userRepo);
+    getUserStream = GetUserStream(_userRepo);
 
-    Get.put<LoginModule>(this, permanent: true);
+    injectSelf();
   }
 
   @protected

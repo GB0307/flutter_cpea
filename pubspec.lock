@@ -434,6 +434,20 @@ packages:
       relative: true
     source: path
     version: "0.0.1"
+  gbx_firebase_login:
+    dependency: "direct main"
+    description:
+      path: "packages/gbx_firebase_login"
+      relative: true
+    source: path
+    version: "0.0.1"
+  gbx_login:
+    dependency: "direct main"
+    description:
+      path: "packages/gbx_login"
+      relative: true
+    source: path
+    version: "0.0.1"
   get:
     dependency: "direct main"
     description:
