@@ -37,4 +37,7 @@ class UserRepository<T extends GbxUser> extends IUserRepository {
 
     return DResponse.from(result);
   }
+
+  @override
+  Future<void> signOut() => _dataSource.signOut();
 }

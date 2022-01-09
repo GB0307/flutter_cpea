@@ -6,6 +6,7 @@ import 'package:gbx_login/domain/repositories/user_repository.dart';
 import 'package:gbx_login/domain/usecases/get_current_user.dart';
 import 'package:gbx_login/domain/usecases/get_user_stream.dart';
 import 'package:gbx_login/domain/usecases/is_logged_in.dart';
+import 'package:gbx_login/domain/usecases/sign_out.dart';
 import 'package:gbx_login/domain/usecases/update_user_data.dart';
 import 'package:get/get.dart';
 
@@ -26,6 +27,7 @@ class LoginModule<UD, U extends GbxUser> extends IModule {
   late final UpdateUserData<UD> updateUserData;
   late final GetUserData<UD> getUserData;
   late final GetUserStream<U> getUserStream;
+  late final SignOut signOut;
 
   @override
   Future<void> initialize() async {
@@ -35,6 +37,7 @@ class LoginModule<UD, U extends GbxUser> extends IModule {
     updateUserData = UpdateUserData(_userDataRepo, _userRepo);
     getUserData = GetUserData(_userDataRepo, _userRepo);
     getUserStream = GetUserStream(_userRepo);
+    signOut = SignOut(_userRepo);
 
     injectSelf();
   }

@@ -4,5 +4,7 @@ abstract class IUserDataSource<T extends GbxUser> {
   T getCurrentUser();
   bool isLoggedIn();
 
+  Future<void> signOut();
+
   Stream<T?> getUserStream();
 }

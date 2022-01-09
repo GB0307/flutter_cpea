@@ -9,6 +9,7 @@ class GetCurrentUser<T extends GbxUser> extends IUseCase<T?, NoParams> {
 
   @override
   T? call([NoParams params = const NoParams()]) {
-    return _repo.getCurrentUser().data;
+    var resp = _repo.getCurrentUser();
+    return resp.didSuccess ? resp.data : null;
   }
 }

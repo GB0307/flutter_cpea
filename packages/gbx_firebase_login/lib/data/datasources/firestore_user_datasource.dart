@@ -35,4 +35,7 @@ class FirebaseUserDataSource extends IUserDataSource<GbxUser> {
         .userChanges()
         .map((event) => event != null ? _userToGbxUser(event) : null);
   }
+
+  @override
+  Future<void> signOut() => FirebaseAuth.instance.signOut();
 }

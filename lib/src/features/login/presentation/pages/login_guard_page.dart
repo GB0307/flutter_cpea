@@ -4,12 +4,19 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_ui/auth.dart';
 import 'package:gbx_firebase_login/gbx_firebase_login.dart';
-import 'package:gbx_login/presentation/widgets/auth_guard.dart';
+import 'package:gbx_login/gbx_login.dart';
 
 class CPEALoginGuard extends StatelessWidget {
-  const CPEALoginGuard({Key? key, required this.page}) : super(key: key);
+  const CPEALoginGuard({Key? key, required this.page})
+      : builder = null,
+        super(key: key);
 
-  final Widget page;
+  const CPEALoginGuard.builder({Key? key, required this.builder})
+      : page = null,
+        super(key: key);
+
+  final Widget? page;
+  final UserWidgetBuilder<GbxUser, UserData?>? builder;
 
   static List<ProviderConfiguration> get providers => [
         const EmailProviderConfiguration(),
@@ -19,10 +26,11 @@ class CPEALoginGuard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AuthGuard<UserData>(
-      builder: (context) => page,
-      noDataBuilder: (context) => noDataWidget(),
-      loadingDataBuilder: (context) => loadingDataWidget(),
-      noUserBuilder: (context) => LoginPage(
+      builder: (context, user, userData) =>
+          page ?? builder?.call(context, user, userData?.user) ?? Container(),
+      noDataBuilder: (context, user, userData) => noDataWidget(),
+      loadingDataBuilder: (context, user, userData) => loadingDataWidget(),
+      noUserBuilder: (context, user, userData) => LoginPage(
         providers: providers,
         headerBuilder: (ctx, constraints, shrinkOffset) =>
             Image.asset("assets/images/logo.png"),
@@ -42,7 +50,7 @@ class CPEALoginGuard extends StatelessWidget {
           SafeArea(
               child: TextButton(
             child: const Text("Log Out"),
-            onPressed: () => FirebaseAuth.instance.signOut(),
+            onPressed: () => FirebaseLoginModule.instance().signOut(),
           ))
         ],
       ),

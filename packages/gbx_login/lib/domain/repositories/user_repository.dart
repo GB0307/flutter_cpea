@@ -7,4 +7,6 @@ abstract class IUserRepository<T extends GbxUser> {
   DResponse<String> getUserId();
 
   Stream<T?> getUserStream();
+
+  Future<void> signOut();
 }
