@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 final cardTheme = CardTheme(
   color: backgroundColor,
   shape: RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(50),
+    borderRadius: BorderRadius.circular(4),
   ),
 );
 

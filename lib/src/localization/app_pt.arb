@@ -4,6 +4,7 @@
       "description": "The title of the application"
     },
 
-    "welcome": "Bem-vindo"
+    "welcome": "Bem-vindo",
+    "hi": "Olá"
 }
   
