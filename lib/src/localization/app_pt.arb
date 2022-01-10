@@ -5,6 +5,11 @@
     },
 
     "welcome": "Bem-vindo",
-    "hi": "Olá"
+    "hi": "Olá",
+
+  "home": "Início",
+  "hall": "Portaria",
+  "mail": "Correios",
+  "schedules": "Agendamentos"
 }
   

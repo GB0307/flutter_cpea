@@ -1,5 +1,10 @@
 {
   "appTitle": "cpea",
   "welcome": "Welcome",
-  "hi": "Hi"
+  "hi": "Hi",
+
+  "home": "Home",
+  "hall": "Hall",
+  "mail": "Mail",
+  "schedules": "Schedule"
 }

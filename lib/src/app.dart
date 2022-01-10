@@ -35,3 +35,11 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+
+// FEATURES:
+// - Entradas
+// - Correio
+// - Mensagens
+// - Agendamento
+// - Horarios de funcionamento
