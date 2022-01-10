@@ -6,4 +6,15 @@ class GeneralFailure extends IFailure {
 
   @override
   List<dynamic> get props => [exception];
+
+  @override
+  String toString() => exception.toString();
 }
+
+class InvalidDataFailure extends GeneralFailure {
+  const InvalidDataFailure(Exception exception) : super(exception);
+}
+
+class NoDataFailure extends IFailure {}
+
+class UnauthorizedFailure extends IFailure {}

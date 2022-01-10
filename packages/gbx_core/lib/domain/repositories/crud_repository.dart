@@ -6,6 +6,6 @@ abstract class ICRUDRepository<T> extends IRepository {
 
   Future<DResponse<T>> create(T data);
   Future<DResponse<T>> read(String id);
-  Future<DResponse<T>> update(T updated);
+  Future<DResponse<T>> update(String id, T updated);
   Future<DResponse<void>> delete(String id);
 }

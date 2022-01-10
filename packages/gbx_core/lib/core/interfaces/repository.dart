@@ -30,7 +30,7 @@ abstract class IRepository {
   IFailure? catchExceptions(Exception e);
 
   IFailure? on<T extends Exception>(
-      Exception e, IFailure Function(T exception) getter) {
-    if (e is T) return getter(e);
+      Exception exception, IFailure Function(T e) getter) {
+    if (exception is T) return getter(exception);
   }
 }

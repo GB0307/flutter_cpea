@@ -1,3 +1,5 @@
+import 'package:gbx_core/core/errors/exceptions.dart';
+import 'package:gbx_core/core/errors/failures.dart';
 import 'package:gbx_core/core/interfaces/index.dart';
 import 'package:gbx_core/data/datasources/crud_datasource.dart';
 import 'package:gbx_core/domain/repositories/crud_repository.dart';
@@ -20,9 +22,12 @@ class CRUDRepository<T> extends ICRUDRepository<T> {
       runCatchingAsync(() => _datasource.read(id));
 
   @override
-  Future<DResponse<T>> update(T updated) =>
-      runCatchingAsync(() => _datasource.update(updated));
+  Future<DResponse<T>> update(String id, T updated) =>
+      runCatchingAsync(() => _datasource.update(id, updated));
 
   @override
-  IFailure? catchExceptions(Exception e) {}
+  IFailure? catchExceptions(Exception exception) {
+    return on<NoDataException>(exception, (e) => NoDataFailure()) ??
+        on<UnauthorizedException>(exception, (e) => UnauthorizedFailure());
+  }
 }
