@@ -39,6 +39,7 @@ dependencies:
     path: packages/gbx_firebase_login
   google_fonts: ^2.2.0
   salomon_bottom_bar: ^3.2.0
+  logger: ^1.1.0
 
 dev_dependencies:
   flutter_test:
