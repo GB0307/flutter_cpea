@@ -23,11 +23,13 @@ class _$NewsTearOff {
   const _$NewsTearOff();
 
   _News call(
-      {required String title,
+      {required String id,
+      required String title,
       required String text,
       required DateTime publishDate,
       String? headerImage}) {
     return _News(
+      id: id,
       title: title,
       text: text,
       publishDate: publishDate,
@@ -45,6 +47,7 @@ const $News = _$NewsTearOff();
 
 /// @nodoc
 mixin _$News {
+  String get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get text => throw _privateConstructorUsedError;
   DateTime get publishDate => throw _privateConstructorUsedError;
@@ -60,7 +63,11 @@ abstract class $NewsCopyWith<$Res> {
   factory $NewsCopyWith(News value, $Res Function(News) then) =
       _$NewsCopyWithImpl<$Res>;
   $Res call(
-      {String title, String text, DateTime publishDate, String? headerImage});
+      {String id,
+      String title,
+      String text,
+      DateTime publishDate,
+      String? headerImage});
 }
 
 /// @nodoc
@@ -73,12 +80,17 @@ class _$NewsCopyWithImpl<$Res> implements $NewsCopyWith<$Res> {
 
   @override
   $Res call({
+    Object? id = freezed,
     Object? title = freezed,
     Object? text = freezed,
     Object? publishDate = freezed,
     Object? headerImage = freezed,
   }) {
     return _then(_value.copyWith(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -105,7 +117,11 @@ abstract class _$NewsCopyWith<$Res> implements $NewsCopyWith<$Res> {
       __$NewsCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String title, String text, DateTime publishDate, String? headerImage});
+      {String id,
+      String title,
+      String text,
+      DateTime publishDate,
+      String? headerImage});
 }
 
 /// @nodoc
@@ -119,12 +135,17 @@ class __$NewsCopyWithImpl<$Res> extends _$NewsCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? id = freezed,
     Object? title = freezed,
     Object? text = freezed,
     Object? publishDate = freezed,
     Object? headerImage = freezed,
   }) {
     return _then(_News(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -149,13 +170,16 @@ class __$NewsCopyWithImpl<$Res> extends _$NewsCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_News implements _News {
   _$_News(
-      {required this.title,
+      {required this.id,
+      required this.title,
       required this.text,
       required this.publishDate,
       this.headerImage});
 
   factory _$_News.fromJson(Map<String, dynamic> json) => _$$_NewsFromJson(json);
 
+  @override
+  final String id;
   @override
   final String title;
   @override
@@ -167,7 +191,7 @@ class _$_News implements _News {
 
   @override
   String toString() {
-    return 'News(title: $title, text: $text, publishDate: $publishDate, headerImage: $headerImage)';
+    return 'News(id: $id, title: $title, text: $text, publishDate: $publishDate, headerImage: $headerImage)';
   }
 
   @override
@@ -175,6 +199,7 @@ class _$_News implements _News {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _News &&
+            const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.title, title) &&
             const DeepCollectionEquality().equals(other.text, text) &&
             const DeepCollectionEquality()
@@ -186,6 +211,7 @@ class _$_News implements _News {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(title),
       const DeepCollectionEquality().hash(text),
       const DeepCollectionEquality().hash(publishDate),
@@ -204,13 +230,16 @@ class _$_News implements _News {
 
 abstract class _News implements News {
   factory _News(
-      {required String title,
+      {required String id,
+      required String title,
       required String text,
       required DateTime publishDate,
       String? headerImage}) = _$_News;
 
   factory _News.fromJson(Map<String, dynamic> json) = _$_News.fromJson;
 
+  @override
+  String get id;
   @override
   String get title;
   @override
