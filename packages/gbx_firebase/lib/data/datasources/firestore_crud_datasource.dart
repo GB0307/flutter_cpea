@@ -1,7 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart' hide Query;
+import 'package:cloud_firestore/cloud_firestore.dart' as firestore show Query;
+
 import 'package:gbx_core/gbx_core.dart';
 
-class FirestoreCRUDDataSource<T> extends ICRUDDataSource<T> {
+class FirestoreCRUDDataSource<T extends Identifiable>
+    extends ICRUDDataSource<T> {
   const FirestoreCRUDDataSource(
       {required this.collection,
       required this.deserializer,
@@ -34,8 +37,8 @@ class FirestoreCRUDDataSource<T> extends ICRUDDataSource<T> {
   }
 
   @override
-  Future<T> update(String id, T updated) async {
-    var doc = col.doc(id);
+  Future<T> update(T updated) async {
+    var doc = col.doc(updated.id);
     var map = serializer(updated);
     await doc.update(map);
     return fromMap(doc.id, map);
@@ -54,7 +57,7 @@ class FirestoreCRUDDataSource<T> extends ICRUDDataSource<T> {
 
   @override
   Future<List<T>> query(QueryParams query) async {
-    Query<T> q = col;
+    firestore.Query<T> q = col;
     if (query.orderBy != null) q = q.orderBy(query.orderBy!);
     if (query.startAt != null) q = q.startAt([query.startAt]);
     if (query.startAfter != null) q = q.startAfter([query.startAfter]);
@@ -65,10 +68,6 @@ class FirestoreCRUDDataSource<T> extends ICRUDDataSource<T> {
     if (query.limit != null) q = q.limit(query.limit!);
     if (query.limitLast != null) q = q.limitToLast(query.limitLast!);
 
-    return (await q.get())
-        .docs
-        .map((e) => e.data())
-        .where((element) => element != null)
-        .toList();
+    return (await q.get()).docs.map((e) => e.data()).toList();
   }
 }

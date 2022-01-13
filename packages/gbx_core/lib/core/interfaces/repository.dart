@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:gbx_core/core/errors/failures.dart';
 import 'package:gbx_core/core/interfaces/index.dart';
 import 'package:logger/logger.dart';
@@ -27,8 +28,10 @@ abstract class IRepository {
     }
   }
 
+  @protected
   IFailure? catchExceptions(Exception e);
 
+  @protected
   IFailure? on<T extends Exception>(
       Exception exception, IFailure Function(T e) getter) {
     if (exception is T) return getter(exception);

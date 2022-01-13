@@ -2,9 +2,10 @@ import 'package:gbx_core/core/errors/exceptions.dart';
 import 'package:gbx_core/core/errors/failures.dart';
 import 'package:gbx_core/core/interfaces/index.dart';
 import 'package:gbx_core/data/datasources/crud_datasource.dart';
+import 'package:gbx_core/domain/params/query_params.dart';
 import 'package:gbx_core/domain/repositories/crud_repository.dart';
 
-class CRUDRepository<T> extends ICRUDRepository<T> {
+class CRUDRepository<T extends Identifiable> extends ICRUDRepository<T> {
   const CRUDRepository(this._datasource) : super();
 
   final ICRUDDataSource<T> _datasource;
@@ -23,7 +24,11 @@ class CRUDRepository<T> extends ICRUDRepository<T> {
 
   @override
   Future<DResponse<T>> update(String id, T updated) =>
-      runCatchingAsync(() => _datasource.update(id, updated));
+      runCatchingAsync(() => _datasource.update(updated));
+
+  @override
+  Future<DResponse<List<T>>> query(QueryParams params) =>
+      runCatchingAsync(() => _datasource.query(params));
 
   @override
   IFailure? catchExceptions(Exception exception) {

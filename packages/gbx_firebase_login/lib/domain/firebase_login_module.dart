@@ -10,7 +10,7 @@ class FirebaseLoginModule<T> extends LoginModule<T, GbxUser> {
       : super(userRepo, userDataRepo);
 
   @override
-  void injectSelf() {
+  Future<void> injectSelf() async {
     Get.put<LoginModule>(this, permanent: true);
   }
 }

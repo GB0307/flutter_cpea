@@ -30,7 +30,7 @@ class LoginModule<UD, U extends GbxUser> extends IModule {
   late final SignOut signOut;
 
   @override
-  Future<void> initialize() async {
+  Future<void> initializeDependencies() async {
     isLoggedIn = IsLoggedIn(_userRepo);
     getCurrentUser = GetCurrentUser(_userRepo);
     getCachedUserData = GetCachedUserData(_userDataRepo);
@@ -38,12 +38,10 @@ class LoginModule<UD, U extends GbxUser> extends IModule {
     getUserData = GetUserData(_userDataRepo, _userRepo);
     getUserStream = GetUserStream(_userRepo);
     signOut = SignOut(_userRepo);
-
-    injectSelf();
   }
 
-  @protected
-  void injectSelf() {
+  @override
+  Future<void> injectSelf() async {
     Get.put<LoginModule>(this, permanent: true);
   }
 }
