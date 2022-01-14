@@ -168,6 +168,7 @@ class __$NewsCopyWithImpl<$Res> extends _$NewsCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
+@Implements<Identifiable>()
 class _$_News implements _News {
   _$_News(
       {required this.id,
@@ -228,7 +229,7 @@ class _$_News implements _News {
   }
 }
 
-abstract class _News implements News {
+abstract class _News implements News, Identifiable {
   factory _News(
       {required String id,
       required String title,

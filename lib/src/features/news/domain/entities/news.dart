@@ -1,10 +1,12 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:gbx_core/core/interfaces/index.dart';
 
 part 'news.freezed.dart';
 part 'news.g.dart';
 
 @freezed
-class News with _$News {
+class News with _$News implements Identifiable {
+  @Implements<Identifiable>()
   factory News({
     required String id,
     required String title,

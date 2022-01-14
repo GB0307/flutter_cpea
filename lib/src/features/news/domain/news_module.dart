@@ -1,15 +1,16 @@
-import 'package:gbx_core/core/interfaces/index.dart';
+import 'package:gbx_core/gbx_core.dart';
+import 'package:get/get.dart';
 
-class NewsModule extends IModule {
-  @override
-  Future<void> initializeDependencies() {
-    // TODO: implement initializeDependencies
-    throw UnimplementedError();
-  }
+import 'entities/news.dart';
+
+class NewsModule extends CRUDModule<News> {
+  static NewsModule get instance => Get.find<NewsModule>();
+
+  NewsModule({required ICRUDRepository<News> repository})
+      : super(repository: repository);
 
   @override
-  Future<void> injectSelf() {
-    // TODO: implement injectSelf
-    throw UnimplementedError();
+  Future<void> injectSelf() async {
+    Get.put<NewsModule>(this, permanent: true);
   }
 }

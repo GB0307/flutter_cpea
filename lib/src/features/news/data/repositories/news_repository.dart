@@ -14,5 +14,3 @@ class NewsRepository extends FirebaseRepository<News> {
   static News newsFromJson(Map<String, dynamic> map) => News.fromJson(map);
   static Map<String, dynamic> newsToJson(News obj) => obj.toJson();
 }
-
-//TODO: FIrebaseModule to initialize dependencies
