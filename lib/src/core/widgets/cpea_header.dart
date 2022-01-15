@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 class CpeaHeader extends StatelessWidget {
   const CpeaHeader({Key? key, this.trailing, this.onTap}) : super(key: key);
 
-  final UserWidgetBuilder<GbxUser, UserData>? trailing;
+  final WidgetBuilder? trailing;
   final void Function()? onTap;
 
   @override
@@ -21,7 +21,13 @@ class CpeaHeader extends StatelessWidget {
         horizontal: horizontalPadding,
       ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          FirebaseAuthBuilder<UserData>(
+            builder: (ctx, user, data) =>
+                imageWidget.call(ctx, user, data?.user) ?? Container(),
+          ),
+          const SizedBox(width: padding),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -30,21 +36,16 @@ class CpeaHeader extends StatelessWidget {
                   "${L18n.tr.welcome},",
                   style: Get.textTheme.subtitle2,
                 ),
-                const SizedBox(height: 6),
                 FirebaseAuthBuilder<UserData>(
                   builder: (ctx, user, data) => Text(
                     firstLastName(data?.user?.name ?? user?.displayName ?? ""),
-                    style: Get.textTheme.headline4,
+                    style: Get.textTheme.headline5,
                   ),
                 ),
               ],
             ),
           ),
-          FirebaseAuthBuilder<UserData>(
-            builder: (ctx, user, data) =>
-                (trailing ?? imageWidget).call(ctx, user, data?.user) ??
-                Container(),
-          ),
+          if (trailing != null) trailing!(context),
         ],
       ),
     );
@@ -66,6 +67,7 @@ class CpeaHeader extends StatelessWidget {
     var url = uData?.photoUrl ?? user?.photoUrl;
     if (url != null) {
       return ImageCard(
+        size: 58,
         url: url,
         onTap: onTap,
         loadingBuilder: _loadingPlaceholder,

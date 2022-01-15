@@ -24,6 +24,7 @@ class ImageCard extends StatelessWidget {
       height: size,
       width: size,
       child: Card(
+        elevation: 0,
         clipBehavior: Clip.antiAliasWithSaveLayer,
         child: InkWell(
           onTap: onTap,
