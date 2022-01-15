@@ -1,3 +1,4 @@
+import 'package:cpea/src/core/theme/consts.dart';
 import 'package:cpea/src/core/utils/l18n.dart';
 import 'package:cpea/src/navigation/routes.dart';
 import 'package:flutter/material.dart';
@@ -44,10 +45,13 @@ class BottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SalomonBottomBar(
-      currentIndex: routes.indexOf(GoRouter.of(context).location),
-      onTap: (i) => context.go(routes[i]),
-      items: routes.map((e) => items[e]!).toList(),
+    return Material(
+      elevation: elevation3,
+      child: SalomonBottomBar(
+        currentIndex: routes.indexOf(GoRouter.of(context).location),
+        onTap: (i) => context.go(routes[i]),
+        items: routes.map((e) => items[e]!).toList(),
+      ),
     );
   }
 }

@@ -6,5 +6,9 @@
   "home": "Home",
   "hall": "Hall",
   "mail": "Mail",
-  "schedules": "Schedule"
+  "schedules": "Schedule",
+
+  "date": "{date}",
+  "compactDate": "{date}"
+  
 }

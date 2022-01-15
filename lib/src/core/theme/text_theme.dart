@@ -12,6 +12,7 @@ final textTheme = _montSerratTheme.copyWith(
   headline5: _montSerratTheme.headline5
       ?.copyWith(fontWeight: FontWeight.bold, color: Colors.black87),
   headline6: _montSerratTheme.headline6?.copyWith(fontWeight: FontWeight.bold),
+  subtitle1: _titleTextTheme.subtitle1?.copyWith(fontWeight: FontWeight.w600),
   subtitle2: _montSerratTheme.subtitle2
       ?.copyWith(fontWeight: FontWeight.w600, color: Colors.grey[600]),
 );

@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 class QueryParams extends Equatable {
   const QueryParams({
     this.orderBy,
+    this.ascendingOrder = true,
     this.startAt,
     this.startAfter,
     this.entAt,
@@ -18,6 +19,7 @@ class QueryParams extends Equatable {
   final Object? endBefore;
   final int? limit;
   final int? limitLast;
+  final bool ascendingOrder;
 
   @override
   List<Object?> get props => [

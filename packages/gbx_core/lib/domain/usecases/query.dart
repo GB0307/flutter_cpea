@@ -8,7 +8,7 @@ class Query<T extends Identifiable>
   final ICRUDRepository<T> _repository;
 
   @override
-  Future<DResponse<List<T>>> call(QueryParams params) {
+  Future<DResponse<List<T>>> call([QueryParams params = const QueryParams()]) {
     return _repository.query(params);
   }
 }

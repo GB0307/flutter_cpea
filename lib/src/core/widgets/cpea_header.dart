@@ -1,3 +1,4 @@
+import 'package:cpea/src/core/theme/consts.dart';
 import 'package:cpea/src/core/utils/l18n.dart';
 import 'package:cpea/src/core/widgets/image_card.dart';
 import 'package:cpea/src/features/login/domain/entities/user_data.dart';
@@ -14,7 +15,10 @@ class CpeaHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(24),
+      margin: const EdgeInsets.symmetric(
+        vertical: doublePadding,
+        horizontal: horizontalPadding,
+      ),
       child: Row(
         children: [
           Expanded(

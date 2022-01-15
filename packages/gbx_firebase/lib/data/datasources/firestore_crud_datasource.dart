@@ -24,7 +24,7 @@ class FirestoreCRUDDataSource<T extends Identifiable>
   Future<T> create(T data) async {
     var doc = col.doc();
     await doc.set(data);
-    return fromMap(doc.id, serializer(data));
+    return fromMap(doc.id, {...serializer(data), 'id': doc.id});
   }
 
   @override
@@ -58,7 +58,9 @@ class FirestoreCRUDDataSource<T extends Identifiable>
   @override
   Future<List<T>> query(QueryParams query) async {
     firestore.Query<T> q = col;
-    if (query.orderBy != null) q = q.orderBy(query.orderBy!);
+    if (query.orderBy != null) {
+      q = q.orderBy(query.orderBy!, descending: !query.ascendingOrder);
+    }
     if (query.startAt != null) q = q.startAt([query.startAt]);
     if (query.startAfter != null) q = q.startAfter([query.startAfter]);
 

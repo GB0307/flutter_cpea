@@ -10,6 +10,29 @@
   "home": "Início",
   "hall": "Portaria",
   "mail": "Correios",
-  "schedules": "Agendamentos"
+  "schedules": "Agendamentos",
+
+  "date": "{date}",
+  "@date": {
+    "description": "A message with a date parameter",
+    "placeholders": {
+      "date": {
+        "type": "DateTime",
+        "format": "yMMMMd"
+      }
+    }
+  },
+  "compactDate": "{date}",
+  "@compactDate": {
+    "description": "A message with a date parameter",
+    "placeholders": {
+      "date": {
+        "type": "DateTime",
+        "format": "yMd"
+      }
+    }
+  }
+  
+  
 }
   

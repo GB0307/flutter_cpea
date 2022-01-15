@@ -1,5 +1,9 @@
+import 'package:cpea/src/core/theme/consts.dart';
 import 'package:cpea/src/core/widgets/bottom_nav_bar.dart';
-import 'package:cpea/src/features/news/presentation/widgets/cpea_header.dart';
+import 'package:cpea/src/features/news/presentation/bloc/news_cubit.dart';
+import 'package:cpea/src/core/widgets/cpea_header.dart';
+import 'package:cpea/src/features/news/presentation/widgets/news_builder.dart';
+import 'package:cpea/src/features/news/presentation/widgets/news_card.dart';
 import 'package:flutter/material.dart';
 import 'package:gbx_login/gbx_login.dart';
 
@@ -10,11 +14,30 @@ class NewsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    NewsCubit().loadNews();
     return Scaffold(
-      body: ListView(
-        children: const [
-          CpeaHeader(),
-        ],
+      body: NewsBuilder(
+        builder: (context, news) => ListView.builder(
+          padding: const EdgeInsets.only(bottom: halfPadding),
+          itemCount: news.length + 1,
+          itemBuilder: (context, index) {
+            if (index == 0) {
+              return const SafeArea(
+                child: Padding(
+                  padding: EdgeInsets.only(bottom: halfPadding),
+                  child: CpeaHeader(),
+                ),
+              );
+            }
+
+            return NewsCard(
+              news: news[index - 1],
+              onTap: () {
+                print(news[index - 1].title);
+              },
+            );
+          },
+        ),
       ),
       bottomNavigationBar: const BottomNavBar(selected: 0),
     );
