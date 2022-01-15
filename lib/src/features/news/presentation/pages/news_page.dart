@@ -7,6 +7,8 @@ import 'package:cpea/src/features/news/presentation/widgets/news_card.dart';
 import 'package:flutter/material.dart';
 import 'package:gbx_login/gbx_login.dart';
 
+// TODO: CREATE A CARD MENU IN HOME, NEWS IS A SUBMENU OR A NOTIFICATION BADGE
+
 class NewsPage extends StatelessWidget {
   const NewsPage({Key? key, this.user}) : super(key: key);
 
@@ -14,7 +16,7 @@ class NewsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    NewsCubit().loadNews();
+    if (NewsCubit().state.isEmpty) NewsCubit().loadNews();
     return Scaffold(
       body: NewsBuilder(
         builder: (context, news) => ListView.builder(

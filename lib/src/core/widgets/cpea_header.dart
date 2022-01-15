@@ -8,9 +8,10 @@ import 'package:gbx_login/gbx_login.dart';
 import 'package:get/get.dart';
 
 class CpeaHeader extends StatelessWidget {
-  const CpeaHeader({Key? key, this.trailing}) : super(key: key);
+  const CpeaHeader({Key? key, this.trailing, this.onTap}) : super(key: key);
 
   final UserWidgetBuilder<GbxUser, UserData>? trailing;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +65,26 @@ class CpeaHeader extends StatelessWidget {
   Widget? imageWidget(BuildContext ctx, GbxUser? user, UserData? uData) {
     var url = uData?.photoUrl ?? user?.photoUrl;
     if (url != null) {
-      return ImageCard(url: url);
+      return ImageCard(
+        url: url,
+        onTap: onTap,
+        loadingBuilder: _loadingPlaceholder,
+        errorBuilder: _placeholder,
+      );
     }
+  }
+
+  Widget _loadingPlaceholder(ctx, Widget child, ImageChunkEvent? progress) {
+    var p = progress?.cumulativeBytesLoaded ?? 0;
+    var expected = progress?.expectedTotalBytes ?? 0;
+    if (p == expected) return child;
+    return _placeholder(ctx, null, null);
+  }
+
+  Widget _placeholder(ctx, error, stack) {
+    return Image.asset(
+      "assets/images/profile_placeholder.jpg",
+      fit: BoxFit.cover,
+    );
   }
 }

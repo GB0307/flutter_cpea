@@ -1,4 +1,4 @@
-const cardBorderRadius = 4.0;
+const cardBorderRadius = 8.0;
 const chipBorderRadius = 60.0;
 const horizontalPadding = 16.0;
 

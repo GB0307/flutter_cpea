@@ -1,3 +1,4 @@
+import 'package:cpea/src/features/home/presentation/pages/home_page.dart';
 import 'package:cpea/src/features/login/presentation/pages/login_guard_page.dart';
 import 'package:cpea/src/features/news/presentation/pages/news_page.dart';
 import 'package:go_router/go_router.dart';
@@ -9,6 +10,7 @@ abstract class Routes {
   // Set routes here, change to methods if the route has any parameters
   static String get logIn => "/login";
   static String get home => "/";
+  static String get news => "/news";
   static String get entryHall => "/hall";
   static String get mail => "/mail";
   static String get schedules => "/schedules";
@@ -17,6 +19,10 @@ abstract class Routes {
   static final routes = <GoRoute>[
     GoRoute(
       path: home,
+      builder: (context, state) => const CPEALoginGuard(page: HomePage()),
+    ),
+    GoRoute(
+      path: news,
       builder: (context, state) => const CPEALoginGuard(page: NewsPage()),
     ),
   ];
