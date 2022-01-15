@@ -8,18 +8,23 @@ import 'package:gbx_login/gbx_login.dart';
 import 'package:get/get.dart';
 
 class CpeaHeader extends StatelessWidget {
-  const CpeaHeader({Key? key, this.trailing, this.onTap}) : super(key: key);
+  const CpeaHeader(
+      {Key? key, this.trailing, this.onTap, this.autoMargin = true})
+      : super(key: key);
 
   final WidgetBuilder? trailing;
   final void Function()? onTap;
+  final bool autoMargin;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(
-        vertical: doublePadding,
-        horizontal: horizontalPadding,
-      ),
+      margin: autoMargin
+          ? const EdgeInsets.symmetric(
+              vertical: doublePadding,
+              horizontal: horizontalPadding,
+            )
+          : const EdgeInsets.symmetric(vertical: doublePadding),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
