@@ -1,7 +1,10 @@
 import 'package:cpea/src/core/theme/consts.dart';
-import 'package:cpea/src/core/widgets/cpea_header.dart';
+import 'package:cpea/src/core/widgets/card_button.dart';
+import 'package:cpea/src/core/widgets/cpea_profile_bar.dart';
+import 'package:cpea/src/navigation/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -9,24 +12,22 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
+      body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: horizontalPadding),
-        child: Column(
-          children: [
-            const SafeArea(
-              child: CpeaHeader(
-                autoMargin: false,
-              ),
+        shrinkWrap: true,
+        children: const [
+          CPEAProfileBar(
+            autoMargin: false,
+            trailing: CardButton.icon(
+              icon: Icon(Icons.notifications_none_rounded),
+              onTap: _openNews,
             ),
-            const SizedBox(height: padding),
-            AspectRatio(
-              aspectRatio: 2,
-              child: Card(),
-            ),
-            const SizedBox(height: halfPadding),
-          ],
-        ),
+          ),
+          SizedBox(height: padding),
+        ],
       ),
     );
   }
+
+  static void _openNews() => Get.context?.push(Routes.news);
 }

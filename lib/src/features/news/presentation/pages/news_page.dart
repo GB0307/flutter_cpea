@@ -1,7 +1,7 @@
 import 'package:cpea/src/core/theme/consts.dart';
-import 'package:cpea/src/core/widgets/bottom_nav_bar.dart';
+import 'package:cpea/src/core/utils/l18n.dart';
+import 'package:cpea/src/core/widgets/cpea_app_bar.dart';
 import 'package:cpea/src/features/news/presentation/bloc/news_cubit.dart';
-import 'package:cpea/src/core/widgets/cpea_header.dart';
 import 'package:cpea/src/features/news/presentation/widgets/news_builder.dart';
 import 'package:cpea/src/features/news/presentation/widgets/news_card.dart';
 import 'package:flutter/material.dart';
@@ -24,11 +24,8 @@ class NewsPage extends StatelessWidget {
           itemCount: news.length + 1,
           itemBuilder: (context, index) {
             if (index == 0) {
-              return const SafeArea(
-                child: Padding(
-                  padding: EdgeInsets.only(bottom: halfPadding),
-                  child: CpeaHeader(),
-                ),
+              return CPEAAppBar(
+                titleText: L18n.tr.news,
               );
             }
 
@@ -41,7 +38,6 @@ class NewsPage extends StatelessWidget {
           },
         ),
       ),
-      bottomNavigationBar: const BottomNavBar(selected: 0),
     );
   }
 }

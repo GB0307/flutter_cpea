@@ -9,6 +9,8 @@
   "schedules": "Schedule",
 
   "date": "{date}",
-  "compactDate": "{date}"
+  "compactDate": "{date}",
+
+  "news": "News"
   
 }

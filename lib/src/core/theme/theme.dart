@@ -10,8 +10,8 @@ final cardTheme = CardTheme(
       cardBorderRadius,
     ),
   ),
-  elevation: elevation2,
-  margin: const EdgeInsets.symmetric(horizontal: 0, vertical: quarterPadding),
+  elevation: elevation1,
+  margin: const EdgeInsets.all(halfPadding),
 );
 
 final theme = ThemeData(
