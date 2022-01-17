@@ -7,7 +7,7 @@ class CardTile extends StatelessWidget {
     Key? key,
     this.leading,
     this.trailing,
-    this.height = defaultCardTileHeight,
+    this.height,
     this.width,
     this.title,
     this.subtitle,
@@ -35,8 +35,10 @@ class CardTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final h =
+        isThreeLine ? defaultCardTileHeight : defaultCardTileThreeLineHeight;
     return ClickableCard(
-      height: height,
+      height: h,
       width: width ?? double.infinity,
       margin: margin ??
           const EdgeInsets.symmetric(
@@ -48,16 +50,19 @@ class CardTile extends StatelessWidget {
         children: [
           if (leading != null) leading!,
           Expanded(
-            child: ListTile(
-              title: title != null ? Text(title!) : null,
-              subtitle: subtitle != null
-                  ? Text(
-                      title!,
-                      maxLines: isThreeLine ? 2 : 1,
-                      overflow: TextOverflow.ellipsis,
-                    )
-                  : null,
-              isThreeLine: isThreeLine,
+            child: Align(
+              alignment: Alignment.topLeft,
+              child: ListTile(
+                title: title != null ? Text(title!) : null,
+                subtitle: subtitle != null
+                    ? Text(
+                        subtitle!,
+                        maxLines: isThreeLine ? 2 : 1,
+                        overflow: TextOverflow.ellipsis,
+                      )
+                    : null,
+                isThreeLine: isThreeLine,
+              ),
             ),
           ),
           if (trailing != null) trailing!,

@@ -18,4 +18,6 @@ class L18n {
   static AppLocalizations get tr {
     return of(Get.context!);
   }
+
+  static String get localeString => tr.localeName;
 }

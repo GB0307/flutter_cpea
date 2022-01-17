@@ -1,13 +1,24 @@
 import 'package:cpea/src/core/theme/consts.dart';
-import 'package:cpea/src/core/widgets/card_button.dart';
-import 'package:cpea/src/core/widgets/clickable_card.dart';
+import 'package:cpea/src/core/widgets/snap_horizontal_list.dart';
 import 'package:cpea/src/features/foyer/domain/entities/permit.dart';
+import 'package:cpea/src/features/foyer/presentation/widget/permit_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:scroll_snap_list/scroll_snap_list.dart';
 
 final _permits = [
   Permit(
     authorizer: "Gabriel Borges",
     authorized: "João filho",
+    startDate: DateTime.now().add(
+      const Duration(hours: 1),
+    ),
+    endDate: DateTime.now().add(
+      const Duration(hours: 2),
+    ),
+  ),
+  Permit(
+    authorizer: "Gabriel Borges",
+    authorized: "Thaynara Brito",
     startDate: DateTime.now().add(
       const Duration(hours: 1),
     ),
@@ -28,36 +39,34 @@ final _permits = [
 ];
 
 class TodayPermits extends StatelessWidget {
-  const TodayPermits({Key? key}) : super(key: key);
+  const TodayPermits({Key? key, this.margin}) : super(key: key);
 
-  final double buttonSize = 70;
+  final double tileHeight = defaultCardTileHeight;
   static const cardSpacing = halfPadding;
+
+  final EdgeInsets? margin;
 
   @override
   Widget build(BuildContext context) {
+    final width =
+        (MediaQuery.of(context).size.width - 2 * horizontalPadding) * 1;
     final permits = _permits;
-    return SizedBox(
-      height: buttonSize + 2 * doublePadding,
-      width: double.infinity,
-      child: ListView.builder(
-        padding: const EdgeInsets.symmetric(
-          horizontal: horizontalPadding - cardSpacing,
-          vertical: doublePadding,
-        ),
-        itemCount: permits.length,
-        itemBuilder: (context, index) => permitCard(context, permits[index]),
-        scrollDirection: Axis.horizontal,
-      ),
-    );
-  }
 
-  Widget permitCard(BuildContext context, Permit permit) {
-    return ClickableCard(
-      height: buttonSize,
-      margin: const EdgeInsets.symmetric(horizontal: cardSpacing),
-      child: Row(
-        children: [],
+    final height = tileHeight + 2 * quarterPadding;
+
+    return SnapHorizontalList(
+      margin: margin,
+      height: height,
+      itemWidth: width + 2 * cardSpacing,
+      itemBuilder: (context, index) => PermitTile(
+        permit: permits[index],
+        margin: const EdgeInsets.symmetric(
+          horizontal: cardSpacing,
+          vertical: quarterPadding,
+        ),
+        width: width,
       ),
+      itemCount: permits.length,
     );
   }
 }
