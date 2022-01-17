@@ -4,6 +4,7 @@ import 'package:cpea/src/core/widgets/cpea_app_bar.dart';
 import 'package:cpea/src/features/news/presentation/bloc/news_cubit.dart';
 import 'package:cpea/src/features/news/presentation/widgets/news_builder.dart';
 import 'package:cpea/src/features/news/presentation/widgets/news_card.dart';
+import 'package:cpea/src/features/news/presentation/widgets/news_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:gbx_login/gbx_login.dart';
 
@@ -29,12 +30,18 @@ class NewsPage extends StatelessWidget {
               );
             }
 
-            return NewsCard(
+            return NewsTile(
               news: news[index - 1],
               onTap: () {
                 print(news[index - 1].title);
               },
             );
+            //return NewsCard(
+            //  news: news[index - 1],
+            //  onTap: () {
+            //    print(news[index - 1].title);
+            //  },
+            //);
           },
         ),
       ),
