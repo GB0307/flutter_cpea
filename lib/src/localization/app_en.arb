@@ -13,6 +13,7 @@
 
   "news": "News",
 
-  "todayPermits": "Permits today"
+  "todayPermits": "Permits today",
+  "receivedPackages": "Received packages" 
   
 }

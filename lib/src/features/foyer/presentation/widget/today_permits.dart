@@ -3,7 +3,6 @@ import 'package:cpea/src/core/widgets/snap_horizontal_list.dart';
 import 'package:cpea/src/features/foyer/domain/entities/permit.dart';
 import 'package:cpea/src/features/foyer/presentation/widget/permit_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:scroll_snap_list/scroll_snap_list.dart';
 
 final _permits = [
   Permit(

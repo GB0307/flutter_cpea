@@ -32,6 +32,8 @@ class SnapHorizontalList extends StatelessWidget {
           width: itemWidth,
           child: itemBuilder(context, index),
         ),
+        curve: Curves.easeInOut,
+        duration: 200,
         itemCount: itemCount,
         onItemFocus: (_) {},
       ),

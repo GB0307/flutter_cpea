@@ -1,3 +1,3 @@
 abstract class Identifiable {
-  String get id;
+  String? get id;
 }
