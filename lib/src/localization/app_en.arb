@@ -11,6 +11,8 @@
   "date": "{date}",
   "compactDate": "{date}",
 
-  "news": "News"
+  "news": "News",
+
+  "todayPermits": "Permits today"
   
 }

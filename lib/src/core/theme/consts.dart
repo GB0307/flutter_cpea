@@ -12,4 +12,5 @@ const elevation1 = 1.0;
 const elevation2 = 2.0;
 const elevation3 = 3.0;
 
-const defaultCardButtonSize = 58.0;
+const defaultCardButtonSize = 52.0;
+const defaultCardTileHeight = 90.0;

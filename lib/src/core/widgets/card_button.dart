@@ -1,3 +1,5 @@
+import 'package:cpea/src/core/theme/consts.dart';
+import 'package:cpea/src/core/widgets/clickable_card.dart';
 import 'package:flutter/material.dart';
 
 //TODO: ADD TEXT CARD BUTTON
@@ -5,10 +7,11 @@ class CardButton extends StatelessWidget {
   const CardButton({
     Key? key,
     this.child,
-    this.size = 58,
+    this.size = defaultCardButtonSize,
     this.onTap,
     this.elevation,
     this.clip = Clip.antiAliasWithSaveLayer,
+    this.margin,
   })  : image = null,
         errorBuilder = null,
         loadingBuilder = null,
@@ -19,7 +22,7 @@ class CardButton extends StatelessWidget {
 
   const CardButton.image({
     Key? key,
-    this.size = 58,
+    this.size = defaultCardButtonSize,
     this.onTap,
     this.elevation,
     this.clip = Clip.antiAliasWithSaveLayer,
@@ -27,6 +30,7 @@ class CardButton extends StatelessWidget {
     this.fit = BoxFit.cover,
     this.errorBuilder,
     this.loadingBuilder,
+    this.margin,
   })  : child = null,
         iconColor = null,
         iconSize = null,
@@ -34,13 +38,14 @@ class CardButton extends StatelessWidget {
 
   const CardButton.icon({
     Key? key,
-    this.size = 58,
+    this.size = defaultCardButtonSize,
     this.onTap,
     this.elevation,
     required Icon icon,
     this.iconColor,
     this.iconSize = 32,
     this.clip = Clip.antiAliasWithSaveLayer,
+    this.margin,
   })  : image = null,
         fit = BoxFit.cover,
         errorBuilder = null,
@@ -54,6 +59,7 @@ class CardButton extends StatelessWidget {
   final void Function()? onTap;
   final double? elevation;
   final Clip? clip;
+  final EdgeInsets? margin;
 
   // IMAGE CARD VARIABLES
   final ImageProvider? image;
@@ -89,19 +95,16 @@ class CardButton extends StatelessWidget {
               )
             : null;
 
-    return SizedBox(
+    return ClickableCard(
+      child: SizedBox.expand(
+        child: c,
+      ),
+      margin: margin,
+      clip: clip,
+      elevation: elevation,
       height: size,
       width: size,
-      child: Card(
-        clipBehavior: clip,
-        elevation: elevation,
-        child: InkWell(
-          onTap: onTap,
-          child: SizedBox.expand(
-            child: c,
-          ),
-        ),
-      ),
+      onTap: onTap,
     );
   }
 }
