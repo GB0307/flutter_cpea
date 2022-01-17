@@ -3,12 +3,9 @@ import 'package:cpea/src/core/utils/l18n.dart';
 import 'package:cpea/src/core/widgets/cpea_app_bar.dart';
 import 'package:cpea/src/features/news/presentation/bloc/news_cubit.dart';
 import 'package:cpea/src/features/news/presentation/widgets/news_builder.dart';
-import 'package:cpea/src/features/news/presentation/widgets/news_card.dart';
 import 'package:cpea/src/features/news/presentation/widgets/news_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:gbx_login/gbx_login.dart';
-
-// TODO: CREATE A CARD MENU IN HOME, NEWS IS A SUBMENU OR A NOTIFICATION BADGE
 
 class NewsPage extends StatelessWidget {
   const NewsPage({Key? key, this.user}) : super(key: key);
@@ -33,15 +30,9 @@ class NewsPage extends StatelessWidget {
             return NewsTile(
               news: news[index - 1],
               onTap: () {
-                print(news[index - 1].title);
+                //TODO: OPEN NEWS PAGE
               },
             );
-            //return NewsCard(
-            //  news: news[index - 1],
-            //  onTap: () {
-            //    print(news[index - 1].title);
-            //  },
-            //);
           },
         ),
       ),

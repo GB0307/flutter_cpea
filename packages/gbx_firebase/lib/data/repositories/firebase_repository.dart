@@ -6,7 +6,7 @@ class FirebaseRepository<T extends Identifiable> extends CRUDRepository<T> {
   const FirebaseRepository(ICRUDDataSource<T> _datasource) : super(_datasource);
 
   @override
-  IFailure? catchExceptions(Exception e) {
-    return on<FirebaseException>(e, (e) => FirebaseFailure(e));
+  IFailure? catchExceptions(Exception exception) {
+    return on<FirebaseException>(exception, (e) => FirebaseFailure(e));
   }
 }

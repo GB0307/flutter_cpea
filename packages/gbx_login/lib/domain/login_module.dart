@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:gbx_core/gbx_core.dart';
 import 'package:gbx_login/domain/entity/user.dart';
 import 'package:gbx_login/domain/repositories/user_data_repository.dart';

@@ -1,7 +1,6 @@
 import 'package:cpea/src/core/theme/consts.dart';
 import 'package:cpea/src/core/widgets/card_button.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 
 class CPEAAppBar extends StatelessWidget {

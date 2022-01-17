@@ -29,7 +29,7 @@ abstract class IRepository {
   }
 
   @protected
-  IFailure? catchExceptions(Exception e);
+  IFailure? catchExceptions(Exception exception);
 
   @protected
   IFailure? on<T extends Exception>(

@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:gbx_core/core/interfaces/identifiable.dart';
 import 'package:gbx_core/core/interfaces/index.dart';
 import 'package:gbx_core/domain/repositories/crud_repository.dart';
 

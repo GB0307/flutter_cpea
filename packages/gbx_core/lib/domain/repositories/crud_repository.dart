@@ -1,4 +1,3 @@
-import 'package:gbx_core/core/interfaces/identifiable.dart';
 import 'package:gbx_core/core/interfaces/index.dart';
 import 'package:gbx_core/core/interfaces/repository.dart';
 import 'package:gbx_core/domain/index.dart';

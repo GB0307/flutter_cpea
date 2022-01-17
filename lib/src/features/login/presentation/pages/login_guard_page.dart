@@ -1,6 +1,5 @@
 import 'package:cpea/src/core/utils/env_variables.dart';
 import 'package:cpea/src/features/login/domain/entities/user_data.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_ui/auth.dart';
 import 'package:gbx_firebase_login/gbx_firebase_login.dart';
