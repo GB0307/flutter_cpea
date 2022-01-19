@@ -263,7 +263,7 @@ class __$PackageCopyWithImpl<$Res> extends _$PackageCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 @Implements<Identifiable>()
-class _$_Package implements _Package {
+class _$_Package extends _Package {
   _$_Package(
       {this.id,
       this.invoice,
@@ -274,7 +274,8 @@ class _$_Package implements _Package {
       this.deliveredAt,
       this.deliveredToDocument,
       this.observations,
-      this.deliveryObservations});
+      this.deliveryObservations})
+      : super._();
 
   factory _$_Package.fromJson(Map<String, dynamic> json) =>
       _$$_PackageFromJson(json);
@@ -373,7 +374,7 @@ class _$_Package implements _Package {
   }
 }
 
-abstract class _Package implements Package, Identifiable {
+abstract class _Package extends Package implements Identifiable {
   factory _Package(
       {String? id,
       String? invoice,
@@ -385,6 +386,7 @@ abstract class _Package implements Package, Identifiable {
       String? deliveredToDocument,
       String? observations,
       String? deliveryObservations}) = _$_Package;
+  _Package._() : super._();
 
   factory _Package.fromJson(Map<String, dynamic> json) = _$_Package.fromJson;
 

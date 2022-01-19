@@ -6,6 +6,8 @@ part 'package.g.dart';
 
 @freezed
 class Package with _$Package implements Identifiable {
+  const Package._();
+
   @Implements<Identifiable>()
   factory Package({
     /// Id of the document.
@@ -39,10 +41,8 @@ class Package with _$Package implements Identifiable {
     String? deliveryObservations,
   }) = _Package;
 
+  bool get wasDelivered => deliveredAt != null || deliveredTo != null;
+
   factory Package.fromJson(Map<String, dynamic> json) =>
       _$PackageFromJson(json);
-}
-
-extension on Package {
-  bool get wasDelivered => deliveredAt != null || deliveredTo != null;
 }

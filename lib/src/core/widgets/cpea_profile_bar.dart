@@ -17,13 +17,16 @@ class CPEAProfileBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FirebaseAuthBuilder<UserData>(
-      builder: (ctx, user, data) => CPEAAppBar(
-        centerTitle: false,
-        title: _buildTitle(ctx, user, data?.user),
-        leading: _imageWidget(ctx, user, data?.user),
-        autoMargin: autoMargin,
-        trailing: trailing,
+    return Container(
+      color: Theme.of(context).primaryColor,
+      child: FirebaseAuthBuilder<UserData>(
+        builder: (ctx, user, data) => CPEAAppBar(
+          centerTitle: false,
+          title: _buildTitle(ctx, user, data?.user),
+          leading: _imageWidget(ctx, user, data?.user),
+          autoMargin: autoMargin,
+          trailing: trailing,
+        ),
       ),
     );
   }
@@ -60,11 +63,13 @@ class CPEAProfileBar extends StatelessWidget {
       children: [
         Text(
           "${L18n.tr.welcome},",
-          style: Theme.of(ctx).textTheme.subtitle2,
+          style:
+              Theme.of(ctx).textTheme.subtitle2?.copyWith(color: Colors.white),
         ),
         Text(
           _firstLastName(data?.name ?? user?.displayName ?? ""),
-          style: Theme.of(ctx).textTheme.headline5,
+          style:
+              Theme.of(ctx).textTheme.headline5?.copyWith(color: Colors.white),
         ),
       ],
     );

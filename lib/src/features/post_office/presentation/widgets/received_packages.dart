@@ -3,9 +3,15 @@ import 'package:flutter/material.dart';
 
 final _packages = [
   Package(
-      recipient: "Gabriel Borges",
-      receivedAt: DateTime(2022, 1, 12),
-      address: "G32")
+    recipient: "Gabriel Borges",
+    receivedAt: DateTime(2022, 1, 12),
+    address: "G32",
+  ),
+  Package(
+    recipient: "Gabriel Borges",
+    receivedAt: DateTime(2022, 1, 2),
+    address: "G32",
+  ),
 ];
 
 class ReceivedPackages extends StatelessWidget {
@@ -13,6 +19,11 @@ class ReceivedPackages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    _packages.sort((a, b) => a.receivedAt.compareTo(b.receivedAt));
+    final packages = _packages.take(3);
+
+    return Column(
+      children: [],
+    );
   }
 }
