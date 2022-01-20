@@ -27,10 +27,11 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body: ListView(
         children: [
-          const CPEAProfileBar(
+          CPEAProfileBar(
             trailing: CardButton.icon(
-              icon: Icon(Icons.notifications_none_rounded),
-              // TODO: OPEN LAST NOTIFICATIONS
+              icon: const Icon(Icons.notifications_none_rounded),
+              // TODO: OPEN LAST NOTIFICATIONS/MESSAGES
+              onTap: () {},
             ),
           ),
           ListItem(

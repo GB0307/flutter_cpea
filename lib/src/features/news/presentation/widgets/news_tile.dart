@@ -21,10 +21,12 @@ class NewsTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final child = dense
         ? CardCornerBox(
-            child: DateIndicator(
-              date: news.publishDate,
-              includeDayName: false,
-            ),
+            child: news.headerImage != null
+                ? Image.network(news.headerImage!, fit: BoxFit.cover)
+                : DateIndicator(
+                    date: news.publishDate,
+                    includeDayName: false,
+                  ),
           )
         : AspectRatio(
             aspectRatio: 1,

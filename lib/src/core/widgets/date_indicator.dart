@@ -5,11 +5,12 @@ import 'package:intl/intl.dart';
 
 class DateIndicator extends StatelessWidget {
   const DateIndicator(
-      {Key? key, required this.date, this.includeDayName = true})
+      {Key? key, required this.date, this.includeDayName = true, this.color})
       : super(key: key);
 
   final DateTime date;
   final bool includeDayName;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -19,18 +20,21 @@ class DateIndicator extends StatelessWidget {
         if (includeDayName)
           Text(
             DateFormat('EEE', L18n.localeString).format(date).toUpperCase(),
-            style: Theme.of(context).textTheme.overline,
+            style: Theme.of(context).textTheme.overline?.copyWith(color: color),
           ),
         Padding(
           padding: const EdgeInsets.all(quarterPadding),
           child: Text(
             date.day.toString(),
             style: includeDayName
-                ? Theme.of(context).textTheme.headline6
-                : Theme.of(context).textTheme.subtitle1,
+                ? Theme.of(context).textTheme.headline6?.copyWith(color: color)
+                : Theme.of(context).textTheme.subtitle1?.copyWith(color: color),
           ),
         ),
-        Text(DateFormat.LLL(L18n.localeString).format(date).toUpperCase()),
+        Text(
+          DateFormat.LLL(L18n.localeString).format(date).toUpperCase(),
+          style: Theme.of(context).textTheme.bodyText1?.copyWith(color: color),
+        ),
       ],
     );
   }
