@@ -7,7 +7,9 @@ import 'package:get/get.dart';
 class NewsCubit extends Cubit<List<News>> {
   factory NewsCubit([String? tag]) {
     if (!Get.isRegistered<NewsCubit>(tag: tag)) {
-      Get.put<NewsCubit>(NewsCubit._(), permanent: true, tag: tag);
+      final c = NewsCubit._();
+      Get.put<NewsCubit>(c, permanent: true, tag: tag);
+      c.loadNews();
     }
     return Get.find<NewsCubit>(tag: tag);
   }

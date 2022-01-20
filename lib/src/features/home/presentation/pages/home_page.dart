@@ -4,6 +4,7 @@ import 'package:cpea/src/core/widgets/card_button.dart';
 import 'package:cpea/src/core/widgets/cpea_profile_bar.dart';
 import 'package:cpea/src/core/widgets/list_item.dart';
 import 'package:cpea/src/features/foyer/presentation/widget/today_permits.dart';
+import 'package:cpea/src/features/news/presentation/widgets/last_news.dart';
 import 'package:cpea/src/features/post_office/presentation/widgets/received_packages.dart';
 import 'package:cpea/src/navigation/routes.dart';
 import 'package:flutter/material.dart';
@@ -29,11 +30,9 @@ class HomePage extends StatelessWidget {
           const CPEAProfileBar(
             trailing: CardButton.icon(
               icon: Icon(Icons.notifications_none_rounded),
-              onTap: _openNews,
+              // TODO: OPEN LAST NOTIFICATIONS
             ),
           ),
-          //const SizedBox(height: padding),
-
           ListItem(
             title: L18n.tr.todayPermits,
             child: TodayPermits(
@@ -42,7 +41,14 @@ class HomePage extends StatelessWidget {
             contentPadding: EdgeInsets.zero,
             onTap: () {},
           ),
-
+          ListItem(
+            title: L18n.tr.lastNews,
+            child: LastNews(
+              onTap: (news) {},
+            ),
+            contentPadding: EdgeInsets.zero,
+            onTap: _openNews,
+          ),
           ListItem(
             title: L18n.tr.receivedPackages,
             child: ReceivedPackages(
