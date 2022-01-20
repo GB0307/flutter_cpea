@@ -45,7 +45,9 @@ class HomePage extends StatelessWidget {
 
           ListItem(
             title: L18n.tr.receivedPackages,
-            child: const ReceivedPackages(),
+            child: ReceivedPackages(
+              onTap: (pkg) {},
+            ),
             onTap: () {},
           ),
         ],

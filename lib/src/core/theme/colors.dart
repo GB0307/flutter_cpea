@@ -9,3 +9,5 @@ const surfaceHighlightColor = Color.fromARGB(255, 252, 252, 252);
 
 const backgroundColor = surfaceColor; //Color.fromARGB(255, 238, 238, 244);
 const cardColor = surfaceHighlightColor;
+
+const cardLeadingColor = Colors.black12;

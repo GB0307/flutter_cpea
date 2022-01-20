@@ -10,6 +10,7 @@ class ClickableCard extends StatelessWidget {
     this.height,
     this.width,
     this.child,
+    this.color,
   }) : super(key: key);
 
   final void Function()? onTap;
@@ -18,14 +19,16 @@ class ClickableCard extends StatelessWidget {
   final double? elevation;
   final double? height;
   final double? width;
+  final Color? color;
 
   final Widget? child;
 
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: color,
       margin: margin,
-      clipBehavior: clip,
+      clipBehavior: clip ?? Clip.antiAliasWithSaveLayer,
       elevation: elevation,
       child: SizedBox(
         height: height,

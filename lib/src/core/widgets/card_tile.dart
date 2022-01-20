@@ -16,7 +16,26 @@ class CardTile extends StatelessWidget {
     this.margin,
     this.clip,
     this.elevation,
-  }) : super(key: key);
+    this.color,
+  })  : dense = false,
+        super(key: key);
+
+  const CardTile.dense({
+    Key? key,
+    this.leading,
+    this.trailing,
+    this.height,
+    this.width,
+    this.title,
+    this.onTap,
+    this.margin,
+    this.clip,
+    this.elevation,
+    this.color,
+  })  : dense = true,
+        subtitle = null,
+        isThreeLine = false,
+        super(key: key);
 
   final Widget? leading;
   final Widget? trailing;
@@ -33,13 +52,21 @@ class CardTile extends StatelessWidget {
   final Clip? clip;
   final double? elevation;
 
+  final bool dense;
+
+  final Color? color;
+
   @override
   Widget build(BuildContext context) {
-    final h =
-        isThreeLine ? defaultCardTileHeight : defaultCardTileThreeLineHeight;
+    final h = dense
+        ? defaultCardTileDenseHeight
+        : (!isThreeLine
+            ? defaultCardTileHeight
+            : defaultCardTileThreeLineHeight);
     return ClickableCard(
-      height: h,
+      height: height ?? h,
       width: width ?? double.infinity,
+      color: color,
       margin: margin ??
           const EdgeInsets.symmetric(
             horizontal: horizontalPadding,
@@ -51,18 +78,27 @@ class CardTile extends StatelessWidget {
           if (leading != null) leading!,
           Expanded(
             child: Align(
-              alignment: Alignment.topLeft,
-              child: ListTile(
-                title: title != null ? Text(title!) : null,
-                subtitle: subtitle != null
-                    ? Text(
-                        subtitle!,
-                        maxLines: isThreeLine ? 2 : 1,
-                        overflow: TextOverflow.ellipsis,
-                      )
-                    : null,
-                isThreeLine: isThreeLine,
-              ),
+              alignment: Alignment.centerLeft,
+              child: dense
+                  ? Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: horizontalPadding),
+                      child: Text(
+                        title ?? "",
+                        style: Theme.of(context).textTheme.subtitle1,
+                      ),
+                    )
+                  : ListTile(
+                      title: title != null ? Text(title!) : null,
+                      subtitle: subtitle != null
+                          ? Text(
+                              subtitle!,
+                              maxLines: isThreeLine ? 2 : 1,
+                              overflow: TextOverflow.ellipsis,
+                            )
+                          : null,
+                      isThreeLine: isThreeLine,
+                    ),
             ),
           ),
           if (trailing != null) trailing!,
