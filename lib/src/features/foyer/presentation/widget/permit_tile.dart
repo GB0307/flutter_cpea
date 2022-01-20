@@ -20,6 +20,7 @@ class PermitTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CardTile(
+      onTap: onTap,
       width: width,
       title: permit.authorized,
       subtitle: "Liberado até as 18:00",

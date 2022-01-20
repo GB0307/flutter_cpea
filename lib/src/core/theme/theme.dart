@@ -14,6 +14,8 @@ final cardTheme = CardTheme(
   margin: const EdgeInsets.all(halfPadding),
 );
 
+const dividerTheme = DividerThemeData(thickness: 1);
+
 final theme = ThemeData(
   primaryColor: primaryColor,
   primaryColorDark: primaryColorDark,
@@ -22,4 +24,5 @@ final theme = ThemeData(
   backgroundColor: backgroundColor,
   scaffoldBackgroundColor: backgroundColor,
   cardTheme: cardTheme,
+  dividerTheme: dividerTheme,
 );

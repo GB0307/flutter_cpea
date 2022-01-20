@@ -19,11 +19,12 @@ class PackageTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CardTile(
-      width: width,
+      width: double.infinity,
+      height: 12,
       title: package.recipient,
-      //subtitle: package.,
-      margin: margin,
-      leading: _leading(context),
+      subtitle: "package",
+      //margin: margin,
+      //leading: _leading(context),
     );
   }
 

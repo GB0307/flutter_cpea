@@ -38,12 +38,14 @@ final _permits = [
 ];
 
 class TodayPermits extends StatelessWidget {
-  const TodayPermits({Key? key, this.margin}) : super(key: key);
+  const TodayPermits({Key? key, this.margin, this.onTap}) : super(key: key);
 
   final double tileHeight = defaultCardTileHeight;
   static const cardSpacing = halfPadding;
 
   final EdgeInsets? margin;
+
+  final void Function(Permit permit)? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +60,7 @@ class TodayPermits extends StatelessWidget {
       height: height,
       itemWidth: width + 2 * cardSpacing,
       itemBuilder: (context, index) => PermitTile(
+        onTap: () => onTap?.call(permits[index]),
         permit: permits[index],
         margin: const EdgeInsets.symmetric(
           horizontal: cardSpacing,
