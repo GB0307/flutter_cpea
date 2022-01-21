@@ -1,4 +1,5 @@
 import 'package:cpea/src/core/utils/l18n.dart';
+import 'package:cpea/src/core/utils/string.dart';
 import 'package:cpea/src/core/widgets/card_button.dart';
 import 'package:cpea/src/core/widgets/cpea_app_bar.dart';
 import 'package:cpea/src/features/login/domain/entities/user_data.dart';
@@ -67,23 +68,11 @@ class CPEAProfileBar extends StatelessWidget {
               Theme.of(ctx).textTheme.subtitle2?.copyWith(color: Colors.white),
         ),
         Text(
-          _firstLastName(data?.name ?? user?.displayName ?? ""),
+          firstAndLastNames(data?.name ?? user?.displayName ?? ""),
           style:
               Theme.of(ctx).textTheme.headline5?.copyWith(color: Colors.white),
         ),
       ],
     );
-  }
-
-  static String _firstLastName(String text) {
-    var words = text.split(" ");
-    var value = "";
-    if (words.isNotEmpty) {
-      value = words[0];
-    }
-    if (words.length > 1) {
-      value += " ${words.last}";
-    }
-    return value;
   }
 }
