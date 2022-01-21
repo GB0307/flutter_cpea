@@ -3,11 +3,6 @@
   "welcome": "Welcome",
   "hi": "Hi",
 
-  "home": "Home",
-  "hall": "Hall",
-  "mail": "Mail",
-  "schedules": "Schedule",
-
   "date": "{date}",
   "compactDate": "{date}",
 
@@ -15,6 +10,7 @@
 
   "todayPermits": "Permits today",
   "receivedPackages": "Received packages",
-  "lastNews": "Latest news"
+  "lastNews": "Latest news",
+  "schedules": "Appointments"
   
 }

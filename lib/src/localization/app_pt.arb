@@ -7,11 +7,6 @@
     "welcome": "Bem-vindo",
     "hi": "Olá",
 
-  "home": "Início",
-  "hall": "Portaria",
-  "mail": "Correios",
-  "schedules": "Agendamentos",
-
   "date": "{date}",
   "@date": {
     "description": "A message with a date parameter",
@@ -37,6 +32,7 @@
 
   "todayPermits": "Entradas liberadas hoje",
   "receivedPackages": "Encomendas recebidas",
-  "lastNews": "Últimas noticias"
+  "lastNews": "Últimas noticias",
+  "schedules": "Agendamentos"
 }
   

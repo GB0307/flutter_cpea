@@ -57,6 +57,13 @@ class HomePage extends StatelessWidget {
             ),
             onTap: () {},
           ),
+          ListItem(
+            title: L18n.tr.schedules,
+            child: ReceivedPackages(
+              onTap: (pkg) {},
+            ),
+            onTap: () {},
+          ),
         ],
       ),
     );
