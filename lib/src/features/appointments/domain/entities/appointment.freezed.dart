@@ -25,7 +25,7 @@ class _$AppointmentTearOff {
   _Appointment call(
       {String? id,
       required String appointmentName,
-      required AppointmentLocation location,
+      required String locationId,
       required DateTime startDate,
       required DateTime finishDate,
       required DateTime creationDate,
@@ -35,7 +35,7 @@ class _$AppointmentTearOff {
     return _Appointment(
       id: id,
       appointmentName: appointmentName,
-      location: location,
+      locationId: locationId,
       startDate: startDate,
       finishDate: finishDate,
       creationDate: creationDate,
@@ -57,7 +57,7 @@ const $Appointment = _$AppointmentTearOff();
 mixin _$Appointment {
   String? get id => throw _privateConstructorUsedError;
   String get appointmentName => throw _privateConstructorUsedError;
-  AppointmentLocation get location => throw _privateConstructorUsedError;
+  String get locationId => throw _privateConstructorUsedError;
   DateTime get startDate => throw _privateConstructorUsedError;
   DateTime get finishDate => throw _privateConstructorUsedError;
   DateTime get creationDate => throw _privateConstructorUsedError;
@@ -79,7 +79,7 @@ abstract class $AppointmentCopyWith<$Res> {
   $Res call(
       {String? id,
       String appointmentName,
-      AppointmentLocation location,
+      String locationId,
       DateTime startDate,
       DateTime finishDate,
       DateTime creationDate,
@@ -100,7 +100,7 @@ class _$AppointmentCopyWithImpl<$Res> implements $AppointmentCopyWith<$Res> {
   $Res call({
     Object? id = freezed,
     Object? appointmentName = freezed,
-    Object? location = freezed,
+    Object? locationId = freezed,
     Object? startDate = freezed,
     Object? finishDate = freezed,
     Object? creationDate = freezed,
@@ -117,10 +117,10 @@ class _$AppointmentCopyWithImpl<$Res> implements $AppointmentCopyWith<$Res> {
           ? _value.appointmentName
           : appointmentName // ignore: cast_nullable_to_non_nullable
               as String,
-      location: location == freezed
-          ? _value.location
-          : location // ignore: cast_nullable_to_non_nullable
-              as AppointmentLocation,
+      locationId: locationId == freezed
+          ? _value.locationId
+          : locationId // ignore: cast_nullable_to_non_nullable
+              as String,
       startDate: startDate == freezed
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
@@ -159,7 +159,7 @@ abstract class _$AppointmentCopyWith<$Res>
   $Res call(
       {String? id,
       String appointmentName,
-      AppointmentLocation location,
+      String locationId,
       DateTime startDate,
       DateTime finishDate,
       DateTime creationDate,
@@ -182,7 +182,7 @@ class __$AppointmentCopyWithImpl<$Res> extends _$AppointmentCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? appointmentName = freezed,
-    Object? location = freezed,
+    Object? locationId = freezed,
     Object? startDate = freezed,
     Object? finishDate = freezed,
     Object? creationDate = freezed,
@@ -199,10 +199,10 @@ class __$AppointmentCopyWithImpl<$Res> extends _$AppointmentCopyWithImpl<$Res>
           ? _value.appointmentName
           : appointmentName // ignore: cast_nullable_to_non_nullable
               as String,
-      location: location == freezed
-          ? _value.location
-          : location // ignore: cast_nullable_to_non_nullable
-              as AppointmentLocation,
+      locationId: locationId == freezed
+          ? _value.locationId
+          : locationId // ignore: cast_nullable_to_non_nullable
+              as String,
       startDate: startDate == freezed
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
@@ -238,7 +238,7 @@ class _$_Appointment extends _Appointment {
   _$_Appointment(
       {this.id,
       required this.appointmentName,
-      required this.location,
+      required this.locationId,
       required this.startDate,
       required this.finishDate,
       required this.creationDate,
@@ -255,7 +255,7 @@ class _$_Appointment extends _Appointment {
   @override
   final String appointmentName;
   @override
-  final AppointmentLocation location;
+  final String locationId;
   @override
   final DateTime startDate;
   @override
@@ -271,7 +271,7 @@ class _$_Appointment extends _Appointment {
 
   @override
   String toString() {
-    return 'Appointment(id: $id, appointmentName: $appointmentName, location: $location, startDate: $startDate, finishDate: $finishDate, creationDate: $creationDate, totalCost: $totalCost, scheduler: $scheduler, address: $address)';
+    return 'Appointment(id: $id, appointmentName: $appointmentName, locationId: $locationId, startDate: $startDate, finishDate: $finishDate, creationDate: $creationDate, totalCost: $totalCost, scheduler: $scheduler, address: $address)';
   }
 
   @override
@@ -282,7 +282,8 @@ class _$_Appointment extends _Appointment {
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality()
                 .equals(other.appointmentName, appointmentName) &&
-            const DeepCollectionEquality().equals(other.location, location) &&
+            const DeepCollectionEquality()
+                .equals(other.locationId, locationId) &&
             const DeepCollectionEquality().equals(other.startDate, startDate) &&
             const DeepCollectionEquality()
                 .equals(other.finishDate, finishDate) &&
@@ -298,7 +299,7 @@ class _$_Appointment extends _Appointment {
       runtimeType,
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(appointmentName),
-      const DeepCollectionEquality().hash(location),
+      const DeepCollectionEquality().hash(locationId),
       const DeepCollectionEquality().hash(startDate),
       const DeepCollectionEquality().hash(finishDate),
       const DeepCollectionEquality().hash(creationDate),
@@ -321,7 +322,7 @@ abstract class _Appointment extends Appointment implements Identifiable {
   factory _Appointment(
       {String? id,
       required String appointmentName,
-      required AppointmentLocation location,
+      required String locationId,
       required DateTime startDate,
       required DateTime finishDate,
       required DateTime creationDate,
@@ -338,7 +339,7 @@ abstract class _Appointment extends Appointment implements Identifiable {
   @override
   String get appointmentName;
   @override
-  AppointmentLocation get location;
+  String get locationId;
   @override
   DateTime get startDate;
   @override

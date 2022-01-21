@@ -10,7 +10,7 @@ _$_Appointment _$$_AppointmentFromJson(Map<String, dynamic> json) =>
     _$_Appointment(
       id: json['id'] as String?,
       appointmentName: json['appointmentName'] as String,
-      location: json['location'],
+      locationId: json['locationId'] as String,
       startDate: DateTime.parse(json['startDate'] as String),
       finishDate: DateTime.parse(json['finishDate'] as String),
       creationDate: DateTime.parse(json['creationDate'] as String),
@@ -23,7 +23,7 @@ Map<String, dynamic> _$$_AppointmentToJson(_$_Appointment instance) =>
     <String, dynamic>{
       'id': instance.id,
       'appointmentName': instance.appointmentName,
-      'location': instance.location,
+      'locationId': instance.locationId,
       'startDate': instance.startDate.toIso8601String(),
       'finishDate': instance.finishDate.toIso8601String(),
       'creationDate': instance.creationDate.toIso8601String(),

@@ -1,14 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'appointment_location.dart';
+part of 'location.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AppointmentLocation _$$_AppointmentLocationFromJson(
-        Map<String, dynamic> json) =>
-    _$_AppointmentLocation(
+_$_Location _$$_LocationFromJson(Map<String, dynamic> json) => _$_Location(
       id: json['id'] as String?,
       name: json['name'] as String,
       description: json['description'] as String?,
@@ -18,22 +16,18 @@ _$_AppointmentLocation _$$_AppointmentLocationFromJson(
               .toList() ??
           const [],
       cost: (json['cost'] as num?)?.toDouble(),
-      duration: Duration(microseconds: json['duration'] as int),
-      minAppointmentTime: json['minAppointmentTime'] == null
-          ? null
-          : DateTime.parse(json['minAppointmentTime'] as String),
-      maxAppointmentTime: json['maxAppointmentTime'] == null
-          ? null
-          : DateTime.parse(json['maxAppointmentTime'] as String),
       allowedDays: (json['allowedDays'] as List<dynamic>?)
               ?.map((e) => e as int)
               .toList() ??
           const [1, 2, 3, 4, 5, 6],
       advancementDays: json['advancementDays'] as int? ?? 10,
+      timeSlots: (json['timeSlots'] as List<dynamic>?)
+              ?.map((e) => TimeSlot.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
     );
 
-Map<String, dynamic> _$$_AppointmentLocationToJson(
-        _$_AppointmentLocation instance) =>
+Map<String, dynamic> _$$_LocationToJson(_$_Location instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
@@ -41,9 +35,7 @@ Map<String, dynamic> _$$_AppointmentLocationToJson(
       'maxConcurrentAppointments': instance.maxConcurrentAppointments,
       'images': instance.images,
       'cost': instance.cost,
-      'duration': instance.duration.inMicroseconds,
-      'minAppointmentTime': instance.minAppointmentTime?.toIso8601String(),
-      'maxAppointmentTime': instance.maxAppointmentTime?.toIso8601String(),
       'allowedDays': instance.allowedDays,
       'advancementDays': instance.advancementDays,
+      'timeSlots': instance.timeSlots,
     };

@@ -1,4 +1,4 @@
-import 'package:cpea/src/features/appointments/domain/entities/appointment_location.dart';
+import 'package:cpea/src/features/appointments/domain/entities/location.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:gbx_core/core/interfaces/index.dart';
 
@@ -13,7 +13,7 @@ class Appointment with _$Appointment, Identifiable {
   factory Appointment({
     String? id,
     required String appointmentName,
-    required AppointmentLocation location,
+    required String locationId,
     required DateTime startDate,
     required DateTime finishDate,
     required DateTime creationDate,

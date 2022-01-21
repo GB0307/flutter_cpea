@@ -1,22 +1,20 @@
+import 'package:cpea/src/features/appointments/domain/entities/time_slot.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:gbx_core/core/interfaces/identifiable.dart';
 
-part 'appointment_location.freezed.dart';
-part 'appointment_location.g.dart';
+part 'location.freezed.dart';
+part 'location.g.dart';
 
 @freezed
-class AppointmentLocation with _$AppointmentLocation, Identifiable {
+class Location with _$Location, Identifiable {
   @Implements<Identifiable>()
-  factory AppointmentLocation({
+  factory Location({
     String? id,
     required String name,
     String? description,
     @Default(1) int maxConcurrentAppointments,
     @Default([]) List<String> images,
     double? cost,
-    required Duration duration,
-    DateTime? minAppointmentTime,
-    DateTime? maxAppointmentTime,
 
     /// List of allowed weekdays
     /// If the number is in the list, this day is allowed for appointments.
@@ -25,8 +23,9 @@ class AppointmentLocation with _$AppointmentLocation, Identifiable {
 
     /// Number of days you can create an appointment in advance.
     @Default(10) int advancementDays,
-  }) = _AppointmentLocation;
+    @Default([]) List<TimeSlot> timeSlots,
+  }) = _Location;
 
-  factory AppointmentLocation.fromJson(Map<String, dynamic> json) =>
-      _$AppointmentLocationFromJson(json);
+  factory Location.fromJson(Map<String, dynamic> json) =>
+      _$LocationFromJson(json);
 }
