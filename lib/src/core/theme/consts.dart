@@ -1,5 +1,6 @@
 const cardBorderRadius = 8.0;
 const chipBorderRadius = 60.0;
+const cardMargin = halfPadding;
 
 const padding = 8.0;
 const doublePadding = padding * 2;

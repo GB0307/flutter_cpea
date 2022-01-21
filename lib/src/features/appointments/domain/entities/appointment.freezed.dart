@@ -31,6 +31,7 @@ class _$AppointmentTearOff {
       required DateTime creationDate,
       double? totalCost,
       required String scheduler,
+      required String schedulerId,
       required String address}) {
     return _Appointment(
       id: id,
@@ -41,6 +42,7 @@ class _$AppointmentTearOff {
       creationDate: creationDate,
       totalCost: totalCost,
       scheduler: scheduler,
+      schedulerId: schedulerId,
       address: address,
     );
   }
@@ -63,6 +65,7 @@ mixin _$Appointment {
   DateTime get creationDate => throw _privateConstructorUsedError;
   double? get totalCost => throw _privateConstructorUsedError;
   String get scheduler => throw _privateConstructorUsedError;
+  String get schedulerId => throw _privateConstructorUsedError;
   String get address => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -85,6 +88,7 @@ abstract class $AppointmentCopyWith<$Res> {
       DateTime creationDate,
       double? totalCost,
       String scheduler,
+      String schedulerId,
       String address});
 }
 
@@ -106,6 +110,7 @@ class _$AppointmentCopyWithImpl<$Res> implements $AppointmentCopyWith<$Res> {
     Object? creationDate = freezed,
     Object? totalCost = freezed,
     Object? scheduler = freezed,
+    Object? schedulerId = freezed,
     Object? address = freezed,
   }) {
     return _then(_value.copyWith(
@@ -141,6 +146,10 @@ class _$AppointmentCopyWithImpl<$Res> implements $AppointmentCopyWith<$Res> {
           ? _value.scheduler
           : scheduler // ignore: cast_nullable_to_non_nullable
               as String,
+      schedulerId: schedulerId == freezed
+          ? _value.schedulerId
+          : schedulerId // ignore: cast_nullable_to_non_nullable
+              as String,
       address: address == freezed
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
@@ -165,6 +174,7 @@ abstract class _$AppointmentCopyWith<$Res>
       DateTime creationDate,
       double? totalCost,
       String scheduler,
+      String schedulerId,
       String address});
 }
 
@@ -188,6 +198,7 @@ class __$AppointmentCopyWithImpl<$Res> extends _$AppointmentCopyWithImpl<$Res>
     Object? creationDate = freezed,
     Object? totalCost = freezed,
     Object? scheduler = freezed,
+    Object? schedulerId = freezed,
     Object? address = freezed,
   }) {
     return _then(_Appointment(
@@ -223,6 +234,10 @@ class __$AppointmentCopyWithImpl<$Res> extends _$AppointmentCopyWithImpl<$Res>
           ? _value.scheduler
           : scheduler // ignore: cast_nullable_to_non_nullable
               as String,
+      schedulerId: schedulerId == freezed
+          ? _value.schedulerId
+          : schedulerId // ignore: cast_nullable_to_non_nullable
+              as String,
       address: address == freezed
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
@@ -244,6 +259,7 @@ class _$_Appointment extends _Appointment {
       required this.creationDate,
       this.totalCost,
       required this.scheduler,
+      required this.schedulerId,
       required this.address})
       : super._();
 
@@ -267,11 +283,13 @@ class _$_Appointment extends _Appointment {
   @override
   final String scheduler;
   @override
+  final String schedulerId;
+  @override
   final String address;
 
   @override
   String toString() {
-    return 'Appointment(id: $id, appointmentName: $appointmentName, locationId: $locationId, startDate: $startDate, finishDate: $finishDate, creationDate: $creationDate, totalCost: $totalCost, scheduler: $scheduler, address: $address)';
+    return 'Appointment(id: $id, appointmentName: $appointmentName, locationId: $locationId, startDate: $startDate, finishDate: $finishDate, creationDate: $creationDate, totalCost: $totalCost, scheduler: $scheduler, schedulerId: $schedulerId, address: $address)';
   }
 
   @override
@@ -291,6 +309,8 @@ class _$_Appointment extends _Appointment {
                 .equals(other.creationDate, creationDate) &&
             const DeepCollectionEquality().equals(other.totalCost, totalCost) &&
             const DeepCollectionEquality().equals(other.scheduler, scheduler) &&
+            const DeepCollectionEquality()
+                .equals(other.schedulerId, schedulerId) &&
             const DeepCollectionEquality().equals(other.address, address));
   }
 
@@ -305,6 +325,7 @@ class _$_Appointment extends _Appointment {
       const DeepCollectionEquality().hash(creationDate),
       const DeepCollectionEquality().hash(totalCost),
       const DeepCollectionEquality().hash(scheduler),
+      const DeepCollectionEquality().hash(schedulerId),
       const DeepCollectionEquality().hash(address));
 
   @JsonKey(ignore: true)
@@ -328,6 +349,7 @@ abstract class _Appointment extends Appointment implements Identifiable {
       required DateTime creationDate,
       double? totalCost,
       required String scheduler,
+      required String schedulerId,
       required String address}) = _$_Appointment;
   _Appointment._() : super._();
 
@@ -350,6 +372,8 @@ abstract class _Appointment extends Appointment implements Identifiable {
   double? get totalCost;
   @override
   String get scheduler;
+  @override
+  String get schedulerId;
   @override
   String get address;
   @override

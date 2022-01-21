@@ -16,6 +16,7 @@ _$_Appointment _$$_AppointmentFromJson(Map<String, dynamic> json) =>
       creationDate: DateTime.parse(json['creationDate'] as String),
       totalCost: (json['totalCost'] as num?)?.toDouble(),
       scheduler: json['scheduler'] as String,
+      schedulerId: json['schedulerId'] as String,
       address: json['address'] as String,
     );
 
@@ -29,5 +30,6 @@ Map<String, dynamic> _$$_AppointmentToJson(_$_Appointment instance) =>
       'creationDate': instance.creationDate.toIso8601String(),
       'totalCost': instance.totalCost,
       'scheduler': instance.scheduler,
+      'schedulerId': instance.schedulerId,
       'address': instance.address,
     };

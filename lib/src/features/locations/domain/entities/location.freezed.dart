@@ -28,10 +28,12 @@ class _$LocationTearOff {
       String? description,
       int maxConcurrentAppointments = 1,
       List<String> images = const [],
-      double? cost,
-      List<int>? allowedDays = const [1, 2, 3, 4, 5, 6],
+      double cost = 0,
+      List<int> allowedDays = const [1, 2, 3, 4, 5, 6],
       int advancementDays = 10,
-      List<TimeSlot> timeSlots = const []}) {
+      List<TimeSlot> timeSlots = const [],
+      DateTime? openingTime,
+      DateTime? closingTime}) {
     return _Location(
       id: id,
       name: name,
@@ -42,6 +44,8 @@ class _$LocationTearOff {
       allowedDays: allowedDays,
       advancementDays: advancementDays,
       timeSlots: timeSlots,
+      openingTime: openingTime,
+      closingTime: closingTime,
     );
   }
 
@@ -60,16 +64,18 @@ mixin _$Location {
   String? get description => throw _privateConstructorUsedError;
   int get maxConcurrentAppointments => throw _privateConstructorUsedError;
   List<String> get images => throw _privateConstructorUsedError;
-  double? get cost => throw _privateConstructorUsedError;
+  double get cost => throw _privateConstructorUsedError;
 
   /// List of allowed weekdays
   /// If the number is in the list, this day is allowed for appointments.
   /// the week starts at 1, which is monday following the ISO 8601
-  List<int>? get allowedDays => throw _privateConstructorUsedError;
+  List<int> get allowedDays => throw _privateConstructorUsedError;
 
   /// Number of days you can create an appointment in advance.
   int get advancementDays => throw _privateConstructorUsedError;
   List<TimeSlot> get timeSlots => throw _privateConstructorUsedError;
+  DateTime? get openingTime => throw _privateConstructorUsedError;
+  DateTime? get closingTime => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -87,10 +93,12 @@ abstract class $LocationCopyWith<$Res> {
       String? description,
       int maxConcurrentAppointments,
       List<String> images,
-      double? cost,
-      List<int>? allowedDays,
+      double cost,
+      List<int> allowedDays,
       int advancementDays,
-      List<TimeSlot> timeSlots});
+      List<TimeSlot> timeSlots,
+      DateTime? openingTime,
+      DateTime? closingTime});
 }
 
 /// @nodoc
@@ -112,6 +120,8 @@ class _$LocationCopyWithImpl<$Res> implements $LocationCopyWith<$Res> {
     Object? allowedDays = freezed,
     Object? advancementDays = freezed,
     Object? timeSlots = freezed,
+    Object? openingTime = freezed,
+    Object? closingTime = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -137,11 +147,11 @@ class _$LocationCopyWithImpl<$Res> implements $LocationCopyWith<$Res> {
       cost: cost == freezed
           ? _value.cost
           : cost // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as double,
       allowedDays: allowedDays == freezed
           ? _value.allowedDays
           : allowedDays // ignore: cast_nullable_to_non_nullable
-              as List<int>?,
+              as List<int>,
       advancementDays: advancementDays == freezed
           ? _value.advancementDays
           : advancementDays // ignore: cast_nullable_to_non_nullable
@@ -150,6 +160,14 @@ class _$LocationCopyWithImpl<$Res> implements $LocationCopyWith<$Res> {
           ? _value.timeSlots
           : timeSlots // ignore: cast_nullable_to_non_nullable
               as List<TimeSlot>,
+      openingTime: openingTime == freezed
+          ? _value.openingTime
+          : openingTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      closingTime: closingTime == freezed
+          ? _value.closingTime
+          : closingTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -165,10 +183,12 @@ abstract class _$LocationCopyWith<$Res> implements $LocationCopyWith<$Res> {
       String? description,
       int maxConcurrentAppointments,
       List<String> images,
-      double? cost,
-      List<int>? allowedDays,
+      double cost,
+      List<int> allowedDays,
       int advancementDays,
-      List<TimeSlot> timeSlots});
+      List<TimeSlot> timeSlots,
+      DateTime? openingTime,
+      DateTime? closingTime});
 }
 
 /// @nodoc
@@ -191,6 +211,8 @@ class __$LocationCopyWithImpl<$Res> extends _$LocationCopyWithImpl<$Res>
     Object? allowedDays = freezed,
     Object? advancementDays = freezed,
     Object? timeSlots = freezed,
+    Object? openingTime = freezed,
+    Object? closingTime = freezed,
   }) {
     return _then(_Location(
       id: id == freezed
@@ -216,11 +238,11 @@ class __$LocationCopyWithImpl<$Res> extends _$LocationCopyWithImpl<$Res>
       cost: cost == freezed
           ? _value.cost
           : cost // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as double,
       allowedDays: allowedDays == freezed
           ? _value.allowedDays
           : allowedDays // ignore: cast_nullable_to_non_nullable
-              as List<int>?,
+              as List<int>,
       advancementDays: advancementDays == freezed
           ? _value.advancementDays
           : advancementDays // ignore: cast_nullable_to_non_nullable
@@ -229,6 +251,14 @@ class __$LocationCopyWithImpl<$Res> extends _$LocationCopyWithImpl<$Res>
           ? _value.timeSlots
           : timeSlots // ignore: cast_nullable_to_non_nullable
               as List<TimeSlot>,
+      openingTime: openingTime == freezed
+          ? _value.openingTime
+          : openingTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      closingTime: closingTime == freezed
+          ? _value.closingTime
+          : closingTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -243,10 +273,12 @@ class _$_Location implements _Location {
       this.description,
       this.maxConcurrentAppointments = 1,
       this.images = const [],
-      this.cost,
+      this.cost = 0,
       this.allowedDays = const [1, 2, 3, 4, 5, 6],
       this.advancementDays = 10,
-      this.timeSlots = const []});
+      this.timeSlots = const [],
+      this.openingTime,
+      this.closingTime});
 
   factory _$_Location.fromJson(Map<String, dynamic> json) =>
       _$$_LocationFromJson(json);
@@ -263,15 +295,16 @@ class _$_Location implements _Location {
   @JsonKey()
   @override
   final List<String> images;
+  @JsonKey()
   @override
-  final double? cost;
+  final double cost;
   @JsonKey()
   @override
 
   /// List of allowed weekdays
   /// If the number is in the list, this day is allowed for appointments.
   /// the week starts at 1, which is monday following the ISO 8601
-  final List<int>? allowedDays;
+  final List<int> allowedDays;
   @JsonKey()
   @override
 
@@ -280,10 +313,14 @@ class _$_Location implements _Location {
   @JsonKey()
   @override
   final List<TimeSlot> timeSlots;
+  @override
+  final DateTime? openingTime;
+  @override
+  final DateTime? closingTime;
 
   @override
   String toString() {
-    return 'Location(id: $id, name: $name, description: $description, maxConcurrentAppointments: $maxConcurrentAppointments, images: $images, cost: $cost, allowedDays: $allowedDays, advancementDays: $advancementDays, timeSlots: $timeSlots)';
+    return 'Location(id: $id, name: $name, description: $description, maxConcurrentAppointments: $maxConcurrentAppointments, images: $images, cost: $cost, allowedDays: $allowedDays, advancementDays: $advancementDays, timeSlots: $timeSlots, openingTime: $openingTime, closingTime: $closingTime)';
   }
 
   @override
@@ -303,7 +340,11 @@ class _$_Location implements _Location {
                 .equals(other.allowedDays, allowedDays) &&
             const DeepCollectionEquality()
                 .equals(other.advancementDays, advancementDays) &&
-            const DeepCollectionEquality().equals(other.timeSlots, timeSlots));
+            const DeepCollectionEquality().equals(other.timeSlots, timeSlots) &&
+            const DeepCollectionEquality()
+                .equals(other.openingTime, openingTime) &&
+            const DeepCollectionEquality()
+                .equals(other.closingTime, closingTime));
   }
 
   @override
@@ -317,7 +358,9 @@ class _$_Location implements _Location {
       const DeepCollectionEquality().hash(cost),
       const DeepCollectionEquality().hash(allowedDays),
       const DeepCollectionEquality().hash(advancementDays),
-      const DeepCollectionEquality().hash(timeSlots));
+      const DeepCollectionEquality().hash(timeSlots),
+      const DeepCollectionEquality().hash(openingTime),
+      const DeepCollectionEquality().hash(closingTime));
 
   @JsonKey(ignore: true)
   @override
@@ -337,10 +380,12 @@ abstract class _Location implements Location, Identifiable {
       String? description,
       int maxConcurrentAppointments,
       List<String> images,
-      double? cost,
-      List<int>? allowedDays,
+      double cost,
+      List<int> allowedDays,
       int advancementDays,
-      List<TimeSlot> timeSlots}) = _$_Location;
+      List<TimeSlot> timeSlots,
+      DateTime? openingTime,
+      DateTime? closingTime}) = _$_Location;
 
   factory _Location.fromJson(Map<String, dynamic> json) = _$_Location.fromJson;
 
@@ -355,19 +400,23 @@ abstract class _Location implements Location, Identifiable {
   @override
   List<String> get images;
   @override
-  double? get cost;
+  double get cost;
   @override
 
   /// List of allowed weekdays
   /// If the number is in the list, this day is allowed for appointments.
   /// the week starts at 1, which is monday following the ISO 8601
-  List<int>? get allowedDays;
+  List<int> get allowedDays;
   @override
 
   /// Number of days you can create an appointment in advance.
   int get advancementDays;
   @override
   List<TimeSlot> get timeSlots;
+  @override
+  DateTime? get openingTime;
+  @override
+  DateTime? get closingTime;
   @override
   @JsonKey(ignore: true)
   _$LocationCopyWith<_Location> get copyWith =>

@@ -15,7 +15,7 @@ _$_Location _$$_LocationFromJson(Map<String, dynamic> json) => _$_Location(
               ?.map((e) => e as String)
               .toList() ??
           const [],
-      cost: (json['cost'] as num?)?.toDouble(),
+      cost: (json['cost'] as num?)?.toDouble() ?? 0,
       allowedDays: (json['allowedDays'] as List<dynamic>?)
               ?.map((e) => e as int)
               .toList() ??
@@ -25,6 +25,12 @@ _$_Location _$$_LocationFromJson(Map<String, dynamic> json) => _$_Location(
               ?.map((e) => TimeSlot.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
+      openingTime: json['openingTime'] == null
+          ? null
+          : DateTime.parse(json['openingTime'] as String),
+      closingTime: json['closingTime'] == null
+          ? null
+          : DateTime.parse(json['closingTime'] as String),
     );
 
 Map<String, dynamic> _$$_LocationToJson(_$_Location instance) =>
@@ -38,4 +44,6 @@ Map<String, dynamic> _$$_LocationToJson(_$_Location instance) =>
       'allowedDays': instance.allowedDays,
       'advancementDays': instance.advancementDays,
       'timeSlots': instance.timeSlots,
+      'openingTime': instance.openingTime?.toIso8601String(),
+      'closingTime': instance.closingTime?.toIso8601String(),
     };

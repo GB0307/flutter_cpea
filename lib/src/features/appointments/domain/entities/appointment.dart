@@ -1,4 +1,3 @@
-import 'package:cpea/src/features/appointments/domain/entities/location.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:gbx_core/core/interfaces/index.dart';
 
@@ -19,6 +18,7 @@ class Appointment with _$Appointment, Identifiable {
     required DateTime creationDate,
     double? totalCost,
     required String scheduler,
+    required String schedulerId,
     required String address,
   }) = _Appointment;
 
