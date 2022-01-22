@@ -25,7 +25,7 @@ class PermitTile extends StatelessWidget {
       title: permit.authorized,
       subtitle: "Liberado até as 18:00",
       margin: margin,
-      leading: CardCornerBox(
+      leading: CardCornerBox.horizontal(
         left: true,
         child: DateIndicator(date: DateTime.now()),
       ),

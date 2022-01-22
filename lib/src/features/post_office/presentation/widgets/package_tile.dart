@@ -25,7 +25,7 @@ class PackageTile extends StatelessWidget {
       width: double.infinity,
       title: package.recipient,
       margin: EdgeInsets.zero,
-      leading: CardCornerBox(
+      leading: CardCornerBox.horizontal(
         left: true,
         width: 64,
         child: DateIndicator(

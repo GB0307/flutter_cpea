@@ -3,6 +3,7 @@ import 'package:cpea/src/core/utils/l18n.dart';
 import 'package:cpea/src/core/widgets/card_button.dart';
 import 'package:cpea/src/core/widgets/cpea_profile_bar.dart';
 import 'package:cpea/src/core/widgets/list_item.dart';
+import 'package:cpea/src/features/appointments/domain/entities/appointment.dart';
 import 'package:cpea/src/features/appointments/presentation/widgets/next_appointments.dart';
 import 'package:cpea/src/features/foyer/presentation/widget/today_permits.dart';
 import 'package:cpea/src/features/news/presentation/widgets/last_news.dart';
@@ -60,7 +61,9 @@ class HomePage extends StatelessWidget {
           ),
           ListItem(
             title: L18n.tr.schedules,
-            child: const NextAppointments(),
+            child: NextAppointments(
+              onTap: (appointment) {},
+            ),
             onTap: () {},
             contentPadding: EdgeInsets.zero,
           ),

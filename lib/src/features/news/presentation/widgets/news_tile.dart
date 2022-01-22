@@ -20,7 +20,8 @@ class NewsTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final child = dense
-        ? CardCornerBox(
+        ? CardCornerBox.horizontal(
+            height: double.infinity,
             child: news.headerImage != null
                 ? Image.network(news.headerImage!, fit: BoxFit.cover)
                 : DateIndicator(

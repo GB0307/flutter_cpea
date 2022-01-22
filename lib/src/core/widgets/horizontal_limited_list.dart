@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cpea/src/core/theme/consts.dart' as consts;
 import 'package:flutter/material.dart';
 
@@ -9,6 +11,7 @@ class HorizontalLimitedList extends StatelessWidget {
     List<Widget> children = const [],
     this.padding,
     this.accountCardMargins = false,
+    this.crossAxisAlignment,
   })  : _children = children,
         _itemCount = null,
         _builder = null,
@@ -20,6 +23,7 @@ class HorizontalLimitedList extends StatelessWidget {
     required _Builder builder,
     this.padding,
     this.accountCardMargins = false,
+    this.crossAxisAlignment,
   })  : _children = null,
         _itemCount = itemCount,
         _builder = builder,
@@ -33,24 +37,33 @@ class HorizontalLimitedList extends StatelessWidget {
   final EdgeInsets? padding;
   final bool accountCardMargins;
 
+  final CrossAxisAlignment? crossAxisAlignment;
+
   @override
   Widget build(BuildContext context) {
     final _padding = EdgeInsets.only(
-      top: padding?.top ??
-          consts.padding - (accountCardMargins ? 1 : 0) * consts.cardMargin,
-      bottom: padding?.bottom ??
-          consts.padding - (accountCardMargins ? 1 : 0) * consts.cardMargin,
-      left: padding?.left ??
-          consts.horizontalPadding -
+      top: max(
+          (padding?.top ?? consts.padding) -
               (accountCardMargins ? 1 : 0) * consts.cardMargin,
-      right: padding?.right ??
-          consts.horizontalPadding -
+          0),
+      bottom: max(
+          (padding?.bottom ?? consts.padding) -
               (accountCardMargins ? 1 : 0) * consts.cardMargin,
+          0),
+      left: max(
+          (padding?.left ?? consts.horizontalPadding) -
+              (accountCardMargins ? 1 : 0) * consts.cardMargin,
+          0),
+      right: max(
+          (padding?.right ?? consts.horizontalPadding) -
+              (accountCardMargins ? 1 : 0) * consts.cardMargin,
+          0),
     );
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       padding: _padding,
       child: Row(
+        crossAxisAlignment: crossAxisAlignment ?? CrossAxisAlignment.center,
         children: _children ??
             List.generate(_itemCount!, (index) => index)
                 .map((i) => _builder!(context, i))

@@ -11,6 +11,7 @@
   "todayPermits": "Permits today",
   "receivedPackages": "Received packages",
   "lastNews": "Latest news",
-  "schedules": "Appointments"
+  "schedules": "Appointments",
+  "newAppointment": "New appointment"
   
 }
