@@ -1,5 +1,3 @@
-import 'package:cpea/src/core/theme/consts.dart';
-import 'package:cpea/src/core/utils/l18n.dart';
 import 'package:cpea/src/core/widgets/card_corner_box.dart';
 import 'package:cpea/src/core/widgets/card_tile.dart';
 import 'package:cpea/src/core/widgets/date_indicator.dart';

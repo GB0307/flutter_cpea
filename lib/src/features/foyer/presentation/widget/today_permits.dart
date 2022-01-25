@@ -1,4 +1,5 @@
 import 'package:cpea/src/core/theme/consts.dart';
+import 'package:cpea/src/core/widgets/horizontal_limited_list.dart';
 import 'package:cpea/src/core/widgets/snap_horizontal_list.dart';
 import 'package:cpea/src/features/foyer/domain/entities/permit.dart';
 import 'package:cpea/src/features/foyer/presentation/widget/permit_tile.dart';
@@ -49,26 +50,20 @@ class TodayPermits extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width =
-        (MediaQuery.of(context).size.width - 2 * horizontalPadding) * 1;
     final permits = _permits;
 
-    final height = tileHeight + 2 * quarterPadding;
-
-    return SnapHorizontalList(
-      margin: margin,
-      height: height,
-      itemWidth: width + 2 * cardSpacing,
-      itemBuilder: (context, index) => PermitTile(
+    return HorizontalLimitedList.builder(
+      itemCount: permits.length,
+      accountCardMargins: true,
+      builder: (context, index) => PermitTile(
         onTap: () => onTap?.call(permits[index]),
         permit: permits[index],
         margin: const EdgeInsets.symmetric(
           horizontal: cardSpacing,
           vertical: quarterPadding,
         ),
-        width: width,
+        width: 250,
       ),
-      itemCount: permits.length,
     );
   }
 }
