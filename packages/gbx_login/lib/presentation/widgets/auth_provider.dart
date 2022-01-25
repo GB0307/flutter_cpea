@@ -6,19 +6,18 @@ import 'package:gbx_login/presentation/bloc/user_data_cubit.dart';
 import 'package:get/get.dart';
 
 class AuthProvider<U extends GbxUser, UD> extends StatelessWidget {
-  AuthProvider({Key? key, required this.child}) : super(key: key) {
+  const AuthProvider({Key? key, required this.child}) : super(key: key);
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
     if (!Get.isRegistered<UserCubit<U>>()) {
       Get.put(UserCubit<U>(), permanent: true);
     }
     if (!Get.isRegistered<UserDataCubit<UD>>()) {
       Get.put(UserDataCubit<UD>(), permanent: true);
     }
-  }
-
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider<UserCubit<U>>(
