@@ -12,6 +12,8 @@
   "receivedPackages": "Received packages",
   "lastNews": "Latest news",
   "schedules": "Appointments",
-  "newAppointment": "New appointment"
+  "newAppointment": "New appointment",
+  "businessHours": "Business hours",
+  "about": "About"
   
 }

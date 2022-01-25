@@ -67,6 +67,14 @@ class HomePage extends StatelessWidget {
             onTap: () {},
             contentPadding: EdgeInsets.zero,
           ),
+          ListItem(
+            title: L18n.tr.businessHours,
+            onTap: () {},
+          ),
+          ListItem(
+            title: L18n.tr.about,
+            onTap: () {},
+          ),
         ],
       ),
     );
