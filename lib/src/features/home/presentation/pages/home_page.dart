@@ -80,5 +80,5 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  static void _openNews() => Get.context?.push(Routes.news);
+  static void _openNews() => Get.context?.push(Routes.newsList);
 }

@@ -1,0 +1,41 @@
+import 'package:cpea/src/core/theme/consts.dart';
+import 'package:cpea/src/core/utils/l18n.dart';
+import 'package:cpea/src/core/widgets/cpea_app_bar.dart';
+import 'package:cpea/src/features/news/presentation/widgets/news_builder.dart';
+import 'package:cpea/src/features/news/presentation/widgets/news_card.dart';
+import 'package:cpea/src/navigation/routes.dart';
+import 'package:flutter/material.dart';
+import 'package:gbx_login/gbx_login.dart';
+import 'package:go_router/go_router.dart';
+
+class NewsListPage extends StatelessWidget {
+  const NewsListPage({Key? key, this.user}) : super(key: key);
+
+  final GbxUser? user;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: NewsBuilder(
+        builder: (context, news) => ListView.builder(
+          padding: const EdgeInsets.only(bottom: halfPadding),
+          itemCount: news.length + 1,
+          itemBuilder: (context, index) {
+            if (index == 0) {
+              return CPEAAppBar(
+                titleText: L18n.tr.news,
+              );
+            }
+            return NewsCard(
+              news: news[index - 1],
+              onTap: () => context.push(
+                Routes.news(news[index - 1].id),
+                extra: news[index - 1],
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}

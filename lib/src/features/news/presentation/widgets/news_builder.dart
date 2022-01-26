@@ -1,5 +1,5 @@
 import 'package:cpea/src/features/news/domain/entities/news.dart';
-import 'package:cpea/src/features/news/presentation/bloc/news_cubit.dart';
+import 'package:cpea/src/features/news/presentation/bloc/news_list_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,8 +12,8 @@ class NewsBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<NewsCubit, List<News>>(
-      bloc: NewsCubit(tag),
+    return BlocBuilder<NewsListCubit, List<News>>(
+      bloc: NewsListCubit(tag),
       builder: builder,
     );
   }

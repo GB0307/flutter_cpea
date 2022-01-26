@@ -28,7 +28,21 @@
     }
   },
 
+  "publishedAt": "Publicado em {date}",
+  "@publishedAt": {
+    "description": "A message with a date parameter",
+    "placeholders": {
+      "date": {
+        "type": "DateTime",
+        "format": "yMMMMd"
+      }
+    }
+  },
+
   "news": "Notícias",
+
+  "loading": "carregando...",
+  "notFound": "não encontrado!",
 
   "todayPermits": "Entradas liberadas hoje",
   "receivedPackages": "Encomendas recebidas",

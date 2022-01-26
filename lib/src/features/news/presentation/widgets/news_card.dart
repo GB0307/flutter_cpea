@@ -1,12 +1,10 @@
 import 'package:cpea/src/core/theme/colors.dart';
 import 'package:cpea/src/core/theme/consts.dart';
 import 'package:cpea/src/core/utils/l18n.dart';
+import 'package:cpea/src/core/widgets/clickable_card.dart';
 import 'package:cpea/src/features/news/domain/entities/news.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-const placeholderImage =
-    "https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png";
 
 class NewsCard extends StatelessWidget {
   const NewsCard({required this.news, Key? key, this.onTap}) : super(key: key);
@@ -16,57 +14,87 @@ class NewsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return ClickableCard(
       margin: const EdgeInsets.symmetric(
         vertical: halfPadding,
         horizontal: horizontalPadding,
       ),
-      child: Card(
-        clipBehavior: Clip.antiAliasWithSaveLayer,
-        child: InkWell(
-          onTap: onTap,
-          child: AspectRatio(
+      clip: Clip.antiAlias,
+      onTap: onTap,
+      child: Column(
+        children: [
+          AspectRatio(
             aspectRatio: 16 / 9,
             child: Stack(
               fit: StackFit.expand,
               children: [
                 _image(),
-                _title(),
                 _timeBadge(),
               ],
             ),
           ),
-        ),
+          const SizedBox(width: double.infinity),
+          Padding(
+            padding: const EdgeInsets.only(top: padding),
+            child: _title(),
+          ),
+          Padding(
+            padding:
+                const EdgeInsets.only(bottom: padding, top: quarterPadding),
+            child: _subtitle(),
+          ),
+        ],
       ),
     );
   }
 
   Widget _title() {
+    return _textWrapper(
+      child: Text(
+        news.title,
+        style: Get.textTheme.subtitle1,
+      ),
+    );
+  }
+
+  Widget _subtitle() {
+    return _textWrapper(
+      child: Text(
+        news.text,
+        style: Get.textTheme.bodyText1,
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
+      ),
+    );
+  }
+
+  Widget _textWrapper({required Widget child}) {
     return Align(
-      alignment: Alignment.bottomLeft,
-      child: ClipRRect(
-        borderRadius: const BorderRadius.only(
-          topRight: Radius.circular(cardBorderRadius),
+      alignment: Alignment.centerLeft,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: doublePadding,
         ),
-        child: Container(
-          color: cardColor,
-          padding: const EdgeInsets.symmetric(
-            vertical: halfPadding,
-            horizontal: doublePadding,
-          ),
-          child: Text(
-            news.title,
-            style: Get.textTheme.subtitle1,
-          ),
-        ),
+        child: child,
       ),
     );
   }
 
   Widget _image() {
-    return Image.network(
-      news.headerImage ?? placeholderImage,
-      fit: BoxFit.cover,
+    ImageProvider provider;
+
+    if (news.headerImage != null) {
+      provider = NetworkImage(news.headerImage!);
+    } else {
+      provider = const AssetImage('assets/16x9_placeholder.png');
+    }
+
+    return Hero(
+      tag: "news_${news.id}",
+      child: Image(
+        image: provider,
+        fit: BoxFit.cover,
+      ),
     );
   }
 

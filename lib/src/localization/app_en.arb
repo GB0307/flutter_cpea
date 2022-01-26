@@ -5,8 +5,12 @@
 
   "date": "{date}",
   "compactDate": "{date}",
+  "publishedAt": "Published at {date}",
 
   "news": "News",
+
+  "loading": "loading...",
+  "notFound": "not found!",
 
   "todayPermits": "Permits today",
   "receivedPackages": "Received packages",
