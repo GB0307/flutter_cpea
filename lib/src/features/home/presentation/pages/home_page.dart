@@ -1,7 +1,7 @@
 import 'package:cpea/src/core/utils/l18n.dart';
-import 'package:cpea/src/core/widgets/card_button.dart';
-import 'package:cpea/src/core/widgets/list_item.dart';
-import 'package:cpea/src/core/widgets/profile_app_bar.dart';
+import 'package:cpea/src/core/widgets/buttons/card_button.dart';
+import 'package:cpea/src/core/widgets/app_bars/profile_app_bar.dart';
+import 'package:cpea/src/core/widgets/layout/list_item.dart';
 import 'package:cpea/src/features/appointments/presentation/widgets/next_appointments.dart';
 import 'package:cpea/src/features/foyer/presentation/widget/today_permits.dart';
 import 'package:cpea/src/features/news/presentation/widgets/last_news.dart';

@@ -1,7 +1,5 @@
 import 'package:cpea/src/core/theme/consts.dart';
-import 'package:cpea/src/core/utils/l18n.dart';
-import 'package:cpea/src/core/widgets/clickable_card.dart';
-import 'package:cpea/src/core/widgets/horizontal_limited_list.dart';
+import 'package:cpea/src/core/widgets/layout/horizontal_limited_list.dart';
 import 'package:cpea/src/features/appointments/domain/entities/appointment.dart';
 import 'package:cpea/src/features/appointments/presentation/widgets/appointment_card.dart';
 import 'package:cpea/src/features/locations/domain/entities/location.dart';

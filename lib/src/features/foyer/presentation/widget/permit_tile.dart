@@ -1,6 +1,6 @@
-import 'package:cpea/src/core/widgets/card_corner_box.dart';
-import 'package:cpea/src/core/widgets/card_tile.dart';
-import 'package:cpea/src/core/widgets/date_indicator.dart';
+import 'package:cpea/src/core/widgets/cards/card_corner_box.dart';
+import 'package:cpea/src/core/widgets/cards/card_tile.dart';
+import 'package:cpea/src/core/widgets/content/date_indicator.dart';
 import 'package:cpea/src/features/foyer/domain/entities/permit.dart';
 import 'package:flutter/material.dart';
 

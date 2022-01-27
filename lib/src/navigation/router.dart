@@ -1,4 +1,4 @@
-import 'package:cpea/src/core/widgets/no_splash_configuration.dart';
+import 'package:cpea/src/core/widgets/utils/no_splash_configuration.dart';
 import 'package:cpea/src/features/login/domain/entities/user_data.dart';
 import 'package:cpea/src/features/login/presentation/pages/login_guard_page.dart';
 import 'package:cpea/src/navigation/redirect_handler.dart';

@@ -1,9 +1,9 @@
 import 'package:cpea/src/core/theme/consts.dart';
 import 'package:cpea/src/core/utils/l18n.dart';
-import 'package:cpea/src/core/widgets/custom_app_bar.dart';
-import 'package:cpea/src/core/widgets/image_loader.dart';
-import 'package:cpea/src/core/widgets/loading_indicator.dart';
-import 'package:cpea/src/core/widgets/error_indicator.dart';
+import 'package:cpea/src/core/widgets/app_bars/custom_app_bar.dart';
+import 'package:cpea/src/core/widgets/content/error_indicator.dart';
+import 'package:cpea/src/core/widgets/content/image_loader.dart';
+import 'package:cpea/src/core/widgets/content/loading_indicator.dart';
 import 'package:cpea/src/features/news/domain/entities/news.dart';
 import 'package:cpea/src/features/news/presentation/bloc/news_cubit.dart';
 import 'package:flutter/material.dart';

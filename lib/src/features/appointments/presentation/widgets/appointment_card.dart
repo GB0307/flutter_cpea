@@ -1,7 +1,7 @@
 import 'package:cpea/src/core/theme/consts.dart';
-import 'package:cpea/src/core/widgets/card_corner_box.dart';
-import 'package:cpea/src/core/widgets/clickable_card.dart';
-import 'package:cpea/src/core/widgets/date_indicator.dart';
+import 'package:cpea/src/core/widgets/cards/card_corner_box.dart';
+import 'package:cpea/src/core/widgets/cards/clickable_card.dart';
+import 'package:cpea/src/core/widgets/content/date_indicator.dart';
 import 'package:cpea/src/features/appointments/domain/entities/appointment.dart';
 import 'package:flutter/material.dart';
 

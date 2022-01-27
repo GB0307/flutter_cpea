@@ -1,6 +1,5 @@
 import 'package:cpea/src/core/theme/consts.dart';
-import 'package:cpea/src/core/widgets/horizontal_limited_list.dart';
-import 'package:cpea/src/core/widgets/snap_horizontal_list.dart';
+import 'package:cpea/src/core/widgets/layout/horizontal_limited_list.dart';
 import 'package:cpea/src/features/foyer/domain/entities/permit.dart';
 import 'package:cpea/src/features/foyer/presentation/widget/permit_tile.dart';
 import 'package:flutter/material.dart';

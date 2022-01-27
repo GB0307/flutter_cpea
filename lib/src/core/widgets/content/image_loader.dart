@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cpea/src/core/widgets/loading_indicator.dart';
 import 'package:flutter/material.dart';
 
 typedef PlaceholderBuilder = Widget Function(BuildContext context, String url);

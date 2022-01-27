@@ -1,8 +1,8 @@
 import 'package:cpea/src/core/theme/consts.dart';
 import 'package:cpea/src/core/utils/l18n.dart';
 import 'package:cpea/src/core/utils/string.dart';
-import 'package:cpea/src/core/widgets/custom_app_bar.dart';
-import 'package:cpea/src/core/widgets/image_loader.dart';
+import 'package:cpea/src/core/widgets/app_bars/custom_app_bar.dart';
+import 'package:cpea/src/core/widgets/content/image_loader.dart';
 import 'package:cpea/src/features/login/domain/entities/user_data.dart';
 import 'package:flutter/material.dart';
 import 'package:gbx_firebase_login/gbx_firebase_login.dart';

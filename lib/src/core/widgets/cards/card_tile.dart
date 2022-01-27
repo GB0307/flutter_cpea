@@ -1,6 +1,7 @@
 import 'package:cpea/src/core/theme/consts.dart';
-import 'package:cpea/src/core/widgets/clickable_card.dart';
 import 'package:flutter/material.dart';
+
+import 'clickable_card.dart';
 
 class CardTile extends StatelessWidget {
   const CardTile({

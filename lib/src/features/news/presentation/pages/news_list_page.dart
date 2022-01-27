@@ -1,6 +1,6 @@
 import 'package:cpea/src/core/theme/consts.dart';
 import 'package:cpea/src/core/utils/l18n.dart';
-import 'package:cpea/src/core/widgets/custom_app_bar.dart';
+import 'package:cpea/src/core/widgets/app_bars/custom_app_bar.dart';
 import 'package:cpea/src/features/news/presentation/widgets/news_builder.dart';
 import 'package:cpea/src/features/news/presentation/widgets/news_card.dart';
 import 'package:cpea/src/navigation/routes.dart';

@@ -1,8 +1,8 @@
 import 'package:cpea/src/core/theme/colors.dart';
 import 'package:cpea/src/core/theme/consts.dart';
 import 'package:cpea/src/core/utils/l18n.dart';
-import 'package:cpea/src/core/widgets/clickable_card.dart';
-import 'package:cpea/src/core/widgets/image_loader.dart';
+import 'package:cpea/src/core/widgets/cards/clickable_card.dart';
+import 'package:cpea/src/core/widgets/content/image_loader.dart';
 import 'package:cpea/src/features/news/domain/entities/news.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
