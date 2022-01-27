@@ -16,6 +16,16 @@ final cardTheme = CardTheme(
 
 const dividerTheme = DividerThemeData(thickness: 1);
 
+final appBarTheme = AppBarTheme(
+  elevation: elevation1,
+  backgroundColor: backgroundColor,
+  centerTitle: true,
+  titleTextStyle: textTheme.headline6,
+  toolbarHeight: appBarHeight,
+  iconTheme: const IconThemeData(size: 32, color: primaryColor),
+  actionsIconTheme: const IconThemeData(size: 32, color: primaryColor),
+);
+
 final theme = ThemeData(
   primaryColor: primaryColor,
   primaryColorDark: primaryColorDark,
@@ -25,4 +35,5 @@ final theme = ThemeData(
   scaffoldBackgroundColor: backgroundColor,
   cardTheme: cardTheme,
   dividerTheme: dividerTheme,
+  appBarTheme: appBarTheme,
 );

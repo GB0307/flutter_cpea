@@ -12,6 +12,7 @@ class CardButton extends StatelessWidget {
     this.elevation,
     this.clip = Clip.antiAliasWithSaveLayer,
     this.margin,
+    this.backgroundColor,
   })  : image = null,
         errorBuilder = null,
         loadingBuilder = null,
@@ -31,6 +32,7 @@ class CardButton extends StatelessWidget {
     this.errorBuilder,
     this.loadingBuilder,
     this.margin,
+    this.backgroundColor,
   })  : child = null,
         iconColor = null,
         iconSize = null,
@@ -46,6 +48,7 @@ class CardButton extends StatelessWidget {
     this.iconSize = 32,
     this.clip = Clip.antiAliasWithSaveLayer,
     this.margin,
+    this.backgroundColor,
   })  : image = null,
         fit = BoxFit.cover,
         errorBuilder = null,
@@ -60,6 +63,7 @@ class CardButton extends StatelessWidget {
   final double? elevation;
   final Clip? clip;
   final EdgeInsets? margin;
+  final Color? backgroundColor;
 
   // IMAGE CARD VARIABLES
   final ImageProvider? image;
@@ -99,6 +103,7 @@ class CardButton extends StatelessWidget {
       child: SizedBox.expand(
         child: c,
       ),
+      color: backgroundColor,
       margin: margin,
       clip: clip,
       elevation: elevation,

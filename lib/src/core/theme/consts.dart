@@ -19,3 +19,5 @@ const defaultCardTileThreeLineHeight = 90.0;
 const defaultCardTileDenseHeight = 48.0;
 
 const defaultLeadingWidth = 64.0;
+
+const appBarHeight = doublePadding * 2 + defaultCardButtonSize;

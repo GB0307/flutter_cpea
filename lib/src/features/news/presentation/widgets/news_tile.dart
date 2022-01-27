@@ -36,10 +36,7 @@ class NewsTile extends StatelessWidget {
           )
         : AspectRatio(
             aspectRatio: 1,
-            child: Image.network(
-              news.headerImage!,
-              fit: BoxFit.cover,
-            ),
+            child: ImageLoader(url: news.headerImage, fit: BoxFit.cover),
           );
 
     return dense

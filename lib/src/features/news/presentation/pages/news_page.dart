@@ -1,6 +1,6 @@
 import 'package:cpea/src/core/theme/consts.dart';
 import 'package:cpea/src/core/utils/l18n.dart';
-import 'package:cpea/src/core/widgets/cpea_app_bar.dart';
+import 'package:cpea/src/core/widgets/custom_app_bar.dart';
 import 'package:cpea/src/core/widgets/image_loader.dart';
 import 'package:cpea/src/core/widgets/loading_indicator.dart';
 import 'package:cpea/src/core/widgets/error_indicator.dart';
@@ -24,9 +24,10 @@ class NewsPage extends StatelessWidget {
         builder: (context, state) {
           var child = Column(
             children: [
-              CPEAAppBar(
-                titleText:
-                    state.isLoading ? L18n.tr.loading : state.news?.title,
+              CustomAppBar(
+                title: Text(state.isLoading
+                    ? L18n.tr.loading
+                    : state.news?.title ?? ""),
               ),
               state.isLoading
                   ? _loading()

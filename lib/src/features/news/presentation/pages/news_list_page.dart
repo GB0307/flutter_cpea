@@ -1,6 +1,6 @@
 import 'package:cpea/src/core/theme/consts.dart';
 import 'package:cpea/src/core/utils/l18n.dart';
-import 'package:cpea/src/core/widgets/cpea_app_bar.dart';
+import 'package:cpea/src/core/widgets/custom_app_bar.dart';
 import 'package:cpea/src/features/news/presentation/widgets/news_builder.dart';
 import 'package:cpea/src/features/news/presentation/widgets/news_card.dart';
 import 'package:cpea/src/navigation/routes.dart';
@@ -16,21 +16,19 @@ class NewsListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CustomAppBar.elevated(
+        title: Text(L18n.tr.news),
+      ),
       body: NewsBuilder(
         builder: (context, news) => ListView.builder(
-          padding: const EdgeInsets.only(bottom: halfPadding),
-          itemCount: news.length + 1,
+          padding: const EdgeInsets.symmetric(vertical: padding),
+          itemCount: news.length,
           itemBuilder: (context, index) {
-            if (index == 0) {
-              return CPEAAppBar(
-                titleText: L18n.tr.news,
-              );
-            }
             return NewsCard(
-              news: news[index - 1],
+              news: news[index],
               onTap: () => context.push(
-                Routes.news(news[index - 1].id),
-                extra: news[index - 1],
+                Routes.news(news[index].id),
+                extra: news[index],
               ),
             );
           },
