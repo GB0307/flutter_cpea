@@ -1,6 +1,7 @@
 import 'package:cpea/src/core/widgets/card_corner_box.dart';
 import 'package:cpea/src/core/widgets/card_tile.dart';
 import 'package:cpea/src/core/widgets/date_indicator.dart';
+import 'package:cpea/src/core/widgets/image_loader.dart';
 import 'package:cpea/src/features/news/domain/entities/news.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +24,11 @@ class NewsTile extends StatelessWidget {
         ? CardCornerBox.horizontal(
             height: double.infinity,
             child: news.headerImage != null
-                ? Image.network(news.headerImage!, fit: BoxFit.cover)
+                ? Hero(
+                    tag: "news_${news.id}",
+                    child:
+                        ImageLoader(url: news.headerImage, fit: BoxFit.cover),
+                  )
                 : DateIndicator(
                     date: news.publishDate,
                     includeDayName: false,

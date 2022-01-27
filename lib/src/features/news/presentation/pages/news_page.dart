@@ -1,6 +1,7 @@
 import 'package:cpea/src/core/theme/consts.dart';
 import 'package:cpea/src/core/utils/l18n.dart';
 import 'package:cpea/src/core/widgets/cpea_app_bar.dart';
+import 'package:cpea/src/core/widgets/image_loader.dart';
 import 'package:cpea/src/core/widgets/loading_indicator.dart';
 import 'package:cpea/src/core/widgets/error_indicator.dart';
 import 'package:cpea/src/features/news/domain/entities/news.dart';
@@ -68,8 +69,8 @@ class NewsPage extends StatelessWidget {
           aspectRatio: 16 / 9,
           child: Hero(
             tag: "news_${news.id}",
-            child: Image(
-              image: provider,
+            child: ImageLoader(
+              url: news.headerImage,
               fit: BoxFit.cover,
             ),
           ),

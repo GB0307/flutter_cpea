@@ -47,7 +47,7 @@ class HomePage extends StatelessWidget {
           ListItem(
             title: L18n.tr.lastNews,
             child: LastNews(
-              onTap: (news) {},
+              onTap: (news) => context.push(Routes.news(news.id), extra: news),
             ),
             contentPadding: EdgeInsets.zero,
             onTap: _openNews,

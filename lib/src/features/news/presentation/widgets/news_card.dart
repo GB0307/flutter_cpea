@@ -2,6 +2,7 @@ import 'package:cpea/src/core/theme/colors.dart';
 import 'package:cpea/src/core/theme/consts.dart';
 import 'package:cpea/src/core/utils/l18n.dart';
 import 'package:cpea/src/core/widgets/clickable_card.dart';
+import 'package:cpea/src/core/widgets/image_loader.dart';
 import 'package:cpea/src/features/news/domain/entities/news.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -81,18 +82,10 @@ class NewsCard extends StatelessWidget {
   }
 
   Widget _image() {
-    ImageProvider provider;
-
-    if (news.headerImage != null) {
-      provider = NetworkImage(news.headerImage!);
-    } else {
-      provider = const AssetImage('assets/16x9_placeholder.png');
-    }
-
     return Hero(
       tag: "news_${news.id}",
-      child: Image(
-        image: provider,
+      child: ImageLoader(
+        url: news.headerImage,
         fit: BoxFit.cover,
       ),
     );
