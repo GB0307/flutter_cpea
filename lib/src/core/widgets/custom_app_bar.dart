@@ -63,28 +63,33 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       leadingWidth: canPop || leading != null
           ? defaultCardButtonSize + horizontalPadding
           : quarterPadding,
-      leading: Align(
-        alignment: Alignment.centerRight,
+      leading: Padding(
+        padding: const EdgeInsets.only(left: doublePadding),
         child: leading != null
-            ? CardButton(
-                margin: EdgeInsets.zero,
-                child: leading,
-                onTap: onLeadingTap,
-                backgroundColor: buttonColor,
-                elevation: buttonElevation,
-                size: defaultCardButtonSize,
+            ? Center(
+                child: CardButton(
+                  margin: EdgeInsets.zero,
+                  child: leading,
+                  onTap: onLeadingTap,
+                  backgroundColor: buttonColor,
+                  elevation: buttonElevation,
+                  size: defaultCardButtonSize,
+                  clip: Clip.antiAliasWithSaveLayer,
+                ),
               )
             : canPop
-                ? CardButton.icon(
-                    iconSize: 32,
-                    size: defaultCardButtonSize + padding,
-                    backgroundColor: buttonColor,
-                    elevation: buttonElevation,
-                    margin: EdgeInsets.zero,
-                    icon: const Icon(
-                      Icons.chevron_left_rounded,
+                ? Center(
+                    child: CardButton.icon(
+                      iconSize: 32,
+                      size: defaultCardButtonSize,
+                      backgroundColor: buttonColor,
+                      elevation: buttonElevation,
+                      margin: EdgeInsets.zero,
+                      icon: const Icon(
+                        Icons.chevron_left_rounded,
+                      ),
+                      onTap: onLeadingTap ?? () => context.pop(),
                     ),
-                    onTap: onLeadingTap ?? () => context.pop(),
                   )
                 : null,
       ),
