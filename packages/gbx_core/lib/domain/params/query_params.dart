@@ -1,34 +1,17 @@
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class QueryParams extends Equatable {
-  const QueryParams({
-    this.orderBy,
-    this.ascendingOrder = true,
-    this.startAt,
-    this.startAfter,
-    this.entAt,
-    this.endBefore,
-    this.limit,
-    this.limitLast,
-  });
+part 'query_params.freezed.dart';
 
-  final String? orderBy;
-  final Object? startAt;
-  final Object? startAfter;
-  final Object? entAt;
-  final Object? endBefore;
-  final int? limit;
-  final int? limitLast;
-  final bool ascendingOrder;
-
-  @override
-  List<Object?> get props => [
-        orderBy,
-        startAfter,
-        startAt,
-        entAt,
-        endBefore,
-        limit,
-        limitLast,
-      ];
+@freezed
+class QueryParams with _$QueryParams {
+  const factory QueryParams({
+    String? orderBy,
+    Object? startAt,
+    Object? startAfter,
+    Object? entAt,
+    Object? endBefore,
+    int? limit,
+    int? limitLast,
+    @Default(true) bool ascendingOrder,
+  }) = _QueryParams;
 }

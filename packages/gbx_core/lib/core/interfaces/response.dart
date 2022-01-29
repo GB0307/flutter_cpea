@@ -32,3 +32,5 @@ class DResponse<T> {
     }
   }
 }
+
+typedef AsyncResponse<T> = Future<DResponse<T>>;
