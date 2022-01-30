@@ -11,12 +11,16 @@ class CachedFirebaseRepository<T extends Identifiable>
     int defaultUpdateLimit = 100,
     bool preferCache = true,
     bool updateCacheOnQuery = true,
+    required Serializer<T> serializer,
+    required Deserializer<T> deserializer,
   }) : super(
           datasource: datasource,
           cacheDatasource: cacheDataSource,
           defaultUpdateLimit: defaultUpdateLimit,
           preferCache: preferCache,
           updateCacheOnQuery: updateCacheOnQuery,
+          serializer: serializer,
+          deserializer: deserializer,
         );
   CachedFirebaseRepository.from({
     required String collection,
@@ -31,13 +35,15 @@ class CachedFirebaseRepository<T extends Identifiable>
               collection: collection,
               deserializer: deserializer,
               serializer: serializer),
-          cacheDatasource: HiveCacheDataSource(
+          cacheDatasource: GetCacheDataSource(
               boxName: boxName,
               deserializer: deserializer,
               serializer: serializer),
           defaultUpdateLimit: defaultUpdateLimit,
           preferCache: preferCache,
           updateCacheOnQuery: updateCacheOnQuery,
+          serializer: serializer,
+          deserializer: deserializer,
         );
 
   @override

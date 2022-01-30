@@ -1,0 +1,71 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "cpea",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "cpea (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "gbx_core",
+            "cwd": "packages\\gbx_core",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "gbx_core (profile mode)",
+            "cwd": "packages\\gbx_core",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "gbx_firebase",
+            "cwd": "packages\\gbx_firebase",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "gbx_firebase (profile mode)",
+            "cwd": "packages\\gbx_firebase",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "gbx_firebase_login",
+            "cwd": "packages\\gbx_firebase_login",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "gbx_firebase_login (profile mode)",
+            "cwd": "packages\\gbx_firebase_login",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "gbx_login",
+            "cwd": "packages\\gbx_login",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "gbx_login (profile mode)",
+            "cwd": "packages\\gbx_login",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        }
+    ]
+}

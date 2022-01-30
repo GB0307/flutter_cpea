@@ -1,7 +1,6 @@
 import 'package:gbx_core/core/errors/exceptions.dart';
 import 'package:gbx_core/core/errors/failures.dart';
 import 'package:gbx_core/core/interfaces/index.dart';
-import 'package:gbx_core/data/datasources/cache_datasource.dart';
 import 'package:gbx_core/data/index.dart';
 import 'package:gbx_core/domain/index.dart';
 
@@ -12,6 +11,8 @@ class CachedCRUDRepository<T extends Identifiable> extends ICRUDRepository<T> {
     this.preferCache = true,
     this.updateCacheOnQuery = true,
     this.defaultUpdateLimit = 100,
+    required this.serializer,
+    required this.deserializer,
   }) : super();
 
   final ICacheDataSource<T> cacheDatasource;
@@ -20,6 +21,9 @@ class CachedCRUDRepository<T extends Identifiable> extends ICRUDRepository<T> {
   final bool preferCache;
   final bool updateCacheOnQuery;
   final int defaultUpdateLimit;
+
+  final Serializer<T> serializer;
+  final Deserializer<T> deserializer;
 
   @override
   Future<DResponse<T>> create(T data) => runCatchingAsync(() async {
@@ -55,7 +59,7 @@ class CachedCRUDRepository<T extends Identifiable> extends ICRUDRepository<T> {
         return newData;
       });
 
-  @override //TODO
+  @override
   Future<DResponse<List<T>>> query(QueryParams params,
           [bool? forceRefresh, bool? updateCache]) =>
       runCatchingAsync(() async {
@@ -71,13 +75,18 @@ class CachedCRUDRepository<T extends Identifiable> extends ICRUDRepository<T> {
           final newItems = await datasource.query(
             params.copyWith(
                 limit: params.limit ?? defaultUpdateLimit,
-                endBefore: items.first.id),
+                endBefore: serializer(items.first)[params.orderBy]),
           );
           items = [...newItems, ...items];
+
+          await cacheDatasource.cacheAll(newItems);
         }
 
         // If no data in cache or force refresh, get the data from source
-        if (items.isEmpty) items = await datasource.query(params);
+        if (items.isEmpty) {
+          items = await datasource.query(params);
+          await cacheDatasource.cacheAll(items);
+        }
 
         return items;
       });

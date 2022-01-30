@@ -16,8 +16,12 @@ class UserDataCubit<T> extends Cubit<UserState<T>> {
   void getUserData() async {
     emit(UserState<T>(null, UAction.loading));
     var data = await _module.getUserData();
-    var action = data.didSuccess ? UAction.complete : UAction.failed;
-    emit(UserState<T>(data.data, action));
+    emit(
+      UserState<T>(
+        data.didSuccess ? data.data : null,
+        data.didSuccess ? UAction.complete : UAction.failed,
+      ),
+    );
   }
 
   void updateUserData(T updatedData) async {

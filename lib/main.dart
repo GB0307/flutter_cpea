@@ -11,3 +11,6 @@ void main() async {
 
   runApp(MyApp(router: AppRouter()));
 }
+
+// TODO: TURN CACHE DATA SOURCE INTO A MAPPER WITH THE POSSIBILITY TO SERIALIZE/DESERIALIZE
+// TODO: CREATE A CACHE STRATEGY CLASS TO HANDLE HOW THE DATA IS CACHED (use default order for caching)
