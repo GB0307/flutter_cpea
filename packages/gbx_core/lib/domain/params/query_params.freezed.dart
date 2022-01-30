@@ -22,7 +22,7 @@ class _$QueryParamsTearOff {
       {String? orderBy,
       Object? startAt,
       Object? startAfter,
-      Object? entAt,
+      Object? endAt,
       Object? endBefore,
       int? limit,
       int? limitLast,
@@ -31,7 +31,7 @@ class _$QueryParamsTearOff {
       orderBy: orderBy,
       startAt: startAt,
       startAfter: startAfter,
-      entAt: entAt,
+      endAt: endAt,
       endBefore: endBefore,
       limit: limit,
       limitLast: limitLast,
@@ -48,7 +48,7 @@ mixin _$QueryParams {
   String? get orderBy => throw _privateConstructorUsedError;
   Object? get startAt => throw _privateConstructorUsedError;
   Object? get startAfter => throw _privateConstructorUsedError;
-  Object? get entAt => throw _privateConstructorUsedError;
+  Object? get endAt => throw _privateConstructorUsedError;
   Object? get endBefore => throw _privateConstructorUsedError;
   int? get limit => throw _privateConstructorUsedError;
   int? get limitLast => throw _privateConstructorUsedError;
@@ -68,7 +68,7 @@ abstract class $QueryParamsCopyWith<$Res> {
       {String? orderBy,
       Object? startAt,
       Object? startAfter,
-      Object? entAt,
+      Object? endAt,
       Object? endBefore,
       int? limit,
       int? limitLast,
@@ -88,7 +88,7 @@ class _$QueryParamsCopyWithImpl<$Res> implements $QueryParamsCopyWith<$Res> {
     Object? orderBy = freezed,
     Object? startAt = freezed,
     Object? startAfter = freezed,
-    Object? entAt = freezed,
+    Object? endAt = freezed,
     Object? endBefore = freezed,
     Object? limit = freezed,
     Object? limitLast = freezed,
@@ -101,7 +101,7 @@ class _$QueryParamsCopyWithImpl<$Res> implements $QueryParamsCopyWith<$Res> {
               as String?,
       startAt: startAt == freezed ? _value.startAt : startAt,
       startAfter: startAfter == freezed ? _value.startAfter : startAfter,
-      entAt: entAt == freezed ? _value.entAt : entAt,
+      endAt: endAt == freezed ? _value.endAt : endAt,
       endBefore: endBefore == freezed ? _value.endBefore : endBefore,
       limit: limit == freezed
           ? _value.limit
@@ -130,7 +130,7 @@ abstract class _$QueryParamsCopyWith<$Res>
       {String? orderBy,
       Object? startAt,
       Object? startAfter,
-      Object? entAt,
+      Object? endAt,
       Object? endBefore,
       int? limit,
       int? limitLast,
@@ -152,7 +152,7 @@ class __$QueryParamsCopyWithImpl<$Res> extends _$QueryParamsCopyWithImpl<$Res>
     Object? orderBy = freezed,
     Object? startAt = freezed,
     Object? startAfter = freezed,
-    Object? entAt = freezed,
+    Object? endAt = freezed,
     Object? endBefore = freezed,
     Object? limit = freezed,
     Object? limitLast = freezed,
@@ -165,7 +165,7 @@ class __$QueryParamsCopyWithImpl<$Res> extends _$QueryParamsCopyWithImpl<$Res>
               as String?,
       startAt: startAt == freezed ? _value.startAt : startAt,
       startAfter: startAfter == freezed ? _value.startAfter : startAfter,
-      entAt: entAt == freezed ? _value.entAt : entAt,
+      endAt: endAt == freezed ? _value.endAt : endAt,
       endBefore: endBefore == freezed ? _value.endBefore : endBefore,
       limit: limit == freezed
           ? _value.limit
@@ -190,7 +190,7 @@ class _$_QueryParams implements _QueryParams {
       {this.orderBy,
       this.startAt,
       this.startAfter,
-      this.entAt,
+      this.endAt,
       this.endBefore,
       this.limit,
       this.limitLast,
@@ -203,7 +203,7 @@ class _$_QueryParams implements _QueryParams {
   @override
   final Object? startAfter;
   @override
-  final Object? entAt;
+  final Object? endAt;
   @override
   final Object? endBefore;
   @override
@@ -216,7 +216,7 @@ class _$_QueryParams implements _QueryParams {
 
   @override
   String toString() {
-    return 'QueryParams(orderBy: $orderBy, startAt: $startAt, startAfter: $startAfter, entAt: $entAt, endBefore: $endBefore, limit: $limit, limitLast: $limitLast, ascendingOrder: $ascendingOrder)';
+    return 'QueryParams(orderBy: $orderBy, startAt: $startAt, startAfter: $startAfter, endAt: $endAt, endBefore: $endBefore, limit: $limit, limitLast: $limitLast, ascendingOrder: $ascendingOrder)';
   }
 
   @override
@@ -228,7 +228,7 @@ class _$_QueryParams implements _QueryParams {
             const DeepCollectionEquality().equals(other.startAt, startAt) &&
             const DeepCollectionEquality()
                 .equals(other.startAfter, startAfter) &&
-            const DeepCollectionEquality().equals(other.entAt, entAt) &&
+            const DeepCollectionEquality().equals(other.endAt, endAt) &&
             const DeepCollectionEquality().equals(other.endBefore, endBefore) &&
             const DeepCollectionEquality().equals(other.limit, limit) &&
             const DeepCollectionEquality().equals(other.limitLast, limitLast) &&
@@ -242,7 +242,7 @@ class _$_QueryParams implements _QueryParams {
       const DeepCollectionEquality().hash(orderBy),
       const DeepCollectionEquality().hash(startAt),
       const DeepCollectionEquality().hash(startAfter),
-      const DeepCollectionEquality().hash(entAt),
+      const DeepCollectionEquality().hash(endAt),
       const DeepCollectionEquality().hash(endBefore),
       const DeepCollectionEquality().hash(limit),
       const DeepCollectionEquality().hash(limitLast),
@@ -259,7 +259,7 @@ abstract class _QueryParams implements QueryParams {
       {String? orderBy,
       Object? startAt,
       Object? startAfter,
-      Object? entAt,
+      Object? endAt,
       Object? endBefore,
       int? limit,
       int? limitLast,
@@ -272,7 +272,7 @@ abstract class _QueryParams implements QueryParams {
   @override
   Object? get startAfter;
   @override
-  Object? get entAt;
+  Object? get endAt;
   @override
   Object? get endBefore;
   @override

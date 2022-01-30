@@ -64,7 +64,7 @@ class FirestoreCRUDDataSource<T extends Identifiable>
     if (query.startAt != null) q = q.startAt([query.startAt]);
     if (query.startAfter != null) q = q.startAfter([query.startAfter]);
 
-    if (query.entAt != null) q = q.endAt([query.entAt]);
+    if (query.endAt != null) q = q.endAt([query.endAt]);
     if (query.endBefore != null) q = q.endBefore([query.endBefore]);
 
     if (query.limit != null) q = q.limit(query.limit!);

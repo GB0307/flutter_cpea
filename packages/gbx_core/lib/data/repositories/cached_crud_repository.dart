@@ -84,6 +84,8 @@ class CachedCRUDRepository<T extends Identifiable> extends ICRUDRepository<T> {
 
   @override
   IFailure? catchExceptions(Exception exception) {
-    return on<NoCachedDataException>(exception, (e) => NoCachedDataFailure());
+    return on<NoCachedDataException>(exception, (e) => NoCachedDataFailure()) ??
+        on<NoDataException>(exception, (e) => NoDataFailure()) ??
+        on<UnauthorizedException>(exception, (e) => UnauthorizedFailure());
   }
 }

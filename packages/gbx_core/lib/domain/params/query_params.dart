@@ -8,7 +8,7 @@ class QueryParams with _$QueryParams {
     String? orderBy,
     Object? startAt,
     Object? startAfter,
-    Object? entAt,
+    Object? endAt,
     Object? endBefore,
     int? limit,
     int? limitLast,
