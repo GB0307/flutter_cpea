@@ -11,8 +11,6 @@ class CachedCRUDRepository<T extends Identifiable> extends ICRUDRepository<T> {
     this.preferCache = true,
     this.updateCacheOnQuery = true,
     this.defaultUpdateLimit = 100,
-    required this.serializer,
-    required this.deserializer,
   }) : super();
 
   final ICacheDataSource<T> cacheDatasource;
@@ -21,9 +19,6 @@ class CachedCRUDRepository<T extends Identifiable> extends ICRUDRepository<T> {
   final bool preferCache;
   final bool updateCacheOnQuery;
   final int defaultUpdateLimit;
-
-  final Serializer<T> serializer;
-  final Deserializer<T> deserializer;
 
   @override
   Future<DResponse<T>> create(T data) => runCatchingAsync(() async {
@@ -44,7 +39,7 @@ class CachedCRUDRepository<T extends Identifiable> extends ICRUDRepository<T> {
         T? data;
         if (!(forceRefresh ?? !preferCache) &&
             await cacheDatasource.hasCached(id)) {
-          data = await cacheDatasource.get(id);
+          data = (await cacheDatasource.get(id)).item;
         }
         data ??= await datasource.read(id);
 
@@ -64,10 +59,11 @@ class CachedCRUDRepository<T extends Identifiable> extends ICRUDRepository<T> {
           [bool? forceRefresh, bool? updateCache]) =>
       runCatchingAsync(() async {
         List<T> items = [];
+        CachedItems<T> cached = [];
 
         // Try getting the data from cache
         if (!(forceRefresh ?? !preferCache)) {
-          items = await cacheDatasource.query(params);
+          cached = (await cacheDatasource.query(params));
         }
 
         // Get the current data and add the server data
@@ -75,7 +71,7 @@ class CachedCRUDRepository<T extends Identifiable> extends ICRUDRepository<T> {
           final newItems = await datasource.query(
             params.copyWith(
                 limit: params.limit ?? defaultUpdateLimit,
-                endBefore: serializer(items.first)[params.orderBy]),
+                endBefore: cached.first.data[params.orderBy]),
           );
           items = [...newItems, ...items];
 

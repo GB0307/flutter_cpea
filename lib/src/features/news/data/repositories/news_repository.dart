@@ -5,8 +5,6 @@ import 'package:gbx_firebase/gbx_firebase.dart';
 class NewsRepository extends CachedFirebaseRepository<News> {
   const NewsRepository()
       : super(
-          deserializer: newsFromJson,
-          serializer: newsToJson,
           cacheDataSource: const GetCacheDataSource(
               boxName: 'news',
               deserializer: newsFromJson,

@@ -6,21 +6,35 @@ import 'package:get_storage/get_storage.dart';
 
 // TODO: MAKE THIS A CACHE OF MAPS ONLY
 abstract class ICacheDataSource<T extends Identifiable> {
-  const ICacheDataSource();
+  const ICacheDataSource(
+      {required this.serializer, required this.deserializer});
 
-  Future<T> get(String id);
+  final Serializer<T> serializer;
+  final Deserializer<T> deserializer;
+
+  Future<CachedItem<T>> get(String id);
 
   /// Gets all available data;
-  Future<List<T>> getAll();
+  Future<CachedItems<T>> getAll();
 
   /// Caches the data.
-  Future<void> cache(T data);
+  Future<void> cache(T data) => cacheData(data.id!, serializer(data));
+
+  /// Caches the map data.
+  Future<void> cacheData(String id, Map<String, dynamic> data);
 
   /// Caches the data.
-  Future<void> cacheAll(List<T> data);
+  Future<void> cacheAll(List<T> data) => cacheAllData(data
+      .map((e) => MapEntry<String, Map<String, dynamic>>(e.id!, serializer(e)))
+      .toList());
+
+  /// Caches the map data of the object.
+  Future<void> cacheAllData(
+          List<MapEntry<String, Map<String, dynamic>>> entries) async =>
+      await Future.wait(entries.map((e) => cacheData(e.key, e.value)));
 
   /// Query all entries in the cache.
-  Future<List<T>> query(QueryParams params);
+  Future<CachedItems<T>> query(QueryParams params);
 
   /// Removes an item from the cache
   ///
@@ -33,42 +47,41 @@ abstract class ICacheDataSource<T extends Identifiable> {
 class GetCacheDataSource<T extends Identifiable> extends ICacheDataSource<T> {
   const GetCacheDataSource(
       {required this.boxName,
-      required this.deserializer,
-      required this.serializer})
-      : super();
+      required Deserializer<T> deserializer,
+      required Serializer<T> serializer})
+      : super(serializer: serializer, deserializer: deserializer);
 
   final String boxName;
-
-  final Serializer<T> serializer;
-  final Deserializer<T> deserializer;
 
   Future<GetStorage> get box async => (await GetStorage.init(boxName))
       ? GetStorage(boxName)
       : throw Exception("couldn't open box");
 
   @override
-  Future<void> cache(T data) async {
-    (await box).write(data.id!, serializer(data));
+  Future<void> cacheData(String id, Map<String, dynamic> data) async {
+    (await box).write(id, data);
   }
 
   @override
-  Future<void> cacheAll(List<T> data) async {
-    await Future.wait(data.map((e) => cache(e)));
-  }
-
-  @override
-  Future<T> get(String id) async {
+  Future<CachedItem<T>> get(String id) async {
     var json = (await box).read(id);
     if (json == null) throw NoCachedDataException();
-    return deserializer(json);
+    return CachedItem(deserializer: deserializer, id: id, data: json);
   }
 
   @override
-  Future<List<T>> getAll() async {
+  Future<CachedItems<T>> getAll() async {
     var _box = (await box);
 
-    var items = _box.getValues().map((key) => deserializer(_box.read(key)!));
-    return items.toList();
+    List<String> ids = _box.getKeys().toList();
+
+    List<CachedItem<T>> items = ids
+        .map(
+          (key) => CachedItem<T>(
+              id: key, data: _box.read(key)!, deserializer: deserializer),
+        )
+        .toList();
+    return items;
   }
 
   @override
@@ -87,16 +100,14 @@ class GetCacheDataSource<T extends Identifiable> extends ICacheDataSource<T> {
   }
 
   @override
-  Future<List<T>> query(QueryParams params) async {
+  Future<CachedItems<T>> query(QueryParams params) async {
     // Sort data
-    var mapList = (await box).getValues().toList()
+    var items = (await getAll())
       ..sort((a, b) {
-        var x = (a[params.orderBy] ?? 0).compareTo(b[params.orderBy] ?? 0);
+        var x = (a.data[params.orderBy] ?? 0)
+            .compareTo(b.data[params.orderBy] ?? 0);
         return x is int ? x : 0;
       });
-
-    // Create a list of items
-    var items = mapList.map<T>((e) => deserializer(e)).toList();
 
     // Sublist by start and end
     int startAt = _findIndex(params.startAfter ?? params.startAt, items,
@@ -123,7 +134,7 @@ class GetCacheDataSource<T extends Identifiable> extends ICacheDataSource<T> {
     return items;
   }
 
-  int? _findIndex(dynamic id, List<T> items, [int modifier = 0]) {
+  int? _findIndex(dynamic id, List<CachedItem> items, [int modifier = 0]) {
     if (id == null) return null;
     int index = items.indexWhere((element) => element.id == id);
     if (index >= 0) return index + modifier;
