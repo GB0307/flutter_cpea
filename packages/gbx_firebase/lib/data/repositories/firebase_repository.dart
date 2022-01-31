@@ -3,15 +3,14 @@ import 'package:gbx_core/gbx_core.dart';
 import 'package:gbx_firebase/gbx_firebase.dart';
 
 class FirebaseRepository<T extends Identifiable> extends CRUDRepository<T> {
-  const FirebaseRepository(ICRUDDataSource<T> _datasource) : super(_datasource);
-  FirebaseRepository.from(
-      {required String collection,
-      required Deserializer<T> deserializer,
-      required Serializer<T> serializer})
-      : super(FirestoreCRUDDataSource(
-            collection: collection,
+  const FirebaseRepository(
+      {required ICRUDDataSource datasource,
+      required Serializer<T> serializer,
+      required Deserializer<T> deserializer})
+      : super(
+            datasource: datasource,
             deserializer: deserializer,
-            serializer: serializer));
+            serializer: serializer);
 
   @override
   IFailure? catchExceptions(Exception exception) {

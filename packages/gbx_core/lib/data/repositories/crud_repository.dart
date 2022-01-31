@@ -1,34 +1,43 @@
-import 'package:gbx_core/core/errors/exceptions.dart';
-import 'package:gbx_core/core/errors/failures.dart';
-import 'package:gbx_core/core/interfaces/index.dart';
+import 'package:gbx_core/core/index.dart';
 import 'package:gbx_core/data/datasources/crud_datasource.dart';
 import 'package:gbx_core/domain/params/query_params.dart';
 import 'package:gbx_core/domain/repositories/crud_repository.dart';
 
 class CRUDRepository<T extends Identifiable> extends ICRUDRepository<T> {
-  const CRUDRepository(this._datasource) : super();
+  const CRUDRepository({
+    required this.datasource,
+    required this.serializer,
+    required this.deserializer,
+  }) : super();
 
-  final ICRUDDataSource<T> _datasource;
+  final Serializer<T> serializer;
+  final Deserializer<T> deserializer;
+
+  final ICRUDDataSource datasource;
 
   @override
-  Future<DResponse<T>> create(T data) =>
-      runCatchingAsync(() => _datasource.create(data));
+  Future<DResponse<T>> create(T data) => runCatchingAsync(() async =>
+      (await datasource.create(serializer(data))).map(deserializer));
 
   @override
   Future<DResponse<void>> delete(String id) =>
-      runCatchingAsync(() => _datasource.delete(id));
+      runCatchingAsync(() => datasource.delete(id));
 
   @override
-  Future<DResponse<T>> read(String id) =>
-      runCatchingAsync(() => _datasource.read(id));
+  Future<DResponse<T>> read(String id) => runCatchingAsync(
+      () async => (await datasource.read(id)).map(deserializer));
 
   @override
   Future<DResponse<T>> update(String id, T updated) =>
-      runCatchingAsync(() => _datasource.update(updated));
+      runCatchingAsync(() => datasource
+          .update(id, serializer(updated))
+          .map<T>((data) => data.map(deserializer)));
 
   @override
   Future<DResponse<List<T>>> query(QueryParams params) =>
-      runCatchingAsync(() => _datasource.query(params));
+      runCatchingAsync(() async => (await datasource.query(params))
+          .map((e) => e.map(deserializer))
+          .toList());
 
   @override
   IFailure? catchExceptions(Exception exception) {
