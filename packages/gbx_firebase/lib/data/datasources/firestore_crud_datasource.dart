@@ -12,8 +12,8 @@ class FirestoreCRUDDataSource extends ICRUDDataSource {
       FirebaseFirestore.instance.collection(collection);
 
   @override
-  Future<CRUDData> create(Map<String, dynamic> data) async {
-    final doc = col.doc();
+  Future<CRUDData> create(Map<String, dynamic> data, [String? id]) async {
+    final doc = col.doc(id);
     final newData = {...data, "id": doc.id};
     await doc.set(newData);
     return CRUDData(doc.id, data);

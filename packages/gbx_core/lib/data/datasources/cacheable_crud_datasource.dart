@@ -1,17 +1,27 @@
+import 'package:gbx_core/core/interfaces/cache_strategy.dart';
 import 'package:gbx_core/data/datasources/crud_datasource.dart';
 import 'package:gbx_core/domain/params/query_params.dart';
 
 class CacheableCRUDDataSource extends ICRUDDataSource {
+  final ICacheStrategy cacheStrategy;
+
+  final ICRUDDataSource datasource, cacheDatasource;
+
+  const CacheableCRUDDataSource(
+      {required this.cacheStrategy,
+      required this.datasource,
+      required this.cacheDatasource});
+
   @override
-  Future<CRUDData> create(Map<String, dynamic> data) {
-    // TODO: implement create
-    throw UnimplementedError();
+  Future<CRUDData> create(Map<String, dynamic> data, [String? id]) async {
+    var newData = await datasource.create(data, id);
+    return await cacheDatasource.create(newData.data, newData.id);
   }
 
   @override
-  Future<void> delete(String id) {
-    // TODO: implement delete
-    throw UnimplementedError();
+  Future<void> delete(String id) async {
+    await datasource.delete(id);
+    await cacheDatasource.delete(id);
   }
 
   @override

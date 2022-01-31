@@ -5,7 +5,7 @@ import 'package:gbx_core/domain/params/query_params.dart';
 abstract class ICRUDDataSource {
   const ICRUDDataSource();
 
-  Future<CRUDData> create(Map<String, dynamic> data);
+  Future<CRUDData> create(Map<String, dynamic> data, [String? id]);
   Future<CRUDData> read(String id);
   Future<CRUDData> update(String id, Map<String, dynamic> updated);
   Future<void> delete(String id);
