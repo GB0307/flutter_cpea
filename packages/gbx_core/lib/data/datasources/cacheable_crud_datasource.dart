@@ -25,20 +25,16 @@ class CacheableCRUDDataSource extends ICRUDDataSource {
   }
 
   @override
-  Future<List<CRUDData>> query(QueryParams query) {
-    // TODO: implement query
-    throw UnimplementedError();
-  }
+  Future<List<CRUDData>> query(QueryParams query) => cacheStrategy.query(
+      params: query, datasource: datasource, cacheDatasource: cacheDatasource);
 
   @override
-  Future<CRUDData> read(String id) {
-    // TODO: implement read
-    throw UnimplementedError();
-  }
+  Future<CRUDData> read(String id) => cacheStrategy.read(
+      id: id, datasource: datasource, cacheDatasource: cacheDatasource);
 
   @override
-  Future<CRUDData> update(String id, Map<String, dynamic> updated) {
-    // TODO: implement update
-    throw UnimplementedError();
+  Future<CRUDData> update(String id, Map<String, dynamic> updated) async {
+    var newData = await datasource.update(id, updated);
+    return await cacheDatasource.update(id, newData.data);
   }
 }
