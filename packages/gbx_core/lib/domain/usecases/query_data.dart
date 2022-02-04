@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:equatable/equatable.dart';
 import 'package:gbx_core/core/index.dart';
 import 'package:gbx_core/domain/index.dart';
-import '../../data/datasources/crud_datasource.dart';
 
 class QueryMapData<T extends Identifiable>
     extends IUseCase<List<CRUDData<T>>, QueryMapParams<T>> {

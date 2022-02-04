@@ -1,5 +1,4 @@
 import 'package:cpea/src/features/home/presentation/pages/home_page.dart';
-import 'package:cpea/src/features/login/presentation/pages/login_guard_page.dart';
 import 'package:cpea/src/features/news/domain/entities/news.dart';
 import 'package:cpea/src/features/news/presentation/pages/news_list_page.dart';
 import 'package:cpea/src/features/news/presentation/pages/news_page.dart';

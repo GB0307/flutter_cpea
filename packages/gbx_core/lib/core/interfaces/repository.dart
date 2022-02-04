@@ -34,6 +34,6 @@ abstract class IRepository {
   @protected
   IFailure? on<T extends Exception>(
       Exception exception, IFailure Function(T e) getter) {
-    if (exception is T) return getter(exception);
+    return exception is T ? getter(exception) : null;
   }
 }

@@ -55,14 +55,6 @@ class NewsPage extends StatelessWidget {
   }
 
   Widget _news(News news) {
-    ImageProvider provider;
-
-    if (news.headerImage != null) {
-      provider = NetworkImage(news.headerImage!);
-    } else {
-      provider = const AssetImage('assets/16x9_placeholder.png');
-    }
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

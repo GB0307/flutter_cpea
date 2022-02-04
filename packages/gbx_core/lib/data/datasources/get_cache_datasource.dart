@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:gbx_core/core/index.dart';
 import 'package:gbx_core/data/datasources/crud_datasource.dart';
 import 'package:gbx_core/domain/params/query_params.dart';
@@ -24,12 +22,6 @@ class GetCacheDataSource<T extends Identifiable> extends ICRUDDataSource<T> {
       ? GetStorage(boxName)
       : throw Exception("couldn't open box");
 
-  int? _findIndex(dynamic id, List<CRUDData> items, [int modifier = 0]) {
-    if (id == null) return null;
-    int index = items.indexWhere((element) => element.id == id);
-    if (index >= 0) return index + modifier;
-  }
-
   @override
   Future<CRUDData<T>> create(T item, [String? id]) async {
     if (id == null && item.id == null) {
@@ -46,8 +38,7 @@ class GetCacheDataSource<T extends Identifiable> extends ICRUDDataSource<T> {
     (await box).remove(id);
   }
 
-  @override
-  Future<List<CRUDData<T>>> getAll() async {
+  Future<List<CRUDData<T>>> readAll() async {
     var _box = (await box);
 
     List<String> ids = _box.getKeys().toList();
@@ -65,7 +56,7 @@ class GetCacheDataSource<T extends Identifiable> extends ICRUDDataSource<T> {
   Future<List<CRUDData<T>>> query(QueryParams query) async {
     const useCase = QueryMapData();
     // Sort data
-    var items = (await getAll());
+    var items = (await readAll());
 
     return useCase(QueryMapParams(query, items)) as List<CRUDData<T>>;
   }

@@ -1,11 +1,8 @@
-import 'package:cpea/src/core/theme/consts.dart';
-import 'package:cpea/src/core/utils/l18n.dart';
 import 'package:cpea/src/core/widgets/cards/card_corner_box.dart';
 import 'package:cpea/src/core/widgets/cards/card_tile.dart';
 import 'package:cpea/src/core/widgets/content/date_indicator.dart';
 import 'package:cpea/src/features/post_office/domain/entities/package.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class PackageTile extends StatelessWidget {
   const PackageTile(

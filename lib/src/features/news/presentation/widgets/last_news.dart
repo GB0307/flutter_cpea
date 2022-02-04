@@ -1,7 +1,5 @@
-import 'package:cpea/src/core/theme/consts.dart';
 import 'package:cpea/src/features/news/domain/entities/news.dart';
 import 'package:cpea/src/features/news/presentation/widgets/news_builder.dart';
-import 'package:cpea/src/features/news/presentation/widgets/news_card.dart';
 import 'package:cpea/src/features/news/presentation/widgets/news_tile.dart';
 import 'package:flutter/material.dart';
 

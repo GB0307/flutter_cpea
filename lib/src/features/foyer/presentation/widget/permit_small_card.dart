@@ -21,7 +21,7 @@ class PermitSmallCard extends StatelessWidget {
         padding: const EdgeInsets.all(padding),
         child: Column(
           children: [
-            Spacer(),
+            const Spacer(),
             Text(
               firstAndLastNames(permit.authorized),
               style: Theme.of(context).textTheme.subtitle1,
