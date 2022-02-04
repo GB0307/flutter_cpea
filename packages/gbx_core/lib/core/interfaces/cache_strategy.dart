@@ -93,12 +93,20 @@ class UpdatingCacheFirstStrategy extends CacheFirstStrategy {
 
     if (lastItem != null) {
       await _updateCache(lastItem, datasource, cacheDatasource);
+    } else {
+      // No cache, get from server
+      final items = await datasource.query(params);
+      // Save data
+      await Future.wait(
+          items.map((item) => cacheDatasource.update(item.id, item.item)));
+      return items;
     }
 
-    return super.query(
+    final items = await super.query(
         params: params,
         datasource: datasource,
         cacheDatasource: cacheDatasource);
+    return items;
   }
 
   Future<Map<String, dynamic>?> _getLastCachedData(

@@ -14,12 +14,14 @@ abstract class ICRUDDataSource<T extends Identifiable> {
 }
 
 class CRUDData<T extends Identifiable> extends Equatable {
-  const CRUDData(this.id, this.data, this.item);
+  const CRUDData(this.id, Map<String, dynamic> data, this.item) : _data = data;
+
+  final Map<String, dynamic> _data;
 
   final String id;
-  final Map<String, dynamic> data;
+  Map<String, dynamic> get data => {..._data, 'id': id};
   final T item;
 
   @override
-  List<Object?> get props => [id, data, item];
+  List<Object?> get props => [id, _data, item];
 }

@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:gbx_core/core/index.dart';
 import 'package:gbx_core/data/datasources/crud_datasource.dart';
 import 'package:gbx_core/domain/params/query_params.dart';
+import 'package:gbx_core/domain/usecases/query_data.dart';
 import 'package:get_storage/get_storage.dart';
 
 class GetCacheDataSource<T extends Identifiable> extends ICRUDDataSource<T> {
@@ -29,8 +30,9 @@ class GetCacheDataSource<T extends Identifiable> extends ICRUDDataSource<T> {
 
   @override
   Future<CRUDData<T>> create(T item, [String? id]) async {
-    if (id == null && item.id == null)
+    if (id == null && item.id == null) {
       throw Exception("GetStorage requires an ID to create an item");
+    }
     final serialized = serializer(item);
     (await box).write(id ?? item.id!, serialized);
     final newData = {...serialized, 'id': id ?? item.id!};
@@ -59,37 +61,11 @@ class GetCacheDataSource<T extends Identifiable> extends ICRUDDataSource<T> {
 
   @override
   Future<List<CRUDData<T>>> query(QueryParams query) async {
+    const useCase = QueryMapData();
     // Sort data
-    var items = (await getAll())
-      ..sort((a, b) {
-        var x =
-            (a.data[query.orderBy] ?? 0).compareTo(b.data[query.orderBy] ?? 0);
-        return x is int ? x : 0;
-      });
+    var items = (await getAll());
 
-    // Sublist by start and end
-    int startAt = _findIndex(query.startAfter ?? query.startAt, items,
-            query.startAfter != null ? 1 : 0) ??
-        0;
-    int endAt = _findIndex(query.endAt ?? query.endBefore, items,
-            query.endAt != null ? 1 : 0) ??
-        items.length;
-    items = items.sublist(startAt, endAt);
-
-    // Limit items
-    if (query.limit != null) {
-      items = items.sublist(0, query.limit);
-    } else if (query.limitLast != null) {
-      items = items.sublist(
-          max<int>(0, items.length - (query.limitLast ?? 0)), items.length);
-    }
-
-    // ORDER
-    if (!query.ascendingOrder) {
-      items = items.reversed.toList();
-    }
-
-    return items;
+    return useCase(QueryMapParams(query, items)) as List<CRUDData<T>>;
   }
 
   @override

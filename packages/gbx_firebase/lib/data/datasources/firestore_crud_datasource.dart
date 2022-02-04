@@ -60,7 +60,8 @@ class FirestoreCRUDDataSource<T extends Identifiable>
 
     return (await q.get())
         .docs
-        .map((e) => CRUDData(e.id, e.data(), deserializer(e.data())))
+        .map((e) =>
+            CRUDData(e.id, e.data(), deserializer({...e.data(), 'id': e.id})))
         .toList();
   }
 }
