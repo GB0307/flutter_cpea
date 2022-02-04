@@ -2,6 +2,7 @@ import 'package:cpea/src/features/home/presentation/pages/home_page.dart';
 import 'package:cpea/src/features/news/domain/entities/news.dart';
 import 'package:cpea/src/features/news/presentation/pages/news_list_page.dart';
 import 'package:cpea/src/features/news/presentation/pages/news_page.dart';
+import 'package:cpea/src/navigation/guarded_route.dart';
 import 'package:go_router/go_router.dart';
 
 abstract class Routes {
@@ -19,15 +20,15 @@ abstract class Routes {
 
   // List of GoRoutes
   static final routes = <GoRoute>[
-    GoRoute(
+    GuardedGoRoute(
       path: home,
       builder: (context, state) => const HomePage(),
     ),
-    GoRoute(
+    GuardedGoRoute(
       path: newsList,
       builder: (context, state) => const NewsListPage(),
     ),
-    GoRoute(
+    GuardedGoRoute(
       path: news(":id"),
       builder: (context, state) => NewsPage(
         newsId: state.params['id']!,

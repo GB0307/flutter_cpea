@@ -16,17 +16,14 @@ class AppRouter extends GoRouter {
           urlPathStrategy: UrlPathStrategy.path,
           initialLocation: Routes.initialRoute,
           redirect: (state) => RedirectHandler.redirect(state),
-          navigatorBuilder: (context, state, child) => NoSplashConfiguration(
-            key: const ValueKey("NO_SPLASH_CONFIG"),
-            child: FirebaseAuthProvider<UserData>(
-              key: const ValueKey("FIREBASE_AUTH_PROVIDER_USER_DATA"),
-              child: state.path == Routes.logIn
-                  ? child
-                  : CPEALoginGuard(
-                      key: const ValueKey("CPEA_LOGIN_GUARD_NAV"),
-                      page: child,
-                    ),
-            ),
-          ),
+          navigatorBuilder: (context, state, child) {
+            print(child);
+            return NoSplashConfiguration(
+              key: const ValueKey("NO_SPLASH_CONFIG"),
+              child: FirebaseAuthProvider<UserData>(
+                  key: const ValueKey("FIREBASE_AUTH_PROVIDER_USER_DATA"),
+                  child: child),
+            );
+          },
         );
 }

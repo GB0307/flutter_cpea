@@ -8,6 +8,8 @@ import 'package:cpea/src/features/news/presentation/widgets/last_news.dart';
 import 'package:cpea/src/features/post_office/presentation/widgets/received_packages.dart';
 import 'package:cpea/src/navigation/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:gbx_firebase_login/domain/firebase_login_module.dart';
+import 'package:gbx_login/domain/login_module.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 
@@ -21,7 +23,9 @@ class HomePage extends StatelessWidget {
         trailing: CardButton.icon(
           icon: const Icon(Icons.notifications_none_rounded),
           // TODO: OPEN LAST NOTIFICATIONS/MESSAGES
-          onTap: () {},
+          onTap: () {
+            FirebaseLoginModule.instance().signOut();
+          },
         ),
       ),
       body: ListView(
