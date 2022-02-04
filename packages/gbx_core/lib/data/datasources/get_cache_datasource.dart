@@ -6,6 +6,8 @@ import 'package:gbx_core/domain/params/query_params.dart';
 import 'package:gbx_core/domain/usecases/query_data.dart';
 import 'package:get_storage/get_storage.dart';
 
+import '../../domain/entities/crud_data.dart';
+
 class GetCacheDataSource<T extends Identifiable> extends ICRUDDataSource<T> {
   const GetCacheDataSource(
       {required this.boxName,
@@ -36,7 +38,7 @@ class GetCacheDataSource<T extends Identifiable> extends ICRUDDataSource<T> {
     final serialized = serializer(item);
     (await box).write(id ?? item.id!, serialized);
     final newData = {...serialized, 'id': id ?? item.id!};
-    return CRUDData(id ?? item.id!, newData, deserializer(newData));
+    return CRUDData(id ?? item.id!, newData, deserializer);
   }
 
   @override
@@ -53,7 +55,7 @@ class GetCacheDataSource<T extends Identifiable> extends ICRUDDataSource<T> {
     List<CRUDData<T>> items = ids.map(
       (key) {
         final data = _box.read<Map<String, dynamic>>(key);
-        return CRUDData<T>(key, data!, deserializer(data));
+        return CRUDData<T>(key, data!, deserializer);
       },
     ).toList();
     return items;
@@ -72,7 +74,7 @@ class GetCacheDataSource<T extends Identifiable> extends ICRUDDataSource<T> {
   Future<CRUDData<T>> read(String id) async {
     var data = (await box).read<Map<String, dynamic>>(id);
     if (data == null) throw NoCachedDataException();
-    return CRUDData(id, data, deserializer(data));
+    return CRUDData(id, data, deserializer);
   }
 
   @override
@@ -80,6 +82,6 @@ class GetCacheDataSource<T extends Identifiable> extends ICRUDDataSource<T> {
     final _box = (await box);
     final newData = {...serializer(updated), 'id': id};
     await _box.write(id, newData);
-    return CRUDData(id, newData, deserializer(newData));
+    return CRUDData(id, newData, deserializer);
   }
 }

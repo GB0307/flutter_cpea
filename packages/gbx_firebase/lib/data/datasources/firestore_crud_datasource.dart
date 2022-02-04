@@ -24,20 +24,20 @@ class FirestoreCRUDDataSource<T extends Identifiable>
     final doc = col.doc(id);
     final newData = {...serializer(item), "id": doc.id};
     await doc.set(newData);
-    return CRUDData(doc.id, newData, deserializer(newData));
+    return CRUDData(doc.id, newData, deserializer);
   }
 
   @override
   Future<CRUDData<T>> read(String id) async {
     final data = (await col.doc(id).get()).data() ?? (throw NoDataException());
-    return CRUDData(id, data, deserializer(data));
+    return CRUDData(id, data, deserializer);
   }
 
   @override
   Future<CRUDData<T>> update(String id, T updated) async {
     final newData = {...serializer(updated), 'id': id};
     await col.doc(id).update(newData);
-    return CRUDData(id, newData, deserializer(newData));
+    return CRUDData(id, newData, deserializer);
   }
 
   @override
@@ -60,8 +60,7 @@ class FirestoreCRUDDataSource<T extends Identifiable>
 
     return (await q.get())
         .docs
-        .map((e) =>
-            CRUDData(e.id, e.data(), deserializer({...e.data(), 'id': e.id})))
+        .map((e) => CRUDData(e.id, e.data(), deserializer))
         .toList();
   }
 }

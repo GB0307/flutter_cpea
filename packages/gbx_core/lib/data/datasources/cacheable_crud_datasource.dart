@@ -2,6 +2,8 @@ import 'package:gbx_core/core/index.dart';
 import 'package:gbx_core/data/datasources/crud_datasource.dart';
 import 'package:gbx_core/domain/params/query_params.dart';
 
+import '../../domain/entities/crud_data.dart';
+
 class CacheableCRUDDataSource<T extends Identifiable>
     extends ICRUDDataSource<T> {
   final CacheStrategy cacheStrategy;
