@@ -3,40 +3,48 @@ import 'package:cloud_firestore/cloud_firestore.dart' as firestore show Query;
 
 import 'package:gbx_core/gbx_core.dart';
 
-class FirestoreCRUDDataSource extends ICRUDDataSource {
-  const FirestoreCRUDDataSource({required this.collection}) : super();
+class FirestoreCRUDDataSource<T extends Identifiable>
+    extends ICRUDDataSource<T> {
+  const FirestoreCRUDDataSource({
+    required this.collection,
+    required this.serializer,
+    required this.deserializer,
+  }) : super();
 
   final String collection;
+
+  final Serializer<T> serializer;
+  final Deserializer<T> deserializer;
 
   CollectionReference<Map<String, dynamic>> get col =>
       FirebaseFirestore.instance.collection(collection);
 
   @override
-  Future<CRUDData> create(Map<String, dynamic> data, [String? id]) async {
+  Future<CRUDData<T>> create(T item, [String? id]) async {
     final doc = col.doc(id);
-    final newData = {...data, "id": doc.id};
+    final newData = {...serializer(item), "id": doc.id};
     await doc.set(newData);
-    return CRUDData(doc.id, data);
+    return CRUDData(doc.id, newData, deserializer(newData));
   }
 
   @override
-  Future<CRUDData> read(String id) async {
-    return CRUDData(
-        id, (await col.doc(id).get()).data() ?? (throw NoDataException()));
+  Future<CRUDData<T>> read(String id) async {
+    final data = (await col.doc(id).get()).data() ?? (throw NoDataException());
+    return CRUDData(id, data, deserializer(data));
   }
 
   @override
-  Future<CRUDData> update(String id, Map<String, dynamic> updated) async {
-    final newData = {...updated, 'id': id};
+  Future<CRUDData<T>> update(String id, T updated) async {
+    final newData = {...serializer(updated), 'id': id};
     await col.doc(id).update(newData);
-    return CRUDData(id, newData);
+    return CRUDData(id, newData, deserializer(newData));
   }
 
   @override
   Future<void> delete(String id) => col.doc(id).delete();
 
   @override
-  Future<List<CRUDData>> query(QueryParams query) async {
+  Future<List<CRUDData<T>>> query(QueryParams query) async {
     firestore.Query<Map<String, dynamic>> q = col;
     if (query.orderBy != null) {
       q = q.orderBy(query.orderBy!, descending: !query.ascendingOrder);
@@ -50,6 +58,9 @@ class FirestoreCRUDDataSource extends ICRUDDataSource {
     if (query.limit != null) q = q.limit(query.limit!);
     if (query.limitLast != null) q = q.limitToLast(query.limitLast!);
 
-    return (await q.get()).docs.map((e) => CRUDData(e.id, e.data())).toList();
+    return (await q.get())
+        .docs
+        .map((e) => CRUDData(e.id, e.data(), deserializer(e.data())))
+        .toList();
   }
 }

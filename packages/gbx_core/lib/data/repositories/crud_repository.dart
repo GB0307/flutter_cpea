@@ -6,38 +6,29 @@ import 'package:gbx_core/domain/repositories/crud_repository.dart';
 class CRUDRepository<T extends Identifiable> extends ICRUDRepository<T> {
   const CRUDRepository({
     required this.datasource,
-    required this.serializer,
-    required this.deserializer,
   }) : super();
 
-  final Serializer<T> serializer;
-  final Deserializer<T> deserializer;
-
-  final ICRUDDataSource datasource;
+  final ICRUDDataSource<T> datasource;
 
   @override
-  Future<DResponse<T>> create(T data) => runCatchingAsync(() async =>
-      (await datasource.create(serializer(data))).map(deserializer));
+  Future<DResponse<T>> create(T data) =>
+      runCatchingAsync(() async => (await datasource.create(data)).item);
 
   @override
   Future<DResponse<void>> delete(String id) =>
       runCatchingAsync(() => datasource.delete(id));
 
   @override
-  Future<DResponse<T>> read(String id) => runCatchingAsync(
-      () async => (await datasource.read(id)).map(deserializer));
+  Future<DResponse<T>> read(String id) =>
+      runCatchingAsync(() async => (await datasource.read(id)).item);
 
   @override
-  Future<DResponse<T>> update(String id, T updated) =>
-      runCatchingAsync(() => datasource
-          .update(id, serializer(updated))
-          .map<T>((data) => data.map(deserializer)));
+  Future<DResponse<T>> update(String id, T updated) => runCatchingAsync(
+      () => datasource.update(id, updated).map<T>((data) => data.item));
 
   @override
-  Future<DResponse<List<T>>> query(QueryParams params) =>
-      runCatchingAsync(() async => (await datasource.query(params))
-          .map((e) => e.map(deserializer))
-          .toList());
+  Future<DResponse<List<T>>> query(QueryParams params) => runCatchingAsync(
+      () async => (await datasource.query(params)).map((e) => e.item).toList());
 
   @override
   IFailure? catchExceptions(Exception exception) {
