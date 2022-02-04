@@ -9,9 +9,9 @@ const halfPadding = padding / 2;
 const quarterPadding = padding / 4;
 const horizontalPadding = doublePadding;
 
-const elevation1 = 1.0;
-const elevation2 = 2.0;
-const elevation3 = 3.0;
+const elevation1 = 0.5;
+const elevation2 = 1.0;
+const elevation3 = 1.5;
 
 const defaultCardButtonSize = 52.0;
 const defaultCardTileHeight = 75.0;
