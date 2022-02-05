@@ -20,14 +20,17 @@ class ProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return FirebaseAuthBuilder<UserData>(
-      builder: (ctx, user, data) => CustomAppBar.elevated(
-        centerTitle: false,
-        backgroundColor: Theme.of(context).primaryColor,
-        leading: _image(ctx, user, data?.user),
-        trailing: trailing,
-        onTrailingTap: onTrailingTap,
-        onLeadingTap: onLeadingTap,
-        title: _buildTitle(context, user, data?.user),
+      builder: (ctx, state) => state.maybeWhen(
+        loggedIn: (user, data) => CustomAppBar.elevated(
+          centerTitle: false,
+          backgroundColor: Theme.of(context).primaryColor,
+          leading: _image(ctx, user, data),
+          trailing: trailing,
+          onTrailingTap: onTrailingTap,
+          onLeadingTap: onLeadingTap,
+          title: _buildTitle(context, user, data),
+        ),
+        orElse: () => const SizedBox(),
       ),
     );
   }

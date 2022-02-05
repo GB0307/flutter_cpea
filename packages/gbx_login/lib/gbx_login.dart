@@ -13,10 +13,8 @@ export './domain/repositories/user_data_repository.dart';
 export './domain/repositories/user_repository.dart';
 
 export './presentation/bloc/user_cubit.dart';
-export './presentation/bloc/user_data_cubit.dart';
 
 export './presentation/widgets/auth_builder.dart';
 export './presentation/widgets/auth_provider.dart';
-export './presentation/widgets/auth_guard.dart';
 
 export 'domain/login_module.dart';

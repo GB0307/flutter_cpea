@@ -15,7 +15,8 @@ class CPEALoginGuard extends StatelessWidget {
         super(key: key);
 
   final Widget? page;
-  final UserWidgetBuilder<GbxUser, UserData?>? builder;
+  final Widget Function(BuildContext context, GbxUser user, UserData data)?
+      builder;
 
   static List<ProviderConfiguration> get providers => [
         const EmailProviderConfiguration(),
@@ -24,15 +25,17 @@ class CPEALoginGuard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AuthGuard<UserData>(
-      builder: (context, user, userData) =>
-          page ?? builder?.call(context, user, userData?.user) ?? Container(),
-      noDataBuilder: (context, user, userData) => noDataWidget(),
-      loadingDataBuilder: (context, user, userData) => loadingDataWidget(),
-      noUserBuilder: (context, user, userData) => LoginPage(
-        providers: providers,
-        headerBuilder: (ctx, constraints, shrinkOffset) =>
-            Image.asset("assets/images/logo.png"),
+    return FirebaseAuthBuilder<UserData>(
+      builder: (ctx, state) => state.when<Widget>(
+        notLoggedIn: () => LoginPage(
+          providers: providers,
+          headerBuilder: (ctx, constraints, shrinkOffset) =>
+              Image.asset("assets/images/logo.png"),
+        ),
+        loggingIn: () => loadingDataWidget(),
+        noData: (user) => noDataWidget(),
+        loggedIn: (user, data) =>
+            page ?? builder?.call(context, user, data) ?? Container(),
       ),
     );
   }

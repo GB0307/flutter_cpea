@@ -23,7 +23,8 @@ class _$UserDataTearOff {
   const _$UserDataTearOff();
 
   _UserData call(
-      {required String name,
+      {required String? id,
+      required String name,
       required String email,
       required String lote,
       required int celular,
@@ -32,6 +33,7 @@ class _$UserDataTearOff {
       required String cpf,
       String? photoUrl}) {
     return _UserData(
+      id: id,
       name: name,
       email: email,
       lote: lote,
@@ -53,6 +55,7 @@ const $UserData = _$UserDataTearOff();
 
 /// @nodoc
 mixin _$UserData {
+  String? get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String get lote => throw _privateConstructorUsedError;
@@ -73,7 +76,8 @@ abstract class $UserDataCopyWith<$Res> {
   factory $UserDataCopyWith(UserData value, $Res Function(UserData) then) =
       _$UserDataCopyWithImpl<$Res>;
   $Res call(
-      {String name,
+      {String? id,
+      String name,
       String email,
       String lote,
       int celular,
@@ -93,6 +97,7 @@ class _$UserDataCopyWithImpl<$Res> implements $UserDataCopyWith<$Res> {
 
   @override
   $Res call({
+    Object? id = freezed,
     Object? name = freezed,
     Object? email = freezed,
     Object? lote = freezed,
@@ -103,6 +108,10 @@ class _$UserDataCopyWithImpl<$Res> implements $UserDataCopyWith<$Res> {
     Object? photoUrl = freezed,
   }) {
     return _then(_value.copyWith(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -145,7 +154,8 @@ abstract class _$UserDataCopyWith<$Res> implements $UserDataCopyWith<$Res> {
       __$UserDataCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String name,
+      {String? id,
+      String name,
       String email,
       String lote,
       int celular,
@@ -166,6 +176,7 @@ class __$UserDataCopyWithImpl<$Res> extends _$UserDataCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? id = freezed,
     Object? name = freezed,
     Object? email = freezed,
     Object? lote = freezed,
@@ -176,6 +187,10 @@ class __$UserDataCopyWithImpl<$Res> extends _$UserDataCopyWithImpl<$Res>
     Object? photoUrl = freezed,
   }) {
     return _then(_UserData(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -214,9 +229,11 @@ class __$UserDataCopyWithImpl<$Res> extends _$UserDataCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
+@Implements<Identifiable>()
 class _$_UserData implements _UserData {
   _$_UserData(
-      {required this.name,
+      {required this.id,
+      required this.name,
       required this.email,
       required this.lote,
       required this.celular,
@@ -228,6 +245,8 @@ class _$_UserData implements _UserData {
   factory _$_UserData.fromJson(Map<String, dynamic> json) =>
       _$$_UserDataFromJson(json);
 
+  @override
+  final String? id;
   @override
   final String name;
   @override
@@ -247,7 +266,7 @@ class _$_UserData implements _UserData {
 
   @override
   String toString() {
-    return 'UserData(name: $name, email: $email, lote: $lote, celular: $celular, telefone: $telefone, nascimento: $nascimento, cpf: $cpf, photoUrl: $photoUrl)';
+    return 'UserData(id: $id, name: $name, email: $email, lote: $lote, celular: $celular, telefone: $telefone, nascimento: $nascimento, cpf: $cpf, photoUrl: $photoUrl)';
   }
 
   @override
@@ -255,6 +274,7 @@ class _$_UserData implements _UserData {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _UserData &&
+            const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.email, email) &&
             const DeepCollectionEquality().equals(other.lote, lote) &&
@@ -269,6 +289,7 @@ class _$_UserData implements _UserData {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(email),
       const DeepCollectionEquality().hash(lote),
@@ -289,9 +310,10 @@ class _$_UserData implements _UserData {
   }
 }
 
-abstract class _UserData implements UserData {
+abstract class _UserData implements UserData, Identifiable {
   factory _UserData(
-      {required String name,
+      {required String? id,
+      required String name,
       required String email,
       required String lote,
       required int celular,
@@ -302,6 +324,8 @@ abstract class _UserData implements UserData {
 
   factory _UserData.fromJson(Map<String, dynamic> json) = _$_UserData.fromJson;
 
+  @override
+  String? get id;
   @override
   String get name;
   @override

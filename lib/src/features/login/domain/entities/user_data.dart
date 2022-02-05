@@ -1,11 +1,14 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:gbx_core/core/index.dart';
 
 part 'user_data.freezed.dart';
 part 'user_data.g.dart';
 
 @freezed
-class UserData with _$UserData {
+class UserData with _$UserData, Identifiable {
+  @Implements<Identifiable>()
   factory UserData({
+    required String? id,
     required String name,
     required String email,
     required String lote,
