@@ -38,6 +38,10 @@ class UserDataRepository<T> extends IUserDataRepository<T> {
       result = UserNotLoggedInFailure();
     } on UserDataNotFoundException {
       result = UserDataNotFoundFailure();
+    } on NoCachedDataException {
+      result = NoCachedDataFailure();
+    } on Exception catch (e) {
+      result = GeneralFailure(e);
     }
 
     return DResponse.from(result);
@@ -52,6 +56,8 @@ class UserDataRepository<T> extends IUserDataRepository<T> {
       result = UserNotLoggedInFailure();
     } on UserDataNotFoundException {
       result = UserDataNotFoundFailure();
+    } on NoCachedDataException {
+      result = NoCachedDataFailure();
     } on Exception catch (e) {
       result = GeneralFailure(e);
     }

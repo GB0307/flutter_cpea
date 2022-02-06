@@ -1,3 +1,4 @@
+import 'package:gbx_core/core/errors/exceptions.dart';
 import 'package:get/get.dart';
 
 abstract class ICachedUserDataDataSource<T> {
@@ -25,6 +26,7 @@ class GetxCachedUserDataDataSource<T> extends ICachedUserDataDataSource<T> {
 
   @override
   T getCachedUserData([String? tag]) {
+    throw NoCachedDataException();
     return Get.find<T>(tag: tag);
   }
 }
