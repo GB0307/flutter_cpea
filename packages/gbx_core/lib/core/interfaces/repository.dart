@@ -23,7 +23,7 @@ abstract class IRepository {
       return DResponse<T>.from(await job());
     } on Exception catch (e) {
       var f = catchExceptions(e);
-      if (f == null) logger.e("EXCEPTION NOT CATCHED!", e);
+      if (f == null) logger.e("EXCEPTION NOT CATCHED IN $this!", e);
       return DResponse<T>.from(f ?? GeneralFailure(e));
     }
   }

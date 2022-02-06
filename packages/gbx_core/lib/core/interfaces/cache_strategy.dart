@@ -30,24 +30,31 @@ class CacheFirstStrategy extends CacheStrategy {
   Future<List<CRUDData<T>>> query<T extends Identifiable>(
       {required QueryParams params,
       required ICRUDDataSource<T> datasource,
-      required ICRUDDataSource<T> cacheDatasource}) {
+      required ICRUDDataSource<T> cacheDatasource}) async {
+    List<CRUDData<T>>? data;
     try {
-      return cacheDatasource.query(params);
+      data = await cacheDatasource.query(params);
     } on NoCachedDataException {
-      return datasource.query(params);
+      data = await datasource.query(params);
+      await Future.wait(data.map((e) => cacheDatasource.update(e.id, e.item)));
     }
+    return data;
   }
 
   @override
   Future<CRUDData<T>> read<T extends Identifiable>(
       {required String id,
       required ICRUDDataSource<T> datasource,
-      required ICRUDDataSource<T> cacheDatasource}) {
+      required ICRUDDataSource<T> cacheDatasource}) async {
+    CRUDData<T>? data;
     try {
-      return cacheDatasource.read(id);
-    } on NoCachedDataException {
-      return datasource.read(id);
+      data = (await cacheDatasource.read(id));
+    } catch (e) {
+      data = (await datasource.read(id));
+      await cacheDatasource.update(data.id, data.item);
     }
+
+    return data;
   }
 }
 
@@ -58,24 +65,30 @@ class ServerFirstStrategy extends CacheStrategy {
   Future<List<CRUDData<T>>> query<T extends Identifiable>(
       {required QueryParams params,
       required ICRUDDataSource<T> datasource,
-      required ICRUDDataSource<T> cacheDatasource}) {
+      required ICRUDDataSource<T> cacheDatasource}) async {
+    List<CRUDData<T>> data;
     try {
-      return datasource.query(params);
-    } on NoCachedDataException {
-      return cacheDatasource.query(params);
+      data = await datasource.query(params);
+      await Future.wait(data.map((e) => cacheDatasource.update(e.id, e.item)));
+    } catch (e) {
+      data = await cacheDatasource.query(params);
     }
+    return data;
   }
 
   @override
   Future<CRUDData<T>> read<T extends Identifiable>(
       {required String id,
       required ICRUDDataSource<T> datasource,
-      required ICRUDDataSource<T> cacheDatasource}) {
+      required ICRUDDataSource<T> cacheDatasource}) async {
+    CRUDData<T> data;
     try {
-      return datasource.read(id);
-    } on NoCachedDataException {
-      return cacheDatasource.read(id);
+      data = await datasource.read(id);
+      await cacheDatasource.update(data.id, data.item);
+    } catch (e) {
+      data = await cacheDatasource.read(id);
     }
+    return data;
   }
 }
 

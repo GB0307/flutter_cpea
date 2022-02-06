@@ -30,10 +30,6 @@ class UserCubit<U extends GbxUser, UD extends Identifiable>
   }
 
   Future<void> _userChanged(U user) async {
-    var cachedUser = module.getCachedUserData();
-    if (cachedUser.didSuccess) {
-      return emit(UserState.loggedIn(user, cachedUser.data));
-    }
     emit(const UserState.loggingIn());
     var response = await module.getUserData(user.uid);
     emit(response.didSuccess

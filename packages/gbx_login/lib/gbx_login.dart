@@ -9,7 +9,6 @@ export './data/repositories/user_repository.dart';
 export './domain/entity/user.dart';
 export './domain/errors/exceptions.dart';
 export './domain/errors/failures.dart';
-export './domain/repositories/user_data_repository.dart';
 export './domain/repositories/user_repository.dart';
 
 export './presentation/bloc/user_cubit.dart';

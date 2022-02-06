@@ -1,12 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:gbx_core/gbx_core.dart';
-import 'package:gbx_login/domain/repositories/user_data_repository.dart';
 import 'package:gbx_login/domain/repositories/user_repository.dart';
 
-class GetUserData<T> extends IAsyncUseCase<T, String?> {
+class GetUserData<T extends Identifiable> extends IAsyncUseCase<T, String?> {
   GetUserData(this._repo, this._userRepo);
 
-  final IUserDataRepository<T> _repo;
+  final ICRUDRepository<T> _repo;
   final IUserRepository _userRepo;
 
   @override
@@ -22,6 +21,6 @@ class GetUserData<T> extends IAsyncUseCase<T, String?> {
       uid = resp.data;
     }
 
-    return await _repo.getUserData(uid);
+    return await _repo.read(uid);
   }
 }

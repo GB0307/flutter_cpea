@@ -1,15 +1,15 @@
 import 'package:gbx_core/gbx_core.dart';
-import 'package:gbx_login/domain/repositories/user_data_repository.dart';
 import 'package:gbx_login/domain/repositories/user_repository.dart';
 
-class UpdateUserData<T> extends IAsyncUseCase<T, UpdateUserParams> {
+class UpdateUserData<T extends Identifiable>
+    extends IAsyncUseCase<T, UpdateUserParams<T>> {
   UpdateUserData(this._repo, this._userRepo);
 
-  final IUserDataRepository<T> _repo;
+  final ICRUDRepository<T> _repo;
   final IUserRepository _userRepo;
 
   @override
-  Future<DResponse<T>> call(UpdateUserParams params) async {
+  Future<DResponse<T>> call(UpdateUserParams<T> params) async {
     var userId = params.userId ?? "";
 
     if (userId.isEmpty) {
@@ -19,11 +19,11 @@ class UpdateUserData<T> extends IAsyncUseCase<T, UpdateUserParams> {
       }
       userId = resp.data.uid;
     }
-    return await _repo.updateUserData(userId, params.updatedUser);
+    return await _repo.update(userId, params.updatedUser);
   }
 }
 
-class UpdateUserParams<T> {
+class UpdateUserParams<T extends Identifiable> {
   final T updatedUser;
   final String? userId;
 
