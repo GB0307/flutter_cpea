@@ -23,15 +23,21 @@ class _$PermitTearOff {
   const _$PermitTearOff();
 
   _Permit call(
-      {required String authorizer,
+      {required String? id,
+      required String authorizer,
       required String authorized,
       required DateTime startDate,
-      required DateTime endDate}) {
+      required DateTime endDate,
+      required DateTime creationDate,
+      required DateTime lastUpdated}) {
     return _Permit(
+      id: id,
       authorizer: authorizer,
       authorized: authorized,
       startDate: startDate,
       endDate: endDate,
+      creationDate: creationDate,
+      lastUpdated: lastUpdated,
     );
   }
 
@@ -45,10 +51,13 @@ const $Permit = _$PermitTearOff();
 
 /// @nodoc
 mixin _$Permit {
+  String? get id => throw _privateConstructorUsedError;
   String get authorizer => throw _privateConstructorUsedError;
   String get authorized => throw _privateConstructorUsedError;
   DateTime get startDate => throw _privateConstructorUsedError;
   DateTime get endDate => throw _privateConstructorUsedError;
+  DateTime get creationDate => throw _privateConstructorUsedError;
+  DateTime get lastUpdated => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -60,10 +69,13 @@ abstract class $PermitCopyWith<$Res> {
   factory $PermitCopyWith(Permit value, $Res Function(Permit) then) =
       _$PermitCopyWithImpl<$Res>;
   $Res call(
-      {String authorizer,
+      {String? id,
+      String authorizer,
       String authorized,
       DateTime startDate,
-      DateTime endDate});
+      DateTime endDate,
+      DateTime creationDate,
+      DateTime lastUpdated});
 }
 
 /// @nodoc
@@ -76,12 +88,19 @@ class _$PermitCopyWithImpl<$Res> implements $PermitCopyWith<$Res> {
 
   @override
   $Res call({
+    Object? id = freezed,
     Object? authorizer = freezed,
     Object? authorized = freezed,
     Object? startDate = freezed,
     Object? endDate = freezed,
+    Object? creationDate = freezed,
+    Object? lastUpdated = freezed,
   }) {
     return _then(_value.copyWith(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       authorizer: authorizer == freezed
           ? _value.authorizer
           : authorizer // ignore: cast_nullable_to_non_nullable
@@ -98,6 +117,14 @@ class _$PermitCopyWithImpl<$Res> implements $PermitCopyWith<$Res> {
           ? _value.endDate
           : endDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      creationDate: creationDate == freezed
+          ? _value.creationDate
+          : creationDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      lastUpdated: lastUpdated == freezed
+          ? _value.lastUpdated
+          : lastUpdated // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -108,10 +135,13 @@ abstract class _$PermitCopyWith<$Res> implements $PermitCopyWith<$Res> {
       __$PermitCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String authorizer,
+      {String? id,
+      String authorizer,
       String authorized,
       DateTime startDate,
-      DateTime endDate});
+      DateTime endDate,
+      DateTime creationDate,
+      DateTime lastUpdated});
 }
 
 /// @nodoc
@@ -125,12 +155,19 @@ class __$PermitCopyWithImpl<$Res> extends _$PermitCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? id = freezed,
     Object? authorizer = freezed,
     Object? authorized = freezed,
     Object? startDate = freezed,
     Object? endDate = freezed,
+    Object? creationDate = freezed,
+    Object? lastUpdated = freezed,
   }) {
     return _then(_Permit(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       authorizer: authorizer == freezed
           ? _value.authorizer
           : authorizer // ignore: cast_nullable_to_non_nullable
@@ -147,22 +184,36 @@ class __$PermitCopyWithImpl<$Res> extends _$PermitCopyWithImpl<$Res>
           ? _value.endDate
           : endDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      creationDate: creationDate == freezed
+          ? _value.creationDate
+          : creationDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      lastUpdated: lastUpdated == freezed
+          ? _value.lastUpdated
+          : lastUpdated // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
+@Implements<Identifiable>()
 class _$_Permit implements _Permit {
   _$_Permit(
-      {required this.authorizer,
+      {required this.id,
+      required this.authorizer,
       required this.authorized,
       required this.startDate,
-      required this.endDate});
+      required this.endDate,
+      required this.creationDate,
+      required this.lastUpdated});
 
   factory _$_Permit.fromJson(Map<String, dynamic> json) =>
       _$$_PermitFromJson(json);
 
+  @override
+  final String? id;
   @override
   final String authorizer;
   @override
@@ -171,10 +222,14 @@ class _$_Permit implements _Permit {
   final DateTime startDate;
   @override
   final DateTime endDate;
+  @override
+  final DateTime creationDate;
+  @override
+  final DateTime lastUpdated;
 
   @override
   String toString() {
-    return 'Permit(authorizer: $authorizer, authorized: $authorized, startDate: $startDate, endDate: $endDate)';
+    return 'Permit(id: $id, authorizer: $authorizer, authorized: $authorized, startDate: $startDate, endDate: $endDate, creationDate: $creationDate, lastUpdated: $lastUpdated)';
   }
 
   @override
@@ -182,21 +237,29 @@ class _$_Permit implements _Permit {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _Permit &&
+            const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality()
                 .equals(other.authorizer, authorizer) &&
             const DeepCollectionEquality()
                 .equals(other.authorized, authorized) &&
             const DeepCollectionEquality().equals(other.startDate, startDate) &&
-            const DeepCollectionEquality().equals(other.endDate, endDate));
+            const DeepCollectionEquality().equals(other.endDate, endDate) &&
+            const DeepCollectionEquality()
+                .equals(other.creationDate, creationDate) &&
+            const DeepCollectionEquality()
+                .equals(other.lastUpdated, lastUpdated));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(authorizer),
       const DeepCollectionEquality().hash(authorized),
       const DeepCollectionEquality().hash(startDate),
-      const DeepCollectionEquality().hash(endDate));
+      const DeepCollectionEquality().hash(endDate),
+      const DeepCollectionEquality().hash(creationDate),
+      const DeepCollectionEquality().hash(lastUpdated));
 
   @JsonKey(ignore: true)
   @override
@@ -209,15 +272,20 @@ class _$_Permit implements _Permit {
   }
 }
 
-abstract class _Permit implements Permit {
+abstract class _Permit implements Permit, Identifiable {
   factory _Permit(
-      {required String authorizer,
+      {required String? id,
+      required String authorizer,
       required String authorized,
       required DateTime startDate,
-      required DateTime endDate}) = _$_Permit;
+      required DateTime endDate,
+      required DateTime creationDate,
+      required DateTime lastUpdated}) = _$_Permit;
 
   factory _Permit.fromJson(Map<String, dynamic> json) = _$_Permit.fromJson;
 
+  @override
+  String? get id;
   @override
   String get authorizer;
   @override
@@ -226,6 +294,10 @@ abstract class _Permit implements Permit {
   DateTime get startDate;
   @override
   DateTime get endDate;
+  @override
+  DateTime get creationDate;
+  @override
+  DateTime get lastUpdated;
   @override
   @JsonKey(ignore: true)
   _$PermitCopyWith<_Permit> get copyWith => throw _privateConstructorUsedError;

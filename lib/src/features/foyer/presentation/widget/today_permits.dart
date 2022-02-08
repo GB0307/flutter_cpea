@@ -4,39 +4,6 @@ import 'package:cpea/src/features/foyer/domain/entities/permit.dart';
 import 'package:cpea/src/features/foyer/presentation/widget/permit_tile.dart';
 import 'package:flutter/material.dart';
 
-final _permits = [
-  Permit(
-    authorizer: "Gabriel Borges",
-    authorized: "João filho",
-    startDate: DateTime.now().add(
-      const Duration(hours: 1),
-    ),
-    endDate: DateTime.now().add(
-      const Duration(hours: 2),
-    ),
-  ),
-  Permit(
-    authorizer: "Gabriel Borges",
-    authorized: "Thaynara Brito",
-    startDate: DateTime.now().add(
-      const Duration(hours: 1),
-    ),
-    endDate: DateTime.now().add(
-      const Duration(hours: 2),
-    ),
-  ),
-  Permit(
-    authorizer: "Gabriel Borges",
-    authorized: "Roberto Santos",
-    startDate: DateTime.now().add(
-      const Duration(hours: 1),
-    ),
-    endDate: DateTime.now().add(
-      const Duration(hours: 2),
-    ),
-  ),
-];
-
 class TodayPermits extends StatelessWidget {
   const TodayPermits({Key? key, this.margin, this.onTap}) : super(key: key);
 
@@ -49,7 +16,7 @@ class TodayPermits extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final permits = _permits;
+    final permits = [];
 
     return HorizontalLimitedList.builder(
       itemCount: permits.length,
