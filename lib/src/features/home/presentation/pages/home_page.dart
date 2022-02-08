@@ -23,10 +23,12 @@ class HomePage extends StatelessWidget {
         trailing: CardButton.icon(
           icon: const Icon(Icons.notifications_none_rounded),
           // TODO: OPEN LAST NOTIFICATIONS/MESSAGES
-          onTap: () {
-            FirebaseLoginModule.instance().signOut();
-          },
+          onTap: () {},
         ),
+        // TODO: OPEN PROFILE
+        onLeadingTap: () {
+          FirebaseLoginModule.instance().signOut();
+        },
       ),
       body: ListView(
         children: [

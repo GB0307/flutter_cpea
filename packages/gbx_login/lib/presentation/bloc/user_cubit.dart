@@ -13,18 +13,19 @@ class UserCubit<U extends GbxUser, UD extends Identifiable>
   LoginModule<UD, U> get module => LoginModule.instance as LoginModule<UD, U>;
 
   UserCubit() : super(const UserState.loggingIn()) {
+    print("INITIALIZING");
     module.getUserStream().listen(_streamEvent);
   }
 
   void _streamEvent(U? newUser) {
-    if (newUser == null) emit(const UserState.notLoggedIn());
+    if (newUser == null) return emit(const UserState.notLoggedIn());
 
     state.maybeWhen(
       loggedIn: (user, data) {
-        if (data.id != newUser!.uid) _userChanged(newUser);
+        if (data.id != newUser.uid) _userChanged(newUser);
       },
       orElse: () {
-        _userChanged(newUser!);
+        _userChanged(newUser);
       },
     );
   }

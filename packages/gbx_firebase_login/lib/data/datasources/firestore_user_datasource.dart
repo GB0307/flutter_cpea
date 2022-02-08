@@ -38,5 +38,5 @@ class FirebaseUserDataSource extends IUserDataSource<GbxUser> {
   }
 
   @override
-  Future<void> signOut() => FirebaseAuth.instance.signOut();
+  Future<void> signOut() async => await FirebaseAuth.instance.signOut();
 }
