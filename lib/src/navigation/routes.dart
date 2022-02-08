@@ -1,3 +1,4 @@
+import 'package:cpea/src/features/foyer/presentation/pages/permit_list_page.dart';
 import 'package:cpea/src/features/home/presentation/pages/home_page.dart';
 import 'package:cpea/src/features/news/domain/entities/news.dart';
 import 'package:cpea/src/features/news/presentation/pages/news_list_page.dart';
@@ -17,6 +18,7 @@ abstract class Routes {
   static String get entryHall => "/hall";
   static String get mail => "/mail";
   static String get schedules => "/schedules";
+  static String get permitList => "/permits";
 
   // List of GoRoutes
   static final routes = <GoRoute>[
@@ -34,6 +36,10 @@ abstract class Routes {
         newsId: state.params['id']!,
         news: state.extra as News?,
       ),
+    ),
+    GuardedGoRoute(
+      path: permitList,
+      builder: (context, state) => const PermitListPage(),
     ),
   ];
 }

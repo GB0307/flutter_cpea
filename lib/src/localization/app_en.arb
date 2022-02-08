@@ -18,6 +18,9 @@
   "schedules": "Appointments",
   "newAppointment": "New appointment",
   "businessHours": "Business hours",
-  "about": "About"
+  "occurrences": "Occurrences",
+  "about": "About",
+
+  "permitListPage_title": "Permits"
   
 }

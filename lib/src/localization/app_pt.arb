@@ -50,6 +50,9 @@
   "schedules": "Agendamentos",
   "newAppointment": "Novo agendamento",
   "businessHours": "Horários de funcionamento",
-  "about": "Sobre o condominio"
+  "occurrences": "Ocorrências",
+  "about": "Sobre o condominio",
+
+  "permitListPage_title": "Entradas liberadas"
 }
   

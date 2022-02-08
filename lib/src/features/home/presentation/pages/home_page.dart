@@ -38,7 +38,7 @@ class HomePage extends StatelessWidget {
               onTap: (permit) {},
             ),
             contentPadding: EdgeInsets.zero,
-            onTap: () {},
+            onTap: _openPermits,
           ),
           ListItem(
             title: L18n.tr.lastNews,
@@ -64,6 +64,10 @@ class HomePage extends StatelessWidget {
             contentPadding: EdgeInsets.zero,
           ),
           ListItem(
+            title: L18n.tr.occurrences,
+            onTap: () {},
+          ),
+          ListItem(
             title: L18n.tr.businessHours,
             onTap: () {},
           ),
@@ -77,4 +81,5 @@ class HomePage extends StatelessWidget {
   }
 
   static void _openNews() => Get.context?.push(Routes.newsList);
+  static void _openPermits() => Get.context?.push(Routes.permitList);
 }
