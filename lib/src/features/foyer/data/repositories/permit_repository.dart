@@ -12,11 +12,14 @@ class PermitRepository extends CRUDRepository<Permit> {
               collection: collection,
               serializer: _permitToJson,
               deserializer: _permitFromJson,
+              lastUpdatedTimestampKey: 'lastUpdated',
+              createdTimestampKey: 'creationDate',
             ),
             cacheDatasource: GetCacheDataSource(
-                boxName: collection,
-                serializer: _permitToJson,
-                deserializer: _permitFromJson),
+              boxName: collection,
+              serializer: _permitToJson,
+              deserializer: _permitFromJson,
+            ),
           ),
         );
 
