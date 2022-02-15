@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart' hide Query;
 import 'package:cloud_firestore/cloud_firestore.dart' as firestore show Query;
+import 'package:flutter/cupertino.dart';
 
 import 'package:gbx_core/gbx_core.dart';
 
@@ -22,23 +23,23 @@ class FirestoreCRUDDataSource<T extends Identifiable>
   @override
   Future<CRUDData<T>> create(T item, [String? id]) async {
     final doc = col.doc(id);
-    var data = serializer(item);
+    var data = serialize(item);
     await doc.set(data);
-    return CRUDData(doc.id, data, deserializer);
+    return CRUDData(doc.id, data, deserialize);
   }
 
   @override
   Future<CRUDData<T>> read(String id) async {
     final data = (await col.doc(id).get()).data() ?? (throw NoDataException());
-    return CRUDData(id, data, deserializer);
+    return CRUDData(id, data, deserialize);
   }
 
   @override
   Future<CRUDData<T>> update(String id, T updated) async {
-    final data = serializer(updated);
+    final data = serialize(updated);
     await col.doc(id).update(data);
 
-    return CRUDData(id, data, deserializer);
+    return CRUDData(id, data, deserialize);
   }
 
   @override
@@ -61,7 +62,27 @@ class FirestoreCRUDDataSource<T extends Identifiable>
 
     return (await q.get())
         .docs
-        .map((e) => CRUDData(e.id, e.data(), deserializer))
+        .map((e) => CRUDData(e.id, e.data(), deserialize))
         .toList();
+  }
+
+  @protected
+  Map<String, dynamic> serialize(T item) {
+    var data = serializer(item);
+
+    data.forEach((key, value) {
+      if (value is DateTime) data[key] = Timestamp.fromDate(value);
+    });
+
+    return data;
+  }
+
+  @protected
+  T deserialize(Map<String, dynamic> data) {
+    data.forEach((key, value) {
+      if (value is Timestamp) data[key] = value.toDate().toIso8601String();
+    });
+
+    return deserializer(data);
   }
 }

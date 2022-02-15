@@ -13,10 +13,12 @@ _$_Permit _$$_PermitFromJson(Map<String, dynamic> json) => _$_Permit(
       address: json['address'] as String,
       startDate: DateTime.parse(json['startDate'] as String),
       endDate: DateTime.parse(json['endDate'] as String),
-      creationDate: const TimestampConverter()
-          .fromJson(json['creationDate'] as Timestamp?),
-      lastUpdated: const TimestampConverter()
-          .fromJson(json['lastUpdated'] as Timestamp?),
+      creationDate: json['creationDate'] == null
+          ? null
+          : DateTime.parse(json['creationDate'] as String),
+      lastUpdated: json['lastUpdated'] == null
+          ? null
+          : DateTime.parse(json['lastUpdated'] as String),
     );
 
 Map<String, dynamic> _$$_PermitToJson(_$_Permit instance) => <String, dynamic>{
@@ -26,6 +28,6 @@ Map<String, dynamic> _$$_PermitToJson(_$_Permit instance) => <String, dynamic>{
       'address': instance.address,
       'startDate': instance.startDate.toIso8601String(),
       'endDate': instance.endDate.toIso8601String(),
-      'creationDate': const TimestampConverter().toJson(instance.creationDate),
-      'lastUpdated': const TimestampConverter().toJson(instance.lastUpdated),
+      'creationDate': instance.creationDate?.toIso8601String(),
+      'lastUpdated': instance.lastUpdated?.toIso8601String(),
     };

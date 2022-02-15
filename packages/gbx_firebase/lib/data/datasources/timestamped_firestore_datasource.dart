@@ -27,7 +27,7 @@ class TimestampedFirestoreDataSource<T extends Identifiable>
     var newData = dataToJson(doc.id, item);
     await doc.set(newData);
     if (createdTimestampKey == null && lastUpdatedTimestampKey == null) {
-      return CRUDData(doc.id, newData, deserializer);
+      return CRUDData(doc.id, newData, deserialize);
     }
     return read(doc.id);
   }
@@ -38,19 +38,18 @@ class TimestampedFirestoreDataSource<T extends Identifiable>
     await col.doc(id).update(newData);
 
     if (lastUpdatedTimestampKey == null) {
-      return CRUDData(id, newData, deserializer);
+      return CRUDData(id, newData, deserialize);
     }
     return read(id);
   }
 
   Map<String, dynamic> dataToJson(String id, T data) {
-    var newData = {...serializer(data), 'id': id};
+    var newData = {...serialize(data), 'id': id};
     if (lastUpdatedTimestampKey != null) {
       newData[lastUpdatedTimestampKey!] = FieldValue.serverTimestamp();
     }
-    if (createdTimestampKey != null) {
-      newData.putIfAbsent(
-          createdTimestampKey!, () => FieldValue.serverTimestamp());
+    if (createdTimestampKey != null && newData[createdTimestampKey!] == null) {
+      newData[createdTimestampKey!] = FieldValue.serverTimestamp();
     }
     return newData;
   }

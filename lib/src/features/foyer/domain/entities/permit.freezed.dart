@@ -27,10 +27,10 @@ class _$PermitTearOff {
       required String authorizer,
       required String authorized,
       required String address,
-      @TimestampConverter() required DateTime startDate,
-      @TimestampConverter() required DateTime endDate,
-      @TimestampConverter() DateTime? creationDate,
-      @TimestampConverter() DateTime? lastUpdated}) {
+      required DateTime startDate,
+      required DateTime endDate,
+      DateTime? creationDate,
+      DateTime? lastUpdated}) {
     return _Permit(
       id: id,
       authorizer: authorizer,
@@ -57,13 +57,9 @@ mixin _$Permit {
   String get authorizer => throw _privateConstructorUsedError;
   String get authorized => throw _privateConstructorUsedError;
   String get address => throw _privateConstructorUsedError;
-  @TimestampConverter()
   DateTime get startDate => throw _privateConstructorUsedError;
-  @TimestampConverter()
   DateTime get endDate => throw _privateConstructorUsedError;
-  @TimestampConverter()
   DateTime? get creationDate => throw _privateConstructorUsedError;
-  @TimestampConverter()
   DateTime? get lastUpdated => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -80,10 +76,10 @@ abstract class $PermitCopyWith<$Res> {
       String authorizer,
       String authorized,
       String address,
-      @TimestampConverter() DateTime startDate,
-      @TimestampConverter() DateTime endDate,
-      @TimestampConverter() DateTime? creationDate,
-      @TimestampConverter() DateTime? lastUpdated});
+      DateTime startDate,
+      DateTime endDate,
+      DateTime? creationDate,
+      DateTime? lastUpdated});
 }
 
 /// @nodoc
@@ -152,10 +148,10 @@ abstract class _$PermitCopyWith<$Res> implements $PermitCopyWith<$Res> {
       String authorizer,
       String authorized,
       String address,
-      @TimestampConverter() DateTime startDate,
-      @TimestampConverter() DateTime endDate,
-      @TimestampConverter() DateTime? creationDate,
-      @TimestampConverter() DateTime? lastUpdated});
+      DateTime startDate,
+      DateTime endDate,
+      DateTime? creationDate,
+      DateTime? lastUpdated});
 }
 
 /// @nodoc
@@ -224,10 +220,10 @@ class _$_Permit implements _Permit {
       required this.authorizer,
       required this.authorized,
       required this.address,
-      @TimestampConverter() required this.startDate,
-      @TimestampConverter() required this.endDate,
-      @TimestampConverter() this.creationDate,
-      @TimestampConverter() this.lastUpdated});
+      required this.startDate,
+      required this.endDate,
+      this.creationDate,
+      this.lastUpdated});
 
   factory _$_Permit.fromJson(Map<String, dynamic> json) =>
       _$$_PermitFromJson(json);
@@ -241,16 +237,12 @@ class _$_Permit implements _Permit {
   @override
   final String address;
   @override
-  @TimestampConverter()
   final DateTime startDate;
   @override
-  @TimestampConverter()
   final DateTime endDate;
   @override
-  @TimestampConverter()
   final DateTime? creationDate;
   @override
-  @TimestampConverter()
   final DateTime? lastUpdated;
 
   @override
@@ -306,10 +298,10 @@ abstract class _Permit implements Permit, Identifiable {
       required String authorizer,
       required String authorized,
       required String address,
-      @TimestampConverter() required DateTime startDate,
-      @TimestampConverter() required DateTime endDate,
-      @TimestampConverter() DateTime? creationDate,
-      @TimestampConverter() DateTime? lastUpdated}) = _$_Permit;
+      required DateTime startDate,
+      required DateTime endDate,
+      DateTime? creationDate,
+      DateTime? lastUpdated}) = _$_Permit;
 
   factory _Permit.fromJson(Map<String, dynamic> json) = _$_Permit.fromJson;
 
@@ -322,16 +314,12 @@ abstract class _Permit implements Permit, Identifiable {
   @override
   String get address;
   @override
-  @TimestampConverter()
   DateTime get startDate;
   @override
-  @TimestampConverter()
   DateTime get endDate;
   @override
-  @TimestampConverter()
   DateTime? get creationDate;
   @override
-  @TimestampConverter()
   DateTime? get lastUpdated;
   @override
   @JsonKey(ignore: true)
