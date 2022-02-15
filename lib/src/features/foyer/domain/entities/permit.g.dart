@@ -10,22 +10,22 @@ _$_Permit _$$_PermitFromJson(Map<String, dynamic> json) => _$_Permit(
       id: json['id'] as String?,
       authorizer: json['authorizer'] as String,
       authorized: json['authorized'] as String,
-      startDate:
-          const TimestampConverter().fromJson(json['startDate'] as Timestamp),
-      endDate:
-          const TimestampConverter().fromJson(json['endDate'] as Timestamp),
+      address: json['address'] as String,
+      startDate: DateTime.parse(json['startDate'] as String),
+      endDate: DateTime.parse(json['endDate'] as String),
       creationDate: const TimestampConverter()
-          .fromJson(json['creationDate'] as Timestamp),
-      lastUpdated:
-          const TimestampConverter().fromJson(json['lastUpdated'] as Timestamp),
+          .fromJson(json['creationDate'] as Timestamp?),
+      lastUpdated: const TimestampConverter()
+          .fromJson(json['lastUpdated'] as Timestamp?),
     );
 
 Map<String, dynamic> _$$_PermitToJson(_$_Permit instance) => <String, dynamic>{
       'id': instance.id,
       'authorizer': instance.authorizer,
       'authorized': instance.authorized,
-      'startDate': const TimestampConverter().toJson(instance.startDate),
-      'endDate': const TimestampConverter().toJson(instance.endDate),
+      'address': instance.address,
+      'startDate': instance.startDate.toIso8601String(),
+      'endDate': instance.endDate.toIso8601String(),
       'creationDate': const TimestampConverter().toJson(instance.creationDate),
       'lastUpdated': const TimestampConverter().toJson(instance.lastUpdated),
     };

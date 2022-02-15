@@ -9,13 +9,14 @@ part 'permit.g.dart';
 class Permit with _$Permit, Identifiable {
   @Implements<Identifiable>()
   factory Permit({
-    required String? id,
+    String? id,
     required String authorizer,
     required String authorized,
+    required String address,
     @TimestampConverter() required DateTime startDate,
     @TimestampConverter() required DateTime endDate,
-    @TimestampConverter() required DateTime creationDate,
-    @TimestampConverter() required DateTime lastUpdated,
+    @TimestampConverter() DateTime? creationDate,
+    @TimestampConverter() DateTime? lastUpdated,
   }) = _Permit;
 
   factory Permit.fromJson(Map<String, dynamic> json) => _$PermitFromJson(json);

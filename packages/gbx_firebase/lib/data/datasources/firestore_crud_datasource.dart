@@ -9,14 +9,7 @@ class FirestoreCRUDDataSource<T extends Identifiable>
     required this.collection,
     required this.serializer,
     required this.deserializer,
-
-    /// Setting this will update the property to the server timestamp
-    this.lastUpdatedTimestampKey,
-    this.createdTimestampKey,
   }) : super();
-
-  final String? lastUpdatedTimestampKey;
-  final String? createdTimestampKey;
 
   final String collection;
 
@@ -29,9 +22,9 @@ class FirestoreCRUDDataSource<T extends Identifiable>
   @override
   Future<CRUDData<T>> create(T item, [String? id]) async {
     final doc = col.doc(id);
-    final newData = dataToJson(doc.id, item);
-    await doc.set(newData);
-    return CRUDData(doc.id, newData, deserializer);
+    var data = serializer(item);
+    await doc.set(data);
+    return CRUDData(doc.id, data, deserializer);
   }
 
   @override
@@ -42,9 +35,10 @@ class FirestoreCRUDDataSource<T extends Identifiable>
 
   @override
   Future<CRUDData<T>> update(String id, T updated) async {
-    final newData = dataToJson(id, updated);
-    await col.doc(id).update(newData);
-    return CRUDData(id, newData, deserializer);
+    final data = serializer(updated);
+    await col.doc(id).update(data);
+
+    return CRUDData(id, data, deserializer);
   }
 
   @override
@@ -69,17 +63,5 @@ class FirestoreCRUDDataSource<T extends Identifiable>
         .docs
         .map((e) => CRUDData(e.id, e.data(), deserializer))
         .toList();
-  }
-
-  Map<String, dynamic> dataToJson(String id, T data) {
-    var newData = {...serializer(data), 'id': id};
-    if (lastUpdatedTimestampKey != null) {
-      newData[lastUpdatedTimestampKey!] = FieldValue.serverTimestamp();
-    }
-    if (createdTimestampKey != null) {
-      newData.putIfAbsent(
-          createdTimestampKey!, () => FieldValue.serverTimestamp());
-    }
-    return newData;
   }
 }

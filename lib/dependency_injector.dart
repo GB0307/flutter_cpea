@@ -1,5 +1,6 @@
 import 'package:cpea/firebase_options.dart';
 import 'package:cpea/src/core/utils/env_variables.dart';
+import 'package:cpea/src/features/foyer/domain/foyer_module.dart';
 import 'package:cpea/src/features/login/domain/cpea_login_module.dart';
 import 'package:cpea/src/features/news/data/repositories/news_repository.dart';
 import 'package:cpea/src/features/news/domain/news_module.dart';
@@ -23,5 +24,6 @@ Future injectDependencies() async {
   await IModule.initializeAll([
     CPEALoginModule(),
     NewsModule(repository: const NewsRepository()),
+    FoyerModule(),
   ]);
 }

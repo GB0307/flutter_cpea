@@ -23,17 +23,19 @@ class _$PermitTearOff {
   const _$PermitTearOff();
 
   _Permit call(
-      {required String? id,
+      {String? id,
       required String authorizer,
       required String authorized,
+      required String address,
       @TimestampConverter() required DateTime startDate,
       @TimestampConverter() required DateTime endDate,
-      @TimestampConverter() required DateTime creationDate,
-      @TimestampConverter() required DateTime lastUpdated}) {
+      @TimestampConverter() DateTime? creationDate,
+      @TimestampConverter() DateTime? lastUpdated}) {
     return _Permit(
       id: id,
       authorizer: authorizer,
       authorized: authorized,
+      address: address,
       startDate: startDate,
       endDate: endDate,
       creationDate: creationDate,
@@ -54,14 +56,15 @@ mixin _$Permit {
   String? get id => throw _privateConstructorUsedError;
   String get authorizer => throw _privateConstructorUsedError;
   String get authorized => throw _privateConstructorUsedError;
+  String get address => throw _privateConstructorUsedError;
   @TimestampConverter()
   DateTime get startDate => throw _privateConstructorUsedError;
   @TimestampConverter()
   DateTime get endDate => throw _privateConstructorUsedError;
   @TimestampConverter()
-  DateTime get creationDate => throw _privateConstructorUsedError;
+  DateTime? get creationDate => throw _privateConstructorUsedError;
   @TimestampConverter()
-  DateTime get lastUpdated => throw _privateConstructorUsedError;
+  DateTime? get lastUpdated => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -76,10 +79,11 @@ abstract class $PermitCopyWith<$Res> {
       {String? id,
       String authorizer,
       String authorized,
+      String address,
       @TimestampConverter() DateTime startDate,
       @TimestampConverter() DateTime endDate,
-      @TimestampConverter() DateTime creationDate,
-      @TimestampConverter() DateTime lastUpdated});
+      @TimestampConverter() DateTime? creationDate,
+      @TimestampConverter() DateTime? lastUpdated});
 }
 
 /// @nodoc
@@ -95,6 +99,7 @@ class _$PermitCopyWithImpl<$Res> implements $PermitCopyWith<$Res> {
     Object? id = freezed,
     Object? authorizer = freezed,
     Object? authorized = freezed,
+    Object? address = freezed,
     Object? startDate = freezed,
     Object? endDate = freezed,
     Object? creationDate = freezed,
@@ -113,6 +118,10 @@ class _$PermitCopyWithImpl<$Res> implements $PermitCopyWith<$Res> {
           ? _value.authorized
           : authorized // ignore: cast_nullable_to_non_nullable
               as String,
+      address: address == freezed
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String,
       startDate: startDate == freezed
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
@@ -124,11 +133,11 @@ class _$PermitCopyWithImpl<$Res> implements $PermitCopyWith<$Res> {
       creationDate: creationDate == freezed
           ? _value.creationDate
           : creationDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       lastUpdated: lastUpdated == freezed
           ? _value.lastUpdated
           : lastUpdated // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
     ));
   }
 }
@@ -142,10 +151,11 @@ abstract class _$PermitCopyWith<$Res> implements $PermitCopyWith<$Res> {
       {String? id,
       String authorizer,
       String authorized,
+      String address,
       @TimestampConverter() DateTime startDate,
       @TimestampConverter() DateTime endDate,
-      @TimestampConverter() DateTime creationDate,
-      @TimestampConverter() DateTime lastUpdated});
+      @TimestampConverter() DateTime? creationDate,
+      @TimestampConverter() DateTime? lastUpdated});
 }
 
 /// @nodoc
@@ -162,6 +172,7 @@ class __$PermitCopyWithImpl<$Res> extends _$PermitCopyWithImpl<$Res>
     Object? id = freezed,
     Object? authorizer = freezed,
     Object? authorized = freezed,
+    Object? address = freezed,
     Object? startDate = freezed,
     Object? endDate = freezed,
     Object? creationDate = freezed,
@@ -180,6 +191,10 @@ class __$PermitCopyWithImpl<$Res> extends _$PermitCopyWithImpl<$Res>
           ? _value.authorized
           : authorized // ignore: cast_nullable_to_non_nullable
               as String,
+      address: address == freezed
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String,
       startDate: startDate == freezed
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
@@ -191,11 +206,11 @@ class __$PermitCopyWithImpl<$Res> extends _$PermitCopyWithImpl<$Res>
       creationDate: creationDate == freezed
           ? _value.creationDate
           : creationDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       lastUpdated: lastUpdated == freezed
           ? _value.lastUpdated
           : lastUpdated // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
     ));
   }
 }
@@ -205,13 +220,14 @@ class __$PermitCopyWithImpl<$Res> extends _$PermitCopyWithImpl<$Res>
 @Implements<Identifiable>()
 class _$_Permit implements _Permit {
   _$_Permit(
-      {required this.id,
+      {this.id,
       required this.authorizer,
       required this.authorized,
+      required this.address,
       @TimestampConverter() required this.startDate,
       @TimestampConverter() required this.endDate,
-      @TimestampConverter() required this.creationDate,
-      @TimestampConverter() required this.lastUpdated});
+      @TimestampConverter() this.creationDate,
+      @TimestampConverter() this.lastUpdated});
 
   factory _$_Permit.fromJson(Map<String, dynamic> json) =>
       _$$_PermitFromJson(json);
@@ -223,6 +239,8 @@ class _$_Permit implements _Permit {
   @override
   final String authorized;
   @override
+  final String address;
+  @override
   @TimestampConverter()
   final DateTime startDate;
   @override
@@ -230,14 +248,14 @@ class _$_Permit implements _Permit {
   final DateTime endDate;
   @override
   @TimestampConverter()
-  final DateTime creationDate;
+  final DateTime? creationDate;
   @override
   @TimestampConverter()
-  final DateTime lastUpdated;
+  final DateTime? lastUpdated;
 
   @override
   String toString() {
-    return 'Permit(id: $id, authorizer: $authorizer, authorized: $authorized, startDate: $startDate, endDate: $endDate, creationDate: $creationDate, lastUpdated: $lastUpdated)';
+    return 'Permit(id: $id, authorizer: $authorizer, authorized: $authorized, address: $address, startDate: $startDate, endDate: $endDate, creationDate: $creationDate, lastUpdated: $lastUpdated)';
   }
 
   @override
@@ -250,6 +268,7 @@ class _$_Permit implements _Permit {
                 .equals(other.authorizer, authorizer) &&
             const DeepCollectionEquality()
                 .equals(other.authorized, authorized) &&
+            const DeepCollectionEquality().equals(other.address, address) &&
             const DeepCollectionEquality().equals(other.startDate, startDate) &&
             const DeepCollectionEquality().equals(other.endDate, endDate) &&
             const DeepCollectionEquality()
@@ -264,6 +283,7 @@ class _$_Permit implements _Permit {
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(authorizer),
       const DeepCollectionEquality().hash(authorized),
+      const DeepCollectionEquality().hash(address),
       const DeepCollectionEquality().hash(startDate),
       const DeepCollectionEquality().hash(endDate),
       const DeepCollectionEquality().hash(creationDate),
@@ -282,13 +302,14 @@ class _$_Permit implements _Permit {
 
 abstract class _Permit implements Permit, Identifiable {
   factory _Permit(
-      {required String? id,
+      {String? id,
       required String authorizer,
       required String authorized,
+      required String address,
       @TimestampConverter() required DateTime startDate,
       @TimestampConverter() required DateTime endDate,
-      @TimestampConverter() required DateTime creationDate,
-      @TimestampConverter() required DateTime lastUpdated}) = _$_Permit;
+      @TimestampConverter() DateTime? creationDate,
+      @TimestampConverter() DateTime? lastUpdated}) = _$_Permit;
 
   factory _Permit.fromJson(Map<String, dynamic> json) = _$_Permit.fromJson;
 
@@ -299,6 +320,8 @@ abstract class _Permit implements Permit, Identifiable {
   @override
   String get authorized;
   @override
+  String get address;
+  @override
   @TimestampConverter()
   DateTime get startDate;
   @override
@@ -306,10 +329,10 @@ abstract class _Permit implements Permit, Identifiable {
   DateTime get endDate;
   @override
   @TimestampConverter()
-  DateTime get creationDate;
+  DateTime? get creationDate;
   @override
   @TimestampConverter()
-  DateTime get lastUpdated;
+  DateTime? get lastUpdated;
   @override
   @JsonKey(ignore: true)
   _$PermitCopyWith<_Permit> get copyWith => throw _privateConstructorUsedError;
