@@ -1,5 +1,6 @@
 import 'package:gbx_core/core/index.dart';
 import 'package:gbx_core/data/datasources/crud_datasource.dart';
+import 'package:gbx_core/domain/index.dart';
 import 'package:gbx_core/domain/params/query_params.dart';
 import 'package:gbx_core/domain/usecases/query_data.dart';
 import 'package:get_storage/get_storage.dart';
@@ -23,19 +24,21 @@ class GetCacheDataSource<T extends Identifiable> extends ICRUDDataSource<T> {
       : throw Exception("couldn't open box");
 
   @override
-  Future<CRUDData<T>> create(T item, [String? id]) async {
-    if (id == null && item.id == null) {
+  Future<CRUDData<T>> create(ICreateParams<T> params) async {
+    if (params.id == null && params.item.id == null) {
       throw Exception("GetStorage requires an ID to create an item");
     }
-    final serialized = serializer(item);
-    (await box).write(id ?? item.id!, serialized);
-    final newData = {...serialized, 'id': id ?? item.id!};
-    return CRUDData(id ?? item.id!, newData, deserializer);
+    final id = params.id ?? params.item.id!;
+
+    final serialized = serializer(params.item);
+    (await box).write(id, serialized);
+    final newData = {...serialized, 'id': id};
+    return CRUDData(id, newData, deserializer);
   }
 
   @override
-  Future<void> delete(String id) async {
-    (await box).remove(id);
+  Future<void> delete(IDeleteParams<T> params) async {
+    (await box).remove(params.id);
   }
 
   Future<List<CRUDData<T>>> readAll() async {
@@ -53,26 +56,26 @@ class GetCacheDataSource<T extends Identifiable> extends ICRUDDataSource<T> {
   }
 
   @override
-  Future<List<CRUDData<T>>> query(QueryParams query) async {
+  Future<List<CRUDData<T>>> query(IQueryParams<T> params) async {
     const useCase = QueryMapData();
     // Sort data
     var items = (await readAll());
 
-    return useCase(QueryMapParams(query, items)) as List<CRUDData<T>>;
+    return useCase(QueryMapParams(params, items)) as List<CRUDData<T>>;
   }
 
   @override
-  Future<CRUDData<T>> read(String id) async {
-    var data = (await box).read<Map<String, dynamic>>(id);
+  Future<CRUDData<T>> read(IReadParams<T> params) async {
+    var data = (await box).read<Map<String, dynamic>>(params.id);
     if (data == null) throw NoCachedDataException();
-    return CRUDData(id, data, deserializer);
+    return CRUDData(params.id, data, deserializer);
   }
 
   @override
-  Future<CRUDData<T>> update(String id, T updated) async {
+  Future<CRUDData<T>> update(IUpdateParams<T> params) async {
     final _box = (await box);
-    final newData = {...serializer(updated), 'id': id};
-    await _box.write(id, newData);
-    return CRUDData(id, newData, deserializer);
+    final newData = {...serializer(params.item), 'id': params.id};
+    await _box.write(params.id, newData);
+    return CRUDData(params.id, newData, deserializer);
   }
 }

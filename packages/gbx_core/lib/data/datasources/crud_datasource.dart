@@ -1,15 +1,15 @@
 import 'package:gbx_core/core/interfaces/index.dart';
-import 'package:gbx_core/domain/params/query_params.dart';
+import 'package:gbx_core/domain/index.dart';
 
-import '../../domain/entities/crud_data.dart';
+import '../../domain/params/delete_params.dart';
 
 abstract class ICRUDDataSource<T extends Identifiable> {
   const ICRUDDataSource();
 
-  Future<CRUDData<T>> create(T item, [String? id]);
-  Future<CRUDData<T>> read(String id);
-  Future<CRUDData<T>> update(String id, T updated);
-  Future<void> delete(String id);
+  Future<CRUDData<T>> create(ICreateParams<T> params);
+  Future<CRUDData<T>> read(IReadParams<T> params);
+  Future<CRUDData<T>> update(IUpdateParams<T> params);
+  Future<void> delete(IDeleteParams<T> params);
 
-  Future<List<CRUDData<T>>> query(QueryParams query);
+  Future<List<CRUDData<T>>> query(IQueryParams<T> params);
 }

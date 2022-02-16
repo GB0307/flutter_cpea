@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:gbx_core/core/index.dart';
+import 'package:gbx_core/domain/index.dart';
 import 'package:gbx_login/domain/entity/user.dart';
 
 import '../../../domain/login_module.dart';
@@ -32,7 +33,7 @@ class UserCubit<U extends GbxUser, UD extends Identifiable>
 
   Future<void> _userChanged(U user) async {
     emit(const UserState.loggingIn());
-    var response = await module.getUserData(user.uid);
+    var response = await module.getUserData(ReadParams(id: user.uid));
     emit(response.didSuccess
         ? UserState.loggedIn(user, response.data)
         : UserState.noData(user));

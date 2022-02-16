@@ -6,13 +6,13 @@ abstract class CacheStrategy {
   const CacheStrategy();
 
   Future<CRUDData<T>> read<T extends Identifiable>({
-    required String id,
+    required IReadParams<T> params,
     required ICRUDDataSource<T> datasource,
     required ICRUDDataSource<T> cacheDatasource,
   });
 
   Future<List<CRUDData<T>>> query<T extends Identifiable>({
-    required QueryParams params,
+    required IQueryParams<T> params,
     required ICRUDDataSource<T> datasource,
     required ICRUDDataSource<T> cacheDatasource,
   });
@@ -27,31 +27,39 @@ class CacheFirstStrategy extends CacheStrategy {
   const CacheFirstStrategy() : super();
 
   @override
-  Future<List<CRUDData<T>>> query<T extends Identifiable>(
-      {required QueryParams params,
-      required ICRUDDataSource<T> datasource,
-      required ICRUDDataSource<T> cacheDatasource}) async {
+  Future<List<CRUDData<T>>> query<T extends Identifiable>({
+    required IQueryParams<T> params,
+    required ICRUDDataSource<T> datasource,
+    required ICRUDDataSource<T> cacheDatasource,
+    bool forceRefresh = false,
+  }) async {
     List<CRUDData<T>>? data;
     try {
+      if (forceRefresh) throw NoCachedDataException();
       data = await cacheDatasource.query(params);
     } on NoCachedDataException {
       data = await datasource.query(params);
-      await Future.wait(data.map((e) => cacheDatasource.update(e.id, e.item)));
+      await Future.wait(data.map(
+        (e) => cacheDatasource.update(UpdateParams(id: e.id, item: e.item)),
+      ));
     }
     return data;
   }
 
   @override
-  Future<CRUDData<T>> read<T extends Identifiable>(
-      {required String id,
-      required ICRUDDataSource<T> datasource,
-      required ICRUDDataSource<T> cacheDatasource}) async {
+  Future<CRUDData<T>> read<T extends Identifiable>({
+    required IReadParams<T> params,
+    required ICRUDDataSource<T> datasource,
+    required ICRUDDataSource<T> cacheDatasource,
+    bool forceRefresh = false,
+  }) async {
     CRUDData<T>? data;
     try {
-      data = (await cacheDatasource.read(id));
+      if (forceRefresh) throw NoCachedDataException();
+      data = (await cacheDatasource.read(params));
     } catch (e) {
-      data = (await datasource.read(id));
-      await cacheDatasource.update(data.id, data.item);
+      data = (await datasource.read(params));
+      await cacheDatasource.update(UpdateParams(id: data.id, item: data.item));
     }
 
     return data;
@@ -62,14 +70,18 @@ class ServerFirstStrategy extends CacheStrategy {
   const ServerFirstStrategy() : super();
 
   @override
-  Future<List<CRUDData<T>>> query<T extends Identifiable>(
-      {required QueryParams params,
-      required ICRUDDataSource<T> datasource,
-      required ICRUDDataSource<T> cacheDatasource}) async {
+  Future<List<CRUDData<T>>> query<T extends Identifiable>({
+    required IQueryParams<T> params,
+    required ICRUDDataSource<T> datasource,
+    required ICRUDDataSource<T> cacheDatasource,
+  }) async {
     List<CRUDData<T>> data;
     try {
       data = await datasource.query(params);
-      await Future.wait(data.map((e) => cacheDatasource.update(e.id, e.item)));
+      await Future.wait(
+        data.map((e) =>
+            cacheDatasource.update(UpdateParams(item: e.item, id: e.id))),
+      );
     } catch (e) {
       data = await cacheDatasource.query(params);
     }
@@ -77,16 +89,18 @@ class ServerFirstStrategy extends CacheStrategy {
   }
 
   @override
-  Future<CRUDData<T>> read<T extends Identifiable>(
-      {required String id,
-      required ICRUDDataSource<T> datasource,
-      required ICRUDDataSource<T> cacheDatasource}) async {
+  Future<CRUDData<T>> read<T extends Identifiable>({
+    required IReadParams<T> params,
+    required ICRUDDataSource<T> datasource,
+    required ICRUDDataSource<T> cacheDatasource,
+    bool forceRefresh = false,
+  }) async {
     CRUDData<T> data;
     try {
-      data = await datasource.read(id);
-      await cacheDatasource.update(data.id, data.item);
+      data = await datasource.read(params);
+      await cacheDatasource.update(UpdateParams(item: data.item, id: data.id));
     } catch (e) {
-      data = await cacheDatasource.read(id);
+      data = await cacheDatasource.read(params);
     }
     return data;
   }
@@ -98,11 +112,14 @@ class UpdatingCacheFirstStrategy extends CacheFirstStrategy {
   final String orderBy;
 
   @override
-  Future<List<CRUDData<T>>> query<T extends Identifiable>(
-      {required QueryParams params,
-      required ICRUDDataSource<T> datasource,
-      required ICRUDDataSource<T> cacheDatasource}) async {
-    final lastItem = await _getLastCachedData(cacheDatasource);
+  Future<List<CRUDData<T>>> query<T extends Identifiable>({
+    required IQueryParams<T> params,
+    required ICRUDDataSource<T> datasource,
+    required ICRUDDataSource<T> cacheDatasource,
+    bool forceRefresh = false,
+  }) async {
+    final lastItem =
+        forceRefresh ? null : await _getLastCachedData(cacheDatasource);
 
     if (lastItem != null) {
       await _updateCache(lastItem, datasource, cacheDatasource);
@@ -110,8 +127,10 @@ class UpdatingCacheFirstStrategy extends CacheFirstStrategy {
       // No cache, get from server
       final items = await datasource.query(params);
       // Save data
-      await Future.wait(
-          items.map((item) => cacheDatasource.update(item.id, item.item)));
+      await Future.wait(items.map(
+        (item) =>
+            cacheDatasource.update(UpdateParams(item: item.item, id: item.id)),
+      ));
       return items;
     }
 
@@ -135,6 +154,7 @@ class UpdatingCacheFirstStrategy extends CacheFirstStrategy {
       ICRUDDataSource<T> cacheDatasource) async {
     final items = await datasource.query(QueryParams(
         orderBy: orderBy, ascendingOrder: false, endBefore: lastItem[orderBy]));
-    await Future.wait(items.map((e) => cacheDatasource.update(e.id, e.item)));
+    await Future.wait(items.map(
+        (e) => cacheDatasource.update(UpdateParams(item: e.item, id: e.id))));
   }
 }

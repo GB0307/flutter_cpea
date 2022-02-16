@@ -28,7 +28,7 @@ class PermitListPage extends StatelessWidget {
                 var data =
                     state.whenOrNull<UserData>(loggedIn: (user, data) => data)!;
                 var permit = await FoyerModule.instance.create(CreateParams(
-                    data: Permit(
+                    item: Permit(
                         authorizer: data.name,
                         authorized: "authorized",
                         address: data.lote,

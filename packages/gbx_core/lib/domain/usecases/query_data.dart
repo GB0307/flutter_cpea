@@ -38,7 +38,7 @@ class QueryMapData<T extends Identifiable>
     return items;
   }
 
-  List<CRUDData<T>> _sublist(QueryParams query, List<CRUDData<T>> items) {
+  List<CRUDData<T>> _sublist(IQueryParams<T> query, List<CRUDData<T>> items) {
     var startAt = 0;
     var endAt = items.length - 1;
 
@@ -84,7 +84,7 @@ class QueryMapParams<T extends Identifiable> extends Equatable {
   const QueryMapParams(this.query, this.data);
 
   final List<CRUDData<T>> data;
-  final QueryParams query;
+  final IQueryParams<T> query;
 
   @override
   List<Object?> get props => [query, data];

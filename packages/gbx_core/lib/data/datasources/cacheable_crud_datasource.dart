@@ -1,8 +1,6 @@
 import 'package:gbx_core/core/index.dart';
 import 'package:gbx_core/data/datasources/crud_datasource.dart';
-import 'package:gbx_core/domain/params/query_params.dart';
-
-import '../../domain/entities/crud_data.dart';
+import 'package:gbx_core/domain/index.dart';
 
 class CacheableCRUDDataSource<T extends Identifiable>
     extends ICRUDDataSource<T> {
@@ -17,28 +15,36 @@ class CacheableCRUDDataSource<T extends Identifiable>
       : super();
 
   @override
-  Future<CRUDData<T>> create(T item, [String? id]) async {
-    var newData = await datasource.create(item, id);
-    return await cacheDatasource.create(newData.item, newData.id);
+  Future<CRUDData<T>> create(ICreateParams<T> params) async {
+    var newData = await datasource.create(params);
+    return await cacheDatasource.create(params.copyWith(item: newData.item));
   }
 
   @override
-  Future<void> delete(String id) async {
-    await datasource.delete(id);
-    await cacheDatasource.delete(id);
+  Future<void> delete(IDeleteParams<T> params) async {
+    await datasource.delete(params);
+    await cacheDatasource.delete(params);
   }
 
   @override
-  Future<List<CRUDData<T>>> query(QueryParams query) => cacheStrategy.query(
-      params: query, datasource: datasource, cacheDatasource: cacheDatasource);
+  Future<List<CRUDData<T>>> query(IQueryParams<T> params) =>
+      cacheStrategy.query(
+        params: params,
+        datasource: datasource,
+        cacheDatasource: cacheDatasource,
+      );
 
   @override
-  Future<CRUDData<T>> read(String id) => cacheStrategy.read<T>(
-      id: id, datasource: datasource, cacheDatasource: cacheDatasource);
+  Future<CRUDData<T>> read(IReadParams<T> params) => cacheStrategy.read<T>(
+        params: params,
+        datasource: datasource,
+        cacheDatasource: cacheDatasource,
+      );
 
   @override
-  Future<CRUDData<T>> update(String id, T updated) async {
-    var newData = await datasource.update(id, updated);
-    return await cacheDatasource.update(id, newData.item);
+  Future<CRUDData<T>> update(IUpdateParams<T> params) async {
+    var newData = await datasource.update(params);
+
+    return await cacheDatasource.update(params.copyWith(item: newData.item));
   }
 }

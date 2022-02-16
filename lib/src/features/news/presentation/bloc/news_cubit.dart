@@ -15,7 +15,7 @@ class NewsCubit extends Cubit<NewsState> {
 
   void loadNews() async {
     emit(const NewsState());
-    var response = await NewsModule.instance.read(GetParams(id: newsId));
+    var response = await NewsModule.instance.read(ReadParams(id: newsId));
     response.on(
       success: (data) => emit(NewsState(news: data)),
       failure: (failure) => emit(const NewsState(loading: false)),

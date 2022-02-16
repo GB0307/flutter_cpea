@@ -10,9 +10,12 @@ abstract class ICrudCubit<M extends Identifiable, R>
     extends Cubit<CrudState<R>> {
   ICrudCubit({
     required this.module,
-    CrudState<R> initialState = const CrudState.noData(),
+    CrudState<R>? initialState,
     bool initialLoad = false,
-  }) : super(initialState) {
+  }) : super(initialState ??
+            (initialLoad
+                ? const CrudState.loading()
+                : const CrudState.noData())) {
     if (initialLoad) loadData();
   }
 

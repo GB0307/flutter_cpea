@@ -21,44 +21,45 @@ class FirestoreCRUDDataSource<T extends Identifiable>
       FirebaseFirestore.instance.collection(collection);
 
   @override
-  Future<CRUDData<T>> create(T item, [String? id]) async {
-    final doc = col.doc(id);
-    var data = serialize(item);
+  Future<CRUDData<T>> create(ICreateParams<T> params) async {
+    final doc = col.doc(params.id);
+    var data = serialize(params.item);
     await doc.set(data);
     return CRUDData(doc.id, data, deserialize);
   }
 
   @override
-  Future<CRUDData<T>> read(String id) async {
-    final data = (await col.doc(id).get()).data() ?? (throw NoDataException());
-    return CRUDData(id, data, deserialize);
+  Future<CRUDData<T>> read(IReadParams<T> params) async {
+    final data =
+        (await col.doc(params.id).get()).data() ?? (throw NoDataException());
+    return CRUDData(params.id, data, deserialize);
   }
 
   @override
-  Future<CRUDData<T>> update(String id, T updated) async {
-    final data = serialize(updated);
-    await col.doc(id).update(data);
+  Future<CRUDData<T>> update(IUpdateParams<T> params) async {
+    final data = serialize(params.item);
+    await col.doc(params.id).update(data);
 
-    return CRUDData(id, data, deserialize);
+    return CRUDData(params.id, data, deserialize);
   }
 
   @override
-  Future<void> delete(String id) => col.doc(id).delete();
+  Future<void> delete(IDeleteParams<T> params) => col.doc(params.id).delete();
 
   @override
-  Future<List<CRUDData<T>>> query(QueryParams query) async {
+  Future<List<CRUDData<T>>> query(IQueryParams params) async {
     firestore.Query<Map<String, dynamic>> q = col;
-    if (query.orderBy != null) {
-      q = q.orderBy(query.orderBy!, descending: !query.ascendingOrder);
+    if (params.orderBy != null) {
+      q = q.orderBy(params.orderBy!, descending: !params.ascendingOrder);
     }
-    if (query.startAt != null) q = q.startAt([query.startAt]);
-    if (query.startAfter != null) q = q.startAfter([query.startAfter]);
+    if (params.startAt != null) q = q.startAt([params.startAt]);
+    if (params.startAfter != null) q = q.startAfter([params.startAfter]);
 
-    if (query.endAt != null) q = q.endAt([query.endAt]);
-    if (query.endBefore != null) q = q.endBefore([query.endBefore]);
+    if (params.endAt != null) q = q.endAt([params.endAt]);
+    if (params.endBefore != null) q = q.endBefore([params.endBefore]);
 
-    if (query.limit != null) q = q.limit(query.limit!);
-    if (query.limitLast != null) q = q.limitToLast(query.limitLast!);
+    if (params.limit != null) q = q.limit(params.limit!);
+    if (params.limitLast != null) q = q.limitToLast(params.limitLast!);
 
     return (await q.get())
         .docs

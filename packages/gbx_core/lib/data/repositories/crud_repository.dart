@@ -1,7 +1,6 @@
 import 'package:gbx_core/core/index.dart';
 import 'package:gbx_core/data/datasources/crud_datasource.dart';
-import 'package:gbx_core/domain/params/query_params.dart';
-import 'package:gbx_core/domain/repositories/crud_repository.dart';
+import 'package:gbx_core/domain/index.dart';
 
 class CRUDRepository<T extends Identifiable> extends ICRUDRepository<T> {
   const CRUDRepository({
@@ -11,24 +10,26 @@ class CRUDRepository<T extends Identifiable> extends ICRUDRepository<T> {
   final ICRUDDataSource<T> datasource;
 
   @override
-  Future<DResponse<T>> create(T data) =>
-      runCatchingAsync(() async => (await datasource.create(data)).item);
+  Future<DResponse<T>> create(ICreateParams<T> params) =>
+      runCatchingAsync(() async => (await datasource.create(params)).item);
 
   @override
-  Future<DResponse<void>> delete(String id) =>
-      runCatchingAsync(() => datasource.delete(id));
+  Future<DResponse<void>> delete(IDeleteParams<T> params) =>
+      runCatchingAsync(() => datasource.delete(params));
 
   @override
-  Future<DResponse<T>> read(String id) =>
-      runCatchingAsync(() async => (await datasource.read(id)).item);
+  Future<DResponse<T>> read(IReadParams<T> params) =>
+      runCatchingAsync(() async => (await datasource.read(params)).item);
 
   @override
-  Future<DResponse<T>> update(String id, T updated) => runCatchingAsync(
-      () => datasource.update(id, updated).map<T>((data) => data.item));
+  Future<DResponse<T>> update(IUpdateParams<T> params) => runCatchingAsync(
+      () => datasource.update(params).map<T>((data) => data.item));
 
   @override
-  Future<DResponse<List<T>>> query(QueryParams params) => runCatchingAsync(
-      () async => (await datasource.query(params)).map((e) => e.item).toList());
+  Future<DResponse<List<T>>> query(IQueryParams<T> params,
+          [bool forceRefresh = false]) =>
+      runCatchingAsync(() async =>
+          (await datasource.query(params)).map((e) => e.item).toList());
 
   @override
   IFailure? catchExceptions(Exception exception) {

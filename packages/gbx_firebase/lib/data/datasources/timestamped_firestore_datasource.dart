@@ -22,25 +22,25 @@ class TimestampedFirestoreDataSource<T extends Identifiable>
   final String? createdTimestampKey;
 
   @override
-  Future<CRUDData<T>> create(T item, [String? id]) async {
-    final doc = col.doc(id);
-    var newData = dataToJson(doc.id, item);
+  Future<CRUDData<T>> create(ICreateParams<T> params) async {
+    final doc = col.doc(params.id);
+    var newData = dataToJson(doc.id, params.item);
     await doc.set(newData);
     if (createdTimestampKey == null && lastUpdatedTimestampKey == null) {
       return CRUDData(doc.id, newData, deserialize);
     }
-    return read(doc.id);
+    return read(ReadParams(id: doc.id));
   }
 
   @override
-  Future<CRUDData<T>> update(String id, T updated) async {
-    final newData = dataToJson(id, updated);
-    await col.doc(id).update(newData);
+  Future<CRUDData<T>> update(IUpdateParams<T> params) async {
+    final newData = dataToJson(params.id, params.item);
+    await col.doc(params.id).update(newData);
 
     if (lastUpdatedTimestampKey == null) {
-      return CRUDData(id, newData, deserialize);
+      return CRUDData(params.id, newData, deserialize);
     }
-    return read(id);
+    return read(ReadParams(id: params.id));
   }
 
   Map<String, dynamic> dataToJson(String id, T data) {
