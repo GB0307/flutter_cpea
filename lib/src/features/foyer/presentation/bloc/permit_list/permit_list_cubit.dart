@@ -1,10 +1,11 @@
-import 'package:bloc/bloc.dart';
 import 'package:cpea/src/features/foyer/domain/entities/permit.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:cpea/src/features/foyer/domain/foyer_module.dart';
+import 'package:gbx_core/presentation/bloc/list_crud/list_crud_cubit.dart';
 
-part 'permit_list_state.dart';
-part 'permit_list_cubit.freezed.dart';
-
-class PermitListCubit extends Cubit<PermitListState> {
-  PermitListCubit() : super(const PermitListState.loading());
+class PermitListCubit extends ListCrudCubit<Permit, void> {
+  PermitListCubit()
+      : super(
+          module: FoyerModule.instance,
+          initialLoad: true,
+        );
 }
