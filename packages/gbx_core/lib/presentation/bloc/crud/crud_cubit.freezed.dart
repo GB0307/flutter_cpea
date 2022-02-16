@@ -18,29 +18,43 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$CrudStateTearOff {
   const _$CrudStateTearOff();
 
-  _$NoData<T> noData<T>() {
-    return _$NoData<T>();
-  }
-
-  _$Loading<T> loading<T>() {
-    return _$Loading<T>();
-  }
-
-  _$Reloading<T> reloading<T>(T data) {
-    return _$Reloading<T>(
-      data,
+  _$NoData<T, Extra> noData<T, Extra>([Extra? extras]) {
+    return _$NoData<T, Extra>(
+      extras,
     );
   }
 
-  _$Loaded<T> loaded<T>(T data) {
-    return _$Loaded<T>(
-      data,
+  _$Loading<T, Extra> loading<T, Extra>([Extra? extras]) {
+    return _$Loading<T, Extra>(
+      extras,
     );
   }
 
-  _$Error<T> error<T>(IFailure failure) {
-    return _$Error<T>(
+  _$LoadingMore<T, Extra> loadingMore<T, Extra>(T data, [Extra? extras]) {
+    return _$LoadingMore<T, Extra>(
+      data,
+      extras,
+    );
+  }
+
+  _$Reloading<T, Extra> reloading<T, Extra>(T data, [Extra? extras]) {
+    return _$Reloading<T, Extra>(
+      data,
+      extras,
+    );
+  }
+
+  _$Loaded<T, Extra> loaded<T, Extra>(T data, [Extra? extras]) {
+    return _$Loaded<T, Extra>(
+      data,
+      extras,
+    );
+  }
+
+  _$Error<T, Extra> error<T, Extra>(IFailure failure, [Extra? extras]) {
+    return _$Error<T, Extra>(
       failure,
+      extras,
     );
   }
 }
@@ -49,153 +63,210 @@ class _$CrudStateTearOff {
 const $CrudState = _$CrudStateTearOff();
 
 /// @nodoc
-mixin _$CrudState<T> {
+mixin _$CrudState<T, Extra> {
+  Extra? get extras => throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() noData,
-    required TResult Function() loading,
-    required TResult Function(T data) reloading,
-    required TResult Function(T data) loaded,
-    required TResult Function(IFailure failure) error,
+    required TResult Function(Extra? extras) noData,
+    required TResult Function(Extra? extras) loading,
+    required TResult Function(T data, Extra? extras) loadingMore,
+    required TResult Function(T data, Extra? extras) reloading,
+    required TResult Function(T data, Extra? extras) loaded,
+    required TResult Function(IFailure failure, Extra? extras) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? noData,
-    TResult Function()? loading,
-    TResult Function(T data)? reloading,
-    TResult Function(T data)? loaded,
-    TResult Function(IFailure failure)? error,
+    TResult Function(Extra? extras)? noData,
+    TResult Function(Extra? extras)? loading,
+    TResult Function(T data, Extra? extras)? loadingMore,
+    TResult Function(T data, Extra? extras)? reloading,
+    TResult Function(T data, Extra? extras)? loaded,
+    TResult Function(IFailure failure, Extra? extras)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? noData,
-    TResult Function()? loading,
-    TResult Function(T data)? reloading,
-    TResult Function(T data)? loaded,
-    TResult Function(IFailure failure)? error,
+    TResult Function(Extra? extras)? noData,
+    TResult Function(Extra? extras)? loading,
+    TResult Function(T data, Extra? extras)? loadingMore,
+    TResult Function(T data, Extra? extras)? reloading,
+    TResult Function(T data, Extra? extras)? loaded,
+    TResult Function(IFailure failure, Extra? extras)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_$NoData<T> value) noData,
-    required TResult Function(_$Loading<T> value) loading,
-    required TResult Function(_$Reloading<T> value) reloading,
-    required TResult Function(_$Loaded<T> value) loaded,
-    required TResult Function(_$Error<T> value) error,
+    required TResult Function(_$NoData<T, Extra> value) noData,
+    required TResult Function(_$Loading<T, Extra> value) loading,
+    required TResult Function(_$LoadingMore<T, Extra> value) loadingMore,
+    required TResult Function(_$Reloading<T, Extra> value) reloading,
+    required TResult Function(_$Loaded<T, Extra> value) loaded,
+    required TResult Function(_$Error<T, Extra> value) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_$NoData<T> value)? noData,
-    TResult Function(_$Loading<T> value)? loading,
-    TResult Function(_$Reloading<T> value)? reloading,
-    TResult Function(_$Loaded<T> value)? loaded,
-    TResult Function(_$Error<T> value)? error,
+    TResult Function(_$NoData<T, Extra> value)? noData,
+    TResult Function(_$Loading<T, Extra> value)? loading,
+    TResult Function(_$LoadingMore<T, Extra> value)? loadingMore,
+    TResult Function(_$Reloading<T, Extra> value)? reloading,
+    TResult Function(_$Loaded<T, Extra> value)? loaded,
+    TResult Function(_$Error<T, Extra> value)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_$NoData<T> value)? noData,
-    TResult Function(_$Loading<T> value)? loading,
-    TResult Function(_$Reloading<T> value)? reloading,
-    TResult Function(_$Loaded<T> value)? loaded,
-    TResult Function(_$Error<T> value)? error,
+    TResult Function(_$NoData<T, Extra> value)? noData,
+    TResult Function(_$Loading<T, Extra> value)? loading,
+    TResult Function(_$LoadingMore<T, Extra> value)? loadingMore,
+    TResult Function(_$Reloading<T, Extra> value)? reloading,
+    TResult Function(_$Loaded<T, Extra> value)? loaded,
+    TResult Function(_$Error<T, Extra> value)? error,
     required TResult orElse(),
   }) =>
+      throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $CrudStateCopyWith<T, Extra, CrudState<T, Extra>> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $CrudStateCopyWith<T, $Res> {
+abstract class $CrudStateCopyWith<T, Extra, $Res> {
   factory $CrudStateCopyWith(
-          CrudState<T> value, $Res Function(CrudState<T>) then) =
-      _$CrudStateCopyWithImpl<T, $Res>;
+          CrudState<T, Extra> value, $Res Function(CrudState<T, Extra>) then) =
+      _$CrudStateCopyWithImpl<T, Extra, $Res>;
+  $Res call({Extra? extras});
 }
 
 /// @nodoc
-class _$CrudStateCopyWithImpl<T, $Res> implements $CrudStateCopyWith<T, $Res> {
+class _$CrudStateCopyWithImpl<T, Extra, $Res>
+    implements $CrudStateCopyWith<T, Extra, $Res> {
   _$CrudStateCopyWithImpl(this._value, this._then);
 
-  final CrudState<T> _value;
+  final CrudState<T, Extra> _value;
   // ignore: unused_field
-  final $Res Function(CrudState<T>) _then;
-}
-
-/// @nodoc
-abstract class _$$NoDataCopyWith<T, $Res> {
-  factory _$$NoDataCopyWith(
-          _$NoData<T> value, $Res Function(_$NoData<T>) then) =
-      __$$NoDataCopyWithImpl<T, $Res>;
-}
-
-/// @nodoc
-class __$$NoDataCopyWithImpl<T, $Res> extends _$CrudStateCopyWithImpl<T, $Res>
-    implements _$$NoDataCopyWith<T, $Res> {
-  __$$NoDataCopyWithImpl(_$NoData<T> _value, $Res Function(_$NoData<T>) _then)
-      : super(_value, (v) => _then(v as _$NoData<T>));
+  final $Res Function(CrudState<T, Extra>) _then;
 
   @override
-  _$NoData<T> get _value => super._value as _$NoData<T>;
+  $Res call({
+    Object? extras = freezed,
+  }) {
+    return _then(_value.copyWith(
+      extras: extras == freezed
+          ? _value.extras
+          : extras // ignore: cast_nullable_to_non_nullable
+              as Extra?,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$$NoDataCopyWith<T, Extra, $Res>
+    implements $CrudStateCopyWith<T, Extra, $Res> {
+  factory _$$NoDataCopyWith(
+          _$NoData<T, Extra> value, $Res Function(_$NoData<T, Extra>) then) =
+      __$$NoDataCopyWithImpl<T, Extra, $Res>;
+  @override
+  $Res call({Extra? extras});
+}
+
+/// @nodoc
+class __$$NoDataCopyWithImpl<T, Extra, $Res>
+    extends _$CrudStateCopyWithImpl<T, Extra, $Res>
+    implements _$$NoDataCopyWith<T, Extra, $Res> {
+  __$$NoDataCopyWithImpl(
+      _$NoData<T, Extra> _value, $Res Function(_$NoData<T, Extra>) _then)
+      : super(_value, (v) => _then(v as _$NoData<T, Extra>));
+
+  @override
+  _$NoData<T, Extra> get _value => super._value as _$NoData<T, Extra>;
+
+  @override
+  $Res call({
+    Object? extras = freezed,
+  }) {
+    return _then(_$NoData<T, Extra>(
+      extras == freezed
+          ? _value.extras
+          : extras // ignore: cast_nullable_to_non_nullable
+              as Extra?,
+    ));
+  }
 }
 
 /// @nodoc
 
-class _$_$NoData<T> implements _$NoData<T> {
-  const _$_$NoData();
+class _$_$NoData<T, Extra> implements _$NoData<T, Extra> {
+  _$_$NoData([this.extras]);
+
+  @override
+  final Extra? extras;
 
   @override
   String toString() {
-    return 'CrudState<$T>.noData()';
+    return 'CrudState<$T, $Extra>.noData(extras: $extras)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$NoData<T>);
+        (other.runtimeType == runtimeType &&
+            other is _$NoData<T, Extra> &&
+            const DeepCollectionEquality().equals(other.extras, extras));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(extras));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$NoDataCopyWith<T, Extra, _$NoData<T, Extra>> get copyWith =>
+      __$$NoDataCopyWithImpl<T, Extra, _$NoData<T, Extra>>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() noData,
-    required TResult Function() loading,
-    required TResult Function(T data) reloading,
-    required TResult Function(T data) loaded,
-    required TResult Function(IFailure failure) error,
+    required TResult Function(Extra? extras) noData,
+    required TResult Function(Extra? extras) loading,
+    required TResult Function(T data, Extra? extras) loadingMore,
+    required TResult Function(T data, Extra? extras) reloading,
+    required TResult Function(T data, Extra? extras) loaded,
+    required TResult Function(IFailure failure, Extra? extras) error,
   }) {
-    return noData();
+    return noData(extras);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? noData,
-    TResult Function()? loading,
-    TResult Function(T data)? reloading,
-    TResult Function(T data)? loaded,
-    TResult Function(IFailure failure)? error,
+    TResult Function(Extra? extras)? noData,
+    TResult Function(Extra? extras)? loading,
+    TResult Function(T data, Extra? extras)? loadingMore,
+    TResult Function(T data, Extra? extras)? reloading,
+    TResult Function(T data, Extra? extras)? loaded,
+    TResult Function(IFailure failure, Extra? extras)? error,
   }) {
-    return noData?.call();
+    return noData?.call(extras);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? noData,
-    TResult Function()? loading,
-    TResult Function(T data)? reloading,
-    TResult Function(T data)? loaded,
-    TResult Function(IFailure failure)? error,
+    TResult Function(Extra? extras)? noData,
+    TResult Function(Extra? extras)? loading,
+    TResult Function(T data, Extra? extras)? loadingMore,
+    TResult Function(T data, Extra? extras)? reloading,
+    TResult Function(T data, Extra? extras)? loaded,
+    TResult Function(IFailure failure, Extra? extras)? error,
     required TResult orElse(),
   }) {
     if (noData != null) {
-      return noData();
+      return noData(extras);
     }
     return orElse();
   }
@@ -203,11 +274,12 @@ class _$_$NoData<T> implements _$NoData<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_$NoData<T> value) noData,
-    required TResult Function(_$Loading<T> value) loading,
-    required TResult Function(_$Reloading<T> value) reloading,
-    required TResult Function(_$Loaded<T> value) loaded,
-    required TResult Function(_$Error<T> value) error,
+    required TResult Function(_$NoData<T, Extra> value) noData,
+    required TResult Function(_$Loading<T, Extra> value) loading,
+    required TResult Function(_$LoadingMore<T, Extra> value) loadingMore,
+    required TResult Function(_$Reloading<T, Extra> value) reloading,
+    required TResult Function(_$Loaded<T, Extra> value) loaded,
+    required TResult Function(_$Error<T, Extra> value) error,
   }) {
     return noData(this);
   }
@@ -215,11 +287,12 @@ class _$_$NoData<T> implements _$NoData<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_$NoData<T> value)? noData,
-    TResult Function(_$Loading<T> value)? loading,
-    TResult Function(_$Reloading<T> value)? reloading,
-    TResult Function(_$Loaded<T> value)? loaded,
-    TResult Function(_$Error<T> value)? error,
+    TResult Function(_$NoData<T, Extra> value)? noData,
+    TResult Function(_$Loading<T, Extra> value)? loading,
+    TResult Function(_$LoadingMore<T, Extra> value)? loadingMore,
+    TResult Function(_$Reloading<T, Extra> value)? reloading,
+    TResult Function(_$Loaded<T, Extra> value)? loaded,
+    TResult Function(_$Error<T, Extra> value)? error,
   }) {
     return noData?.call(this);
   }
@@ -227,11 +300,12 @@ class _$_$NoData<T> implements _$NoData<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_$NoData<T> value)? noData,
-    TResult Function(_$Loading<T> value)? loading,
-    TResult Function(_$Reloading<T> value)? reloading,
-    TResult Function(_$Loaded<T> value)? loaded,
-    TResult Function(_$Error<T> value)? error,
+    TResult Function(_$NoData<T, Extra> value)? noData,
+    TResult Function(_$Loading<T, Extra> value)? loading,
+    TResult Function(_$LoadingMore<T, Extra> value)? loadingMore,
+    TResult Function(_$Reloading<T, Extra> value)? reloading,
+    TResult Function(_$Loaded<T, Extra> value)? loaded,
+    TResult Function(_$Error<T, Extra> value)? error,
     required TResult orElse(),
   }) {
     if (noData != null) {
@@ -241,83 +315,120 @@ class _$_$NoData<T> implements _$NoData<T> {
   }
 }
 
-abstract class _$NoData<T> implements CrudState<T> {
-  const factory _$NoData() = _$_$NoData<T>;
-}
-
-/// @nodoc
-abstract class _$$LoadingCopyWith<T, $Res> {
-  factory _$$LoadingCopyWith(
-          _$Loading<T> value, $Res Function(_$Loading<T>) then) =
-      __$$LoadingCopyWithImpl<T, $Res>;
-}
-
-/// @nodoc
-class __$$LoadingCopyWithImpl<T, $Res> extends _$CrudStateCopyWithImpl<T, $Res>
-    implements _$$LoadingCopyWith<T, $Res> {
-  __$$LoadingCopyWithImpl(
-      _$Loading<T> _value, $Res Function(_$Loading<T>) _then)
-      : super(_value, (v) => _then(v as _$Loading<T>));
+abstract class _$NoData<T, Extra> implements CrudState<T, Extra> {
+  factory _$NoData([Extra? extras]) = _$_$NoData<T, Extra>;
 
   @override
-  _$Loading<T> get _value => super._value as _$Loading<T>;
+  Extra? get extras;
+  @override
+  @JsonKey(ignore: true)
+  _$$NoDataCopyWith<T, Extra, _$NoData<T, Extra>> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$LoadingCopyWith<T, Extra, $Res>
+    implements $CrudStateCopyWith<T, Extra, $Res> {
+  factory _$$LoadingCopyWith(
+          _$Loading<T, Extra> value, $Res Function(_$Loading<T, Extra>) then) =
+      __$$LoadingCopyWithImpl<T, Extra, $Res>;
+  @override
+  $Res call({Extra? extras});
+}
+
+/// @nodoc
+class __$$LoadingCopyWithImpl<T, Extra, $Res>
+    extends _$CrudStateCopyWithImpl<T, Extra, $Res>
+    implements _$$LoadingCopyWith<T, Extra, $Res> {
+  __$$LoadingCopyWithImpl(
+      _$Loading<T, Extra> _value, $Res Function(_$Loading<T, Extra>) _then)
+      : super(_value, (v) => _then(v as _$Loading<T, Extra>));
+
+  @override
+  _$Loading<T, Extra> get _value => super._value as _$Loading<T, Extra>;
+
+  @override
+  $Res call({
+    Object? extras = freezed,
+  }) {
+    return _then(_$Loading<T, Extra>(
+      extras == freezed
+          ? _value.extras
+          : extras // ignore: cast_nullable_to_non_nullable
+              as Extra?,
+    ));
+  }
 }
 
 /// @nodoc
 
-class _$_$Loading<T> implements _$Loading<T> {
-  const _$_$Loading();
+class _$_$Loading<T, Extra> implements _$Loading<T, Extra> {
+  _$_$Loading([this.extras]);
+
+  @override
+  final Extra? extras;
 
   @override
   String toString() {
-    return 'CrudState<$T>.loading()';
+    return 'CrudState<$T, $Extra>.loading(extras: $extras)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$Loading<T>);
+        (other.runtimeType == runtimeType &&
+            other is _$Loading<T, Extra> &&
+            const DeepCollectionEquality().equals(other.extras, extras));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(extras));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$LoadingCopyWith<T, Extra, _$Loading<T, Extra>> get copyWith =>
+      __$$LoadingCopyWithImpl<T, Extra, _$Loading<T, Extra>>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() noData,
-    required TResult Function() loading,
-    required TResult Function(T data) reloading,
-    required TResult Function(T data) loaded,
-    required TResult Function(IFailure failure) error,
+    required TResult Function(Extra? extras) noData,
+    required TResult Function(Extra? extras) loading,
+    required TResult Function(T data, Extra? extras) loadingMore,
+    required TResult Function(T data, Extra? extras) reloading,
+    required TResult Function(T data, Extra? extras) loaded,
+    required TResult Function(IFailure failure, Extra? extras) error,
   }) {
-    return loading();
+    return loading(extras);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? noData,
-    TResult Function()? loading,
-    TResult Function(T data)? reloading,
-    TResult Function(T data)? loaded,
-    TResult Function(IFailure failure)? error,
+    TResult Function(Extra? extras)? noData,
+    TResult Function(Extra? extras)? loading,
+    TResult Function(T data, Extra? extras)? loadingMore,
+    TResult Function(T data, Extra? extras)? reloading,
+    TResult Function(T data, Extra? extras)? loaded,
+    TResult Function(IFailure failure, Extra? extras)? error,
   }) {
-    return loading?.call();
+    return loading?.call(extras);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? noData,
-    TResult Function()? loading,
-    TResult Function(T data)? reloading,
-    TResult Function(T data)? loaded,
-    TResult Function(IFailure failure)? error,
+    TResult Function(Extra? extras)? noData,
+    TResult Function(Extra? extras)? loading,
+    TResult Function(T data, Extra? extras)? loadingMore,
+    TResult Function(T data, Extra? extras)? reloading,
+    TResult Function(T data, Extra? extras)? loaded,
+    TResult Function(IFailure failure, Extra? extras)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
-      return loading();
+      return loading(extras);
     }
     return orElse();
   }
@@ -325,11 +436,12 @@ class _$_$Loading<T> implements _$Loading<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_$NoData<T> value) noData,
-    required TResult Function(_$Loading<T> value) loading,
-    required TResult Function(_$Reloading<T> value) reloading,
-    required TResult Function(_$Loaded<T> value) loaded,
-    required TResult Function(_$Error<T> value) error,
+    required TResult Function(_$NoData<T, Extra> value) noData,
+    required TResult Function(_$Loading<T, Extra> value) loading,
+    required TResult Function(_$LoadingMore<T, Extra> value) loadingMore,
+    required TResult Function(_$Reloading<T, Extra> value) reloading,
+    required TResult Function(_$Loaded<T, Extra> value) loaded,
+    required TResult Function(_$Error<T, Extra> value) error,
   }) {
     return loading(this);
   }
@@ -337,11 +449,12 @@ class _$_$Loading<T> implements _$Loading<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_$NoData<T> value)? noData,
-    TResult Function(_$Loading<T> value)? loading,
-    TResult Function(_$Reloading<T> value)? reloading,
-    TResult Function(_$Loaded<T> value)? loaded,
-    TResult Function(_$Error<T> value)? error,
+    TResult Function(_$NoData<T, Extra> value)? noData,
+    TResult Function(_$Loading<T, Extra> value)? loading,
+    TResult Function(_$LoadingMore<T, Extra> value)? loadingMore,
+    TResult Function(_$Reloading<T, Extra> value)? reloading,
+    TResult Function(_$Loaded<T, Extra> value)? loaded,
+    TResult Function(_$Error<T, Extra> value)? error,
   }) {
     return loading?.call(this);
   }
@@ -349,11 +462,12 @@ class _$_$Loading<T> implements _$Loading<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_$NoData<T> value)? noData,
-    TResult Function(_$Loading<T> value)? loading,
-    TResult Function(_$Reloading<T> value)? reloading,
-    TResult Function(_$Loaded<T> value)? loaded,
-    TResult Function(_$Error<T> value)? error,
+    TResult Function(_$NoData<T, Extra> value)? noData,
+    TResult Function(_$Loading<T, Extra> value)? loading,
+    TResult Function(_$LoadingMore<T, Extra> value)? loadingMore,
+    TResult Function(_$Reloading<T, Extra> value)? reloading,
+    TResult Function(_$Loaded<T, Extra> value)? loaded,
+    TResult Function(_$Error<T, Extra> value)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -363,108 +477,131 @@ class _$_$Loading<T> implements _$Loading<T> {
   }
 }
 
-abstract class _$Loading<T> implements CrudState<T> {
-  const factory _$Loading() = _$_$Loading<T>;
-}
-
-/// @nodoc
-abstract class _$$ReloadingCopyWith<T, $Res> {
-  factory _$$ReloadingCopyWith(
-          _$Reloading<T> value, $Res Function(_$Reloading<T>) then) =
-      __$$ReloadingCopyWithImpl<T, $Res>;
-  $Res call({T data});
-}
-
-/// @nodoc
-class __$$ReloadingCopyWithImpl<T, $Res>
-    extends _$CrudStateCopyWithImpl<T, $Res>
-    implements _$$ReloadingCopyWith<T, $Res> {
-  __$$ReloadingCopyWithImpl(
-      _$Reloading<T> _value, $Res Function(_$Reloading<T>) _then)
-      : super(_value, (v) => _then(v as _$Reloading<T>));
+abstract class _$Loading<T, Extra> implements CrudState<T, Extra> {
+  factory _$Loading([Extra? extras]) = _$_$Loading<T, Extra>;
 
   @override
-  _$Reloading<T> get _value => super._value as _$Reloading<T>;
+  Extra? get extras;
+  @override
+  @JsonKey(ignore: true)
+  _$$LoadingCopyWith<T, Extra, _$Loading<T, Extra>> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$LoadingMoreCopyWith<T, Extra, $Res>
+    implements $CrudStateCopyWith<T, Extra, $Res> {
+  factory _$$LoadingMoreCopyWith(_$LoadingMore<T, Extra> value,
+          $Res Function(_$LoadingMore<T, Extra>) then) =
+      __$$LoadingMoreCopyWithImpl<T, Extra, $Res>;
+  @override
+  $Res call({T data, Extra? extras});
+}
+
+/// @nodoc
+class __$$LoadingMoreCopyWithImpl<T, Extra, $Res>
+    extends _$CrudStateCopyWithImpl<T, Extra, $Res>
+    implements _$$LoadingMoreCopyWith<T, Extra, $Res> {
+  __$$LoadingMoreCopyWithImpl(_$LoadingMore<T, Extra> _value,
+      $Res Function(_$LoadingMore<T, Extra>) _then)
+      : super(_value, (v) => _then(v as _$LoadingMore<T, Extra>));
+
+  @override
+  _$LoadingMore<T, Extra> get _value => super._value as _$LoadingMore<T, Extra>;
 
   @override
   $Res call({
     Object? data = freezed,
+    Object? extras = freezed,
   }) {
-    return _then(_$Reloading<T>(
+    return _then(_$LoadingMore<T, Extra>(
       data == freezed
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
               as T,
+      extras == freezed
+          ? _value.extras
+          : extras // ignore: cast_nullable_to_non_nullable
+              as Extra?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_$Reloading<T> implements _$Reloading<T> {
-  _$_$Reloading(this.data);
+class _$_$LoadingMore<T, Extra> implements _$LoadingMore<T, Extra> {
+  _$_$LoadingMore(this.data, [this.extras]);
 
   @override
   final T data;
+  @override
+  final Extra? extras;
 
   @override
   String toString() {
-    return 'CrudState<$T>.reloading(data: $data)';
+    return 'CrudState<$T, $Extra>.loadingMore(data: $data, extras: $extras)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$Reloading<T> &&
-            const DeepCollectionEquality().equals(other.data, data));
+            other is _$LoadingMore<T, Extra> &&
+            const DeepCollectionEquality().equals(other.data, data) &&
+            const DeepCollectionEquality().equals(other.extras, extras));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(data));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(data),
+      const DeepCollectionEquality().hash(extras));
 
   @JsonKey(ignore: true)
   @override
-  _$$ReloadingCopyWith<T, _$Reloading<T>> get copyWith =>
-      __$$ReloadingCopyWithImpl<T, _$Reloading<T>>(this, _$identity);
+  _$$LoadingMoreCopyWith<T, Extra, _$LoadingMore<T, Extra>> get copyWith =>
+      __$$LoadingMoreCopyWithImpl<T, Extra, _$LoadingMore<T, Extra>>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() noData,
-    required TResult Function() loading,
-    required TResult Function(T data) reloading,
-    required TResult Function(T data) loaded,
-    required TResult Function(IFailure failure) error,
+    required TResult Function(Extra? extras) noData,
+    required TResult Function(Extra? extras) loading,
+    required TResult Function(T data, Extra? extras) loadingMore,
+    required TResult Function(T data, Extra? extras) reloading,
+    required TResult Function(T data, Extra? extras) loaded,
+    required TResult Function(IFailure failure, Extra? extras) error,
   }) {
-    return reloading(data);
+    return loadingMore(data, extras);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? noData,
-    TResult Function()? loading,
-    TResult Function(T data)? reloading,
-    TResult Function(T data)? loaded,
-    TResult Function(IFailure failure)? error,
+    TResult Function(Extra? extras)? noData,
+    TResult Function(Extra? extras)? loading,
+    TResult Function(T data, Extra? extras)? loadingMore,
+    TResult Function(T data, Extra? extras)? reloading,
+    TResult Function(T data, Extra? extras)? loaded,
+    TResult Function(IFailure failure, Extra? extras)? error,
   }) {
-    return reloading?.call(data);
+    return loadingMore?.call(data, extras);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? noData,
-    TResult Function()? loading,
-    TResult Function(T data)? reloading,
-    TResult Function(T data)? loaded,
-    TResult Function(IFailure failure)? error,
+    TResult Function(Extra? extras)? noData,
+    TResult Function(Extra? extras)? loading,
+    TResult Function(T data, Extra? extras)? loadingMore,
+    TResult Function(T data, Extra? extras)? reloading,
+    TResult Function(T data, Extra? extras)? loaded,
+    TResult Function(IFailure failure, Extra? extras)? error,
     required TResult orElse(),
   }) {
-    if (reloading != null) {
-      return reloading(data);
+    if (loadingMore != null) {
+      return loadingMore(data, extras);
     }
     return orElse();
   }
@@ -472,11 +609,186 @@ class _$_$Reloading<T> implements _$Reloading<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_$NoData<T> value) noData,
-    required TResult Function(_$Loading<T> value) loading,
-    required TResult Function(_$Reloading<T> value) reloading,
-    required TResult Function(_$Loaded<T> value) loaded,
-    required TResult Function(_$Error<T> value) error,
+    required TResult Function(_$NoData<T, Extra> value) noData,
+    required TResult Function(_$Loading<T, Extra> value) loading,
+    required TResult Function(_$LoadingMore<T, Extra> value) loadingMore,
+    required TResult Function(_$Reloading<T, Extra> value) reloading,
+    required TResult Function(_$Loaded<T, Extra> value) loaded,
+    required TResult Function(_$Error<T, Extra> value) error,
+  }) {
+    return loadingMore(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_$NoData<T, Extra> value)? noData,
+    TResult Function(_$Loading<T, Extra> value)? loading,
+    TResult Function(_$LoadingMore<T, Extra> value)? loadingMore,
+    TResult Function(_$Reloading<T, Extra> value)? reloading,
+    TResult Function(_$Loaded<T, Extra> value)? loaded,
+    TResult Function(_$Error<T, Extra> value)? error,
+  }) {
+    return loadingMore?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_$NoData<T, Extra> value)? noData,
+    TResult Function(_$Loading<T, Extra> value)? loading,
+    TResult Function(_$LoadingMore<T, Extra> value)? loadingMore,
+    TResult Function(_$Reloading<T, Extra> value)? reloading,
+    TResult Function(_$Loaded<T, Extra> value)? loaded,
+    TResult Function(_$Error<T, Extra> value)? error,
+    required TResult orElse(),
+  }) {
+    if (loadingMore != null) {
+      return loadingMore(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _$LoadingMore<T, Extra> implements CrudState<T, Extra> {
+  factory _$LoadingMore(T data, [Extra? extras]) = _$_$LoadingMore<T, Extra>;
+
+  T get data;
+  @override
+  Extra? get extras;
+  @override
+  @JsonKey(ignore: true)
+  _$$LoadingMoreCopyWith<T, Extra, _$LoadingMore<T, Extra>> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ReloadingCopyWith<T, Extra, $Res>
+    implements $CrudStateCopyWith<T, Extra, $Res> {
+  factory _$$ReloadingCopyWith(_$Reloading<T, Extra> value,
+          $Res Function(_$Reloading<T, Extra>) then) =
+      __$$ReloadingCopyWithImpl<T, Extra, $Res>;
+  @override
+  $Res call({T data, Extra? extras});
+}
+
+/// @nodoc
+class __$$ReloadingCopyWithImpl<T, Extra, $Res>
+    extends _$CrudStateCopyWithImpl<T, Extra, $Res>
+    implements _$$ReloadingCopyWith<T, Extra, $Res> {
+  __$$ReloadingCopyWithImpl(
+      _$Reloading<T, Extra> _value, $Res Function(_$Reloading<T, Extra>) _then)
+      : super(_value, (v) => _then(v as _$Reloading<T, Extra>));
+
+  @override
+  _$Reloading<T, Extra> get _value => super._value as _$Reloading<T, Extra>;
+
+  @override
+  $Res call({
+    Object? data = freezed,
+    Object? extras = freezed,
+  }) {
+    return _then(_$Reloading<T, Extra>(
+      data == freezed
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as T,
+      extras == freezed
+          ? _value.extras
+          : extras // ignore: cast_nullable_to_non_nullable
+              as Extra?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_$Reloading<T, Extra> implements _$Reloading<T, Extra> {
+  _$_$Reloading(this.data, [this.extras]);
+
+  @override
+  final T data;
+  @override
+  final Extra? extras;
+
+  @override
+  String toString() {
+    return 'CrudState<$T, $Extra>.reloading(data: $data, extras: $extras)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$Reloading<T, Extra> &&
+            const DeepCollectionEquality().equals(other.data, data) &&
+            const DeepCollectionEquality().equals(other.extras, extras));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(data),
+      const DeepCollectionEquality().hash(extras));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$ReloadingCopyWith<T, Extra, _$Reloading<T, Extra>> get copyWith =>
+      __$$ReloadingCopyWithImpl<T, Extra, _$Reloading<T, Extra>>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(Extra? extras) noData,
+    required TResult Function(Extra? extras) loading,
+    required TResult Function(T data, Extra? extras) loadingMore,
+    required TResult Function(T data, Extra? extras) reloading,
+    required TResult Function(T data, Extra? extras) loaded,
+    required TResult Function(IFailure failure, Extra? extras) error,
+  }) {
+    return reloading(data, extras);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(Extra? extras)? noData,
+    TResult Function(Extra? extras)? loading,
+    TResult Function(T data, Extra? extras)? loadingMore,
+    TResult Function(T data, Extra? extras)? reloading,
+    TResult Function(T data, Extra? extras)? loaded,
+    TResult Function(IFailure failure, Extra? extras)? error,
+  }) {
+    return reloading?.call(data, extras);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Extra? extras)? noData,
+    TResult Function(Extra? extras)? loading,
+    TResult Function(T data, Extra? extras)? loadingMore,
+    TResult Function(T data, Extra? extras)? reloading,
+    TResult Function(T data, Extra? extras)? loaded,
+    TResult Function(IFailure failure, Extra? extras)? error,
+    required TResult orElse(),
+  }) {
+    if (reloading != null) {
+      return reloading(data, extras);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_$NoData<T, Extra> value) noData,
+    required TResult Function(_$Loading<T, Extra> value) loading,
+    required TResult Function(_$LoadingMore<T, Extra> value) loadingMore,
+    required TResult Function(_$Reloading<T, Extra> value) reloading,
+    required TResult Function(_$Loaded<T, Extra> value) loaded,
+    required TResult Function(_$Error<T, Extra> value) error,
   }) {
     return reloading(this);
   }
@@ -484,11 +796,12 @@ class _$_$Reloading<T> implements _$Reloading<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_$NoData<T> value)? noData,
-    TResult Function(_$Loading<T> value)? loading,
-    TResult Function(_$Reloading<T> value)? reloading,
-    TResult Function(_$Loaded<T> value)? loaded,
-    TResult Function(_$Error<T> value)? error,
+    TResult Function(_$NoData<T, Extra> value)? noData,
+    TResult Function(_$Loading<T, Extra> value)? loading,
+    TResult Function(_$LoadingMore<T, Extra> value)? loadingMore,
+    TResult Function(_$Reloading<T, Extra> value)? reloading,
+    TResult Function(_$Loaded<T, Extra> value)? loaded,
+    TResult Function(_$Error<T, Extra> value)? error,
   }) {
     return reloading?.call(this);
   }
@@ -496,11 +809,12 @@ class _$_$Reloading<T> implements _$Reloading<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_$NoData<T> value)? noData,
-    TResult Function(_$Loading<T> value)? loading,
-    TResult Function(_$Reloading<T> value)? reloading,
-    TResult Function(_$Loaded<T> value)? loaded,
-    TResult Function(_$Error<T> value)? error,
+    TResult Function(_$NoData<T, Extra> value)? noData,
+    TResult Function(_$Loading<T, Extra> value)? loading,
+    TResult Function(_$LoadingMore<T, Extra> value)? loadingMore,
+    TResult Function(_$Reloading<T, Extra> value)? reloading,
+    TResult Function(_$Loaded<T, Extra> value)? loaded,
+    TResult Function(_$Error<T, Extra> value)? error,
     required TResult orElse(),
   }) {
     if (reloading != null) {
@@ -510,111 +824,131 @@ class _$_$Reloading<T> implements _$Reloading<T> {
   }
 }
 
-abstract class _$Reloading<T> implements CrudState<T> {
-  factory _$Reloading(T data) = _$_$Reloading<T>;
+abstract class _$Reloading<T, Extra> implements CrudState<T, Extra> {
+  factory _$Reloading(T data, [Extra? extras]) = _$_$Reloading<T, Extra>;
 
   T get data;
+  @override
+  Extra? get extras;
+  @override
   @JsonKey(ignore: true)
-  _$$ReloadingCopyWith<T, _$Reloading<T>> get copyWith =>
+  _$$ReloadingCopyWith<T, Extra, _$Reloading<T, Extra>> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$LoadedCopyWith<T, $Res> {
+abstract class _$$LoadedCopyWith<T, Extra, $Res>
+    implements $CrudStateCopyWith<T, Extra, $Res> {
   factory _$$LoadedCopyWith(
-          _$Loaded<T> value, $Res Function(_$Loaded<T>) then) =
-      __$$LoadedCopyWithImpl<T, $Res>;
-  $Res call({T data});
+          _$Loaded<T, Extra> value, $Res Function(_$Loaded<T, Extra>) then) =
+      __$$LoadedCopyWithImpl<T, Extra, $Res>;
+  @override
+  $Res call({T data, Extra? extras});
 }
 
 /// @nodoc
-class __$$LoadedCopyWithImpl<T, $Res> extends _$CrudStateCopyWithImpl<T, $Res>
-    implements _$$LoadedCopyWith<T, $Res> {
-  __$$LoadedCopyWithImpl(_$Loaded<T> _value, $Res Function(_$Loaded<T>) _then)
-      : super(_value, (v) => _then(v as _$Loaded<T>));
+class __$$LoadedCopyWithImpl<T, Extra, $Res>
+    extends _$CrudStateCopyWithImpl<T, Extra, $Res>
+    implements _$$LoadedCopyWith<T, Extra, $Res> {
+  __$$LoadedCopyWithImpl(
+      _$Loaded<T, Extra> _value, $Res Function(_$Loaded<T, Extra>) _then)
+      : super(_value, (v) => _then(v as _$Loaded<T, Extra>));
 
   @override
-  _$Loaded<T> get _value => super._value as _$Loaded<T>;
+  _$Loaded<T, Extra> get _value => super._value as _$Loaded<T, Extra>;
 
   @override
   $Res call({
     Object? data = freezed,
+    Object? extras = freezed,
   }) {
-    return _then(_$Loaded<T>(
+    return _then(_$Loaded<T, Extra>(
       data == freezed
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
               as T,
+      extras == freezed
+          ? _value.extras
+          : extras // ignore: cast_nullable_to_non_nullable
+              as Extra?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_$Loaded<T> implements _$Loaded<T> {
-  _$_$Loaded(this.data);
+class _$_$Loaded<T, Extra> implements _$Loaded<T, Extra> {
+  _$_$Loaded(this.data, [this.extras]);
 
   @override
   final T data;
+  @override
+  final Extra? extras;
 
   @override
   String toString() {
-    return 'CrudState<$T>.loaded(data: $data)';
+    return 'CrudState<$T, $Extra>.loaded(data: $data, extras: $extras)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$Loaded<T> &&
-            const DeepCollectionEquality().equals(other.data, data));
+            other is _$Loaded<T, Extra> &&
+            const DeepCollectionEquality().equals(other.data, data) &&
+            const DeepCollectionEquality().equals(other.extras, extras));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(data));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(data),
+      const DeepCollectionEquality().hash(extras));
 
   @JsonKey(ignore: true)
   @override
-  _$$LoadedCopyWith<T, _$Loaded<T>> get copyWith =>
-      __$$LoadedCopyWithImpl<T, _$Loaded<T>>(this, _$identity);
+  _$$LoadedCopyWith<T, Extra, _$Loaded<T, Extra>> get copyWith =>
+      __$$LoadedCopyWithImpl<T, Extra, _$Loaded<T, Extra>>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() noData,
-    required TResult Function() loading,
-    required TResult Function(T data) reloading,
-    required TResult Function(T data) loaded,
-    required TResult Function(IFailure failure) error,
+    required TResult Function(Extra? extras) noData,
+    required TResult Function(Extra? extras) loading,
+    required TResult Function(T data, Extra? extras) loadingMore,
+    required TResult Function(T data, Extra? extras) reloading,
+    required TResult Function(T data, Extra? extras) loaded,
+    required TResult Function(IFailure failure, Extra? extras) error,
   }) {
-    return loaded(data);
+    return loaded(data, extras);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? noData,
-    TResult Function()? loading,
-    TResult Function(T data)? reloading,
-    TResult Function(T data)? loaded,
-    TResult Function(IFailure failure)? error,
+    TResult Function(Extra? extras)? noData,
+    TResult Function(Extra? extras)? loading,
+    TResult Function(T data, Extra? extras)? loadingMore,
+    TResult Function(T data, Extra? extras)? reloading,
+    TResult Function(T data, Extra? extras)? loaded,
+    TResult Function(IFailure failure, Extra? extras)? error,
   }) {
-    return loaded?.call(data);
+    return loaded?.call(data, extras);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? noData,
-    TResult Function()? loading,
-    TResult Function(T data)? reloading,
-    TResult Function(T data)? loaded,
-    TResult Function(IFailure failure)? error,
+    TResult Function(Extra? extras)? noData,
+    TResult Function(Extra? extras)? loading,
+    TResult Function(T data, Extra? extras)? loadingMore,
+    TResult Function(T data, Extra? extras)? reloading,
+    TResult Function(T data, Extra? extras)? loaded,
+    TResult Function(IFailure failure, Extra? extras)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(data);
+      return loaded(data, extras);
     }
     return orElse();
   }
@@ -622,11 +956,12 @@ class _$_$Loaded<T> implements _$Loaded<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_$NoData<T> value) noData,
-    required TResult Function(_$Loading<T> value) loading,
-    required TResult Function(_$Reloading<T> value) reloading,
-    required TResult Function(_$Loaded<T> value) loaded,
-    required TResult Function(_$Error<T> value) error,
+    required TResult Function(_$NoData<T, Extra> value) noData,
+    required TResult Function(_$Loading<T, Extra> value) loading,
+    required TResult Function(_$LoadingMore<T, Extra> value) loadingMore,
+    required TResult Function(_$Reloading<T, Extra> value) reloading,
+    required TResult Function(_$Loaded<T, Extra> value) loaded,
+    required TResult Function(_$Error<T, Extra> value) error,
   }) {
     return loaded(this);
   }
@@ -634,11 +969,12 @@ class _$_$Loaded<T> implements _$Loaded<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_$NoData<T> value)? noData,
-    TResult Function(_$Loading<T> value)? loading,
-    TResult Function(_$Reloading<T> value)? reloading,
-    TResult Function(_$Loaded<T> value)? loaded,
-    TResult Function(_$Error<T> value)? error,
+    TResult Function(_$NoData<T, Extra> value)? noData,
+    TResult Function(_$Loading<T, Extra> value)? loading,
+    TResult Function(_$LoadingMore<T, Extra> value)? loadingMore,
+    TResult Function(_$Reloading<T, Extra> value)? reloading,
+    TResult Function(_$Loaded<T, Extra> value)? loaded,
+    TResult Function(_$Error<T, Extra> value)? error,
   }) {
     return loaded?.call(this);
   }
@@ -646,11 +982,12 @@ class _$_$Loaded<T> implements _$Loaded<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_$NoData<T> value)? noData,
-    TResult Function(_$Loading<T> value)? loading,
-    TResult Function(_$Reloading<T> value)? reloading,
-    TResult Function(_$Loaded<T> value)? loaded,
-    TResult Function(_$Error<T> value)? error,
+    TResult Function(_$NoData<T, Extra> value)? noData,
+    TResult Function(_$Loading<T, Extra> value)? loading,
+    TResult Function(_$LoadingMore<T, Extra> value)? loadingMore,
+    TResult Function(_$Reloading<T, Extra> value)? reloading,
+    TResult Function(_$Loaded<T, Extra> value)? loaded,
+    TResult Function(_$Error<T, Extra> value)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -660,110 +997,131 @@ class _$_$Loaded<T> implements _$Loaded<T> {
   }
 }
 
-abstract class _$Loaded<T> implements CrudState<T> {
-  factory _$Loaded(T data) = _$_$Loaded<T>;
+abstract class _$Loaded<T, Extra> implements CrudState<T, Extra> {
+  factory _$Loaded(T data, [Extra? extras]) = _$_$Loaded<T, Extra>;
 
   T get data;
+  @override
+  Extra? get extras;
+  @override
   @JsonKey(ignore: true)
-  _$$LoadedCopyWith<T, _$Loaded<T>> get copyWith =>
+  _$$LoadedCopyWith<T, Extra, _$Loaded<T, Extra>> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ErrorCopyWith<T, $Res> {
-  factory _$$ErrorCopyWith(_$Error<T> value, $Res Function(_$Error<T>) then) =
-      __$$ErrorCopyWithImpl<T, $Res>;
-  $Res call({IFailure failure});
+abstract class _$$ErrorCopyWith<T, Extra, $Res>
+    implements $CrudStateCopyWith<T, Extra, $Res> {
+  factory _$$ErrorCopyWith(
+          _$Error<T, Extra> value, $Res Function(_$Error<T, Extra>) then) =
+      __$$ErrorCopyWithImpl<T, Extra, $Res>;
+  @override
+  $Res call({IFailure failure, Extra? extras});
 }
 
 /// @nodoc
-class __$$ErrorCopyWithImpl<T, $Res> extends _$CrudStateCopyWithImpl<T, $Res>
-    implements _$$ErrorCopyWith<T, $Res> {
-  __$$ErrorCopyWithImpl(_$Error<T> _value, $Res Function(_$Error<T>) _then)
-      : super(_value, (v) => _then(v as _$Error<T>));
+class __$$ErrorCopyWithImpl<T, Extra, $Res>
+    extends _$CrudStateCopyWithImpl<T, Extra, $Res>
+    implements _$$ErrorCopyWith<T, Extra, $Res> {
+  __$$ErrorCopyWithImpl(
+      _$Error<T, Extra> _value, $Res Function(_$Error<T, Extra>) _then)
+      : super(_value, (v) => _then(v as _$Error<T, Extra>));
 
   @override
-  _$Error<T> get _value => super._value as _$Error<T>;
+  _$Error<T, Extra> get _value => super._value as _$Error<T, Extra>;
 
   @override
   $Res call({
     Object? failure = freezed,
+    Object? extras = freezed,
   }) {
-    return _then(_$Error<T>(
+    return _then(_$Error<T, Extra>(
       failure == freezed
           ? _value.failure
           : failure // ignore: cast_nullable_to_non_nullable
               as IFailure,
+      extras == freezed
+          ? _value.extras
+          : extras // ignore: cast_nullable_to_non_nullable
+              as Extra?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_$Error<T> implements _$Error<T> {
-  _$_$Error(this.failure);
+class _$_$Error<T, Extra> implements _$Error<T, Extra> {
+  _$_$Error(this.failure, [this.extras]);
 
   @override
   final IFailure failure;
+  @override
+  final Extra? extras;
 
   @override
   String toString() {
-    return 'CrudState<$T>.error(failure: $failure)';
+    return 'CrudState<$T, $Extra>.error(failure: $failure, extras: $extras)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$Error<T> &&
-            const DeepCollectionEquality().equals(other.failure, failure));
+            other is _$Error<T, Extra> &&
+            const DeepCollectionEquality().equals(other.failure, failure) &&
+            const DeepCollectionEquality().equals(other.extras, extras));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(failure));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(failure),
+      const DeepCollectionEquality().hash(extras));
 
   @JsonKey(ignore: true)
   @override
-  _$$ErrorCopyWith<T, _$Error<T>> get copyWith =>
-      __$$ErrorCopyWithImpl<T, _$Error<T>>(this, _$identity);
+  _$$ErrorCopyWith<T, Extra, _$Error<T, Extra>> get copyWith =>
+      __$$ErrorCopyWithImpl<T, Extra, _$Error<T, Extra>>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() noData,
-    required TResult Function() loading,
-    required TResult Function(T data) reloading,
-    required TResult Function(T data) loaded,
-    required TResult Function(IFailure failure) error,
+    required TResult Function(Extra? extras) noData,
+    required TResult Function(Extra? extras) loading,
+    required TResult Function(T data, Extra? extras) loadingMore,
+    required TResult Function(T data, Extra? extras) reloading,
+    required TResult Function(T data, Extra? extras) loaded,
+    required TResult Function(IFailure failure, Extra? extras) error,
   }) {
-    return error(failure);
+    return error(failure, extras);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? noData,
-    TResult Function()? loading,
-    TResult Function(T data)? reloading,
-    TResult Function(T data)? loaded,
-    TResult Function(IFailure failure)? error,
+    TResult Function(Extra? extras)? noData,
+    TResult Function(Extra? extras)? loading,
+    TResult Function(T data, Extra? extras)? loadingMore,
+    TResult Function(T data, Extra? extras)? reloading,
+    TResult Function(T data, Extra? extras)? loaded,
+    TResult Function(IFailure failure, Extra? extras)? error,
   }) {
-    return error?.call(failure);
+    return error?.call(failure, extras);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? noData,
-    TResult Function()? loading,
-    TResult Function(T data)? reloading,
-    TResult Function(T data)? loaded,
-    TResult Function(IFailure failure)? error,
+    TResult Function(Extra? extras)? noData,
+    TResult Function(Extra? extras)? loading,
+    TResult Function(T data, Extra? extras)? loadingMore,
+    TResult Function(T data, Extra? extras)? reloading,
+    TResult Function(T data, Extra? extras)? loaded,
+    TResult Function(IFailure failure, Extra? extras)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error(failure);
+      return error(failure, extras);
     }
     return orElse();
   }
@@ -771,11 +1129,12 @@ class _$_$Error<T> implements _$Error<T> {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_$NoData<T> value) noData,
-    required TResult Function(_$Loading<T> value) loading,
-    required TResult Function(_$Reloading<T> value) reloading,
-    required TResult Function(_$Loaded<T> value) loaded,
-    required TResult Function(_$Error<T> value) error,
+    required TResult Function(_$NoData<T, Extra> value) noData,
+    required TResult Function(_$Loading<T, Extra> value) loading,
+    required TResult Function(_$LoadingMore<T, Extra> value) loadingMore,
+    required TResult Function(_$Reloading<T, Extra> value) reloading,
+    required TResult Function(_$Loaded<T, Extra> value) loaded,
+    required TResult Function(_$Error<T, Extra> value) error,
   }) {
     return error(this);
   }
@@ -783,11 +1142,12 @@ class _$_$Error<T> implements _$Error<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_$NoData<T> value)? noData,
-    TResult Function(_$Loading<T> value)? loading,
-    TResult Function(_$Reloading<T> value)? reloading,
-    TResult Function(_$Loaded<T> value)? loaded,
-    TResult Function(_$Error<T> value)? error,
+    TResult Function(_$NoData<T, Extra> value)? noData,
+    TResult Function(_$Loading<T, Extra> value)? loading,
+    TResult Function(_$LoadingMore<T, Extra> value)? loadingMore,
+    TResult Function(_$Reloading<T, Extra> value)? reloading,
+    TResult Function(_$Loaded<T, Extra> value)? loaded,
+    TResult Function(_$Error<T, Extra> value)? error,
   }) {
     return error?.call(this);
   }
@@ -795,11 +1155,12 @@ class _$_$Error<T> implements _$Error<T> {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_$NoData<T> value)? noData,
-    TResult Function(_$Loading<T> value)? loading,
-    TResult Function(_$Reloading<T> value)? reloading,
-    TResult Function(_$Loaded<T> value)? loaded,
-    TResult Function(_$Error<T> value)? error,
+    TResult Function(_$NoData<T, Extra> value)? noData,
+    TResult Function(_$Loading<T, Extra> value)? loading,
+    TResult Function(_$LoadingMore<T, Extra> value)? loadingMore,
+    TResult Function(_$Reloading<T, Extra> value)? reloading,
+    TResult Function(_$Loaded<T, Extra> value)? loaded,
+    TResult Function(_$Error<T, Extra> value)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -809,11 +1170,14 @@ class _$_$Error<T> implements _$Error<T> {
   }
 }
 
-abstract class _$Error<T> implements CrudState<T> {
-  factory _$Error(IFailure failure) = _$_$Error<T>;
+abstract class _$Error<T, Extra> implements CrudState<T, Extra> {
+  factory _$Error(IFailure failure, [Extra? extras]) = _$_$Error<T, Extra>;
 
   IFailure get failure;
+  @override
+  Extra? get extras;
+  @override
   @JsonKey(ignore: true)
-  _$$ErrorCopyWith<T, _$Error<T>> get copyWith =>
+  _$$ErrorCopyWith<T, Extra, _$Error<T, Extra>> get copyWith =>
       throw _privateConstructorUsedError;
 }

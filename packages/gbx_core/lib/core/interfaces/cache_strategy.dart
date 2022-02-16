@@ -21,6 +21,9 @@ abstract class CacheStrategy {
   factory CacheStrategy.serverFirst() => const ServerFirstStrategy();
   factory CacheStrategy.updatingCacheFirst(String orderBy) =>
       UpdatingCacheFirstStrategy(orderBy: orderBy);
+
+  bool shouldIgnoreCache(IParam param) =>
+      param is ICacheParams && param.ignoreCache;
 }
 
 class CacheFirstStrategy extends CacheStrategy {
@@ -31,11 +34,10 @@ class CacheFirstStrategy extends CacheStrategy {
     required IQueryParams<T> params,
     required ICRUDDataSource<T> datasource,
     required ICRUDDataSource<T> cacheDatasource,
-    bool forceRefresh = false,
   }) async {
     List<CRUDData<T>>? data;
     try {
-      if (forceRefresh) throw NoCachedDataException();
+      if (shouldIgnoreCache(params)) throw NoCachedDataException();
       data = await cacheDatasource.query(params);
     } on NoCachedDataException {
       data = await datasource.query(params);
@@ -51,11 +53,10 @@ class CacheFirstStrategy extends CacheStrategy {
     required IReadParams<T> params,
     required ICRUDDataSource<T> datasource,
     required ICRUDDataSource<T> cacheDatasource,
-    bool forceRefresh = false,
   }) async {
     CRUDData<T>? data;
     try {
-      if (forceRefresh) throw NoCachedDataException();
+      if (shouldIgnoreCache(params)) throw NoCachedDataException();
       data = (await cacheDatasource.read(params));
     } catch (e) {
       data = (await datasource.read(params));
@@ -83,6 +84,7 @@ class ServerFirstStrategy extends CacheStrategy {
             cacheDatasource.update(UpdateParams(item: e.item, id: e.id))),
       );
     } catch (e) {
+      if (shouldIgnoreCache(params)) throw NoDataException();
       data = await cacheDatasource.query(params);
     }
     return data;
@@ -100,6 +102,7 @@ class ServerFirstStrategy extends CacheStrategy {
       data = await datasource.read(params);
       await cacheDatasource.update(UpdateParams(item: data.item, id: data.id));
     } catch (e) {
+      if (shouldIgnoreCache(params)) throw NoDataException();
       data = await cacheDatasource.read(params);
     }
     return data;
@@ -116,10 +119,10 @@ class UpdatingCacheFirstStrategy extends CacheFirstStrategy {
     required IQueryParams<T> params,
     required ICRUDDataSource<T> datasource,
     required ICRUDDataSource<T> cacheDatasource,
-    bool forceRefresh = false,
   }) async {
-    final lastItem =
-        forceRefresh ? null : await _getLastCachedData(cacheDatasource);
+    final lastItem = shouldIgnoreCache(params)
+        ? null
+        : await _getLastCachedData(cacheDatasource);
 
     if (lastItem != null) {
       await _updateCache(lastItem, datasource, cacheDatasource);

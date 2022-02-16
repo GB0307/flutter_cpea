@@ -6,16 +6,17 @@ import 'package:gbx_core/domain/index.dart';
 part 'crud_state.dart';
 part 'crud_cubit.freezed.dart';
 
-abstract class ICrudCubit<M extends Identifiable, R>
-    extends Cubit<CrudState<R>> {
+abstract class ICrudCubit<M extends Identifiable, R, Extra>
+    extends Cubit<CrudState<R, Extra>> {
   ICrudCubit({
     required this.module,
-    CrudState<R>? initialState,
+    CrudState<R, Extra>? initialState,
+    Extra? initialExtras,
     bool initialLoad = false,
   }) : super(initialState ??
             (initialLoad
-                ? const CrudState.loading()
-                : const CrudState.noData())) {
+                ? CrudState.loading(initialExtras)
+                : CrudState.noData(initialExtras))) {
     if (initialLoad) loadData();
   }
 
@@ -45,41 +46,41 @@ abstract class ICrudCubit<M extends Identifiable, R>
   Future<DResponse<R>> loadRefreshedItems();
 
   Future<void> cleanData() async {
-    emit(const CrudState.noData());
+    emit(CrudState.noData(state.extras));
   }
 
   /// Handles errors that may occur while loading data
   /// If the error is handled correctly, then emit a new state and return true,
   /// otherwhise, return false, and an error state will be emitted.
   @protected
-  Future<CrudState<R>> handleFailure(IFailure failure) async {
-    if (failure is NoDataFailure) return const CrudState.noData();
-    return CrudState.error(failure);
+  Future<CrudState<R, Extra>> handleFailure(IFailure failure) async {
+    if (failure is NoDataFailure) return CrudState.noData(state.extras);
+    return CrudState.error(failure, state.extras);
   }
 
   /// Handles exceptions that may occur while executing jobs
   /// If the exception is handled correctly, then emit a new state and return true,
   /// otherwhise, return false, and an error state will be emitted.
   @protected
-  Future<CrudState<R>> handleException(Exception exception) async {
-    return CrudState.error(GeneralFailure(exception));
+  Future<CrudState<R, Extra>> handleException(Exception exception) async {
+    return CrudState.error(GeneralFailure(exception), state.extras);
   }
 
   /// Executes some kind of job, emits loading while it is processing and catch
   /// exceptions along the way.
   @protected
-  Future<void> executeLoading(Future<CrudState<R>> Function() job,
+  Future<void> executeLoading(Future<CrudState<R, Extra>> Function() job,
       {bool ignoreCurrentData = false}) async {
     var currentData = ignoreCurrentData
         ? null
         : state.whenOrNull(
-            reloading: (data) => data,
-            loaded: (data) => data,
+            reloading: (data, extra) => data,
+            loaded: (data, extra) => data,
           );
 
     emit(currentData != null
-        ? CrudState.reloading(currentData)
-        : const CrudState.loading());
+        ? CrudState.reloading(currentData, state.extras)
+        : CrudState.loading(state.extras));
     try {
       emit(await job.call());
     } on Exception catch (e) {
@@ -90,15 +91,21 @@ abstract class ICrudCubit<M extends Identifiable, R>
   /// Map a response into a loaded crud response, in case of a failure it calls
   /// handleFailure.
   @protected
-  Future<CrudState<R>> responseToState(DResponse<R> response) {
+  Future<CrudState<R, Extra>> responseToState(DResponse<R> response) {
     return response.on(
       failure: (failure) => handleFailure(failure),
       success: (data) async {
         if (data == null || (data is List && data.isEmpty)) {
-          return const CrudState.noData();
+          return CrudState.noData(state.extras);
         }
-        return CrudState.loaded(data);
+        return handleSuccess(data);
       },
     );
+  }
+
+  /// Called to map a succeded response data into a crud state
+  @protected
+  CrudState<R, Extra> handleSuccess(R data) {
+    return CrudState.loaded(data, state.extras);
   }
 }
