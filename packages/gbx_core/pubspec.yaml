@@ -16,6 +16,7 @@ dependencies:
   logger: ^1.1.0
   freezed_annotation:
   get_storage: ^2.0.3
+  bloc:
 
 dev_dependencies:
   flutter_test:
