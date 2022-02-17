@@ -27,39 +27,34 @@ class ListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Column(
-        children: [
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: titlePadding,
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        title,
-                        style: Theme.of(context).textTheme.headline6,
-                      ),
-                    ),
-                    trailing ?? const Icon(Icons.chevron_right_rounded),
-                  ],
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        InkWell(
+          onTap: onTap,
+          child: Padding(
+            padding: titlePadding,
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    title,
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
                 ),
-              ),
-              if (child != null)
-                Padding(
-                  padding: contentPadding,
-                  child: child,
-                ),
-            ],
+                trailing ?? const Icon(Icons.chevron_right_rounded),
+              ],
+            ),
           ),
-          if (child != null) const SizedBox(height: doublePadding),
-          const Divider(height: 0),
-        ],
-      ),
+        ),
+        if (child != null)
+          Padding(
+            padding: contentPadding,
+            child: child,
+          ),
+        if (child != null) const SizedBox(height: doublePadding),
+        const Divider(height: 0),
+      ],
     );
   }
 }

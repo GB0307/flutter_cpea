@@ -19,6 +19,7 @@ class CardButton extends StatelessWidget {
         fit = BoxFit.cover,
         iconColor = null,
         iconSize = null,
+        label = null,
         super(key: key);
 
   const CardButton.image({
@@ -36,11 +37,13 @@ class CardButton extends StatelessWidget {
   })  : child = null,
         iconColor = null,
         iconSize = null,
+        label = null,
         super(key: key);
 
   const CardButton.icon({
     Key? key,
     this.size = defaultCardButtonSize,
+    this.label,
     this.onTap,
     this.elevation,
     required Icon icon,
@@ -58,7 +61,7 @@ class CardButton extends StatelessWidget {
 
   // DEFAULT VARIABLES
   final Widget? child;
-  final double size;
+  final double? size;
   final void Function()? onTap;
   final double? elevation;
   final Clip? clip;
@@ -76,6 +79,7 @@ class CardButton extends StatelessWidget {
   // ICON VARIABLES
   final double? iconSize;
   final Color? iconColor;
+  final String? label;
 
   @override
   Widget build(BuildContext context) {
@@ -90,12 +94,19 @@ class CardButton extends StatelessWidget {
         : child != null
             ? Theme(
                 data: theme.copyWith(
-                  iconTheme: theme.iconTheme.copyWith(
-                    size: iconSize,
-                    color: iconColor ?? theme.primaryColor,
-                  ),
+                    iconTheme: theme.iconTheme.copyWith(
+                      size: iconSize,
+                      color: iconColor ?? theme.primaryColor,
+                    ),
+                    textTheme: theme.textTheme
+                        .apply(bodyColor: iconColor ?? theme.primaryColor)),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    child!,
+                    if (label != null) Text(label!),
+                  ],
                 ),
-                child: child!,
               )
             : null;
 

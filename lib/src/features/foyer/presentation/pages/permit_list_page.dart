@@ -1,14 +1,10 @@
 import 'package:cpea/src/core/utils/l18n.dart';
 import 'package:cpea/src/core/widgets/app_bars/custom_app_bar.dart';
 import 'package:cpea/src/features/foyer/domain/entities/permit.dart';
-import 'package:cpea/src/features/foyer/domain/foyer_module.dart';
-import 'package:cpea/src/features/foyer/presentation/bloc/cubit/permit_list_cubit.dart';
-import 'package:cpea/src/features/login/domain/entities/user_data.dart';
+import 'package:cpea/src/features/foyer/presentation/bloc/permit_list/permit_list_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gbx_core/core/index.dart';
-import 'package:gbx_core/domain/index.dart';
-import 'package:gbx_login/gbx_login.dart';
 
 class PermitListPage extends StatelessWidget {
   const PermitListPage({Key? key}) : super(key: key);
