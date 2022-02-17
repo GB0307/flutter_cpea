@@ -122,7 +122,7 @@ class UpdatingCacheFirstStrategy extends CacheFirstStrategy {
   }) async {
     final lastItem = shouldIgnoreCache(params)
         ? null
-        : await _getLastCachedData(cacheDatasource);
+        : await _getLastCachedData<T>(cacheDatasource);
 
     if (lastItem != null) {
       await _updateCache(lastItem, datasource, cacheDatasource);
@@ -144,10 +144,10 @@ class UpdatingCacheFirstStrategy extends CacheFirstStrategy {
     return items;
   }
 
-  Future<Map<String, dynamic>?> _getLastCachedData(
+  Future<Map<String, dynamic>?> _getLastCachedData<T extends Identifiable>(
       ICRUDDataSource cacheDatasource) async {
-    var lastItems = (await cacheDatasource
-        .query(QueryParams(limit: 1, orderBy: orderBy, ascendingOrder: false)));
+    var lastItems = (await cacheDatasource.query(
+        QueryParams<T>(limit: 1, orderBy: orderBy, ascendingOrder: false)));
     return lastItems.isEmpty ? null : lastItems.first.data;
   }
 
@@ -155,7 +155,7 @@ class UpdatingCacheFirstStrategy extends CacheFirstStrategy {
       Map<String, dynamic> lastItem,
       ICRUDDataSource<T> datasource,
       ICRUDDataSource<T> cacheDatasource) async {
-    final items = await datasource.query(QueryParams(
+    final items = await datasource.query(QueryParams<T>(
         orderBy: orderBy, ascendingOrder: false, endBefore: lastItem[orderBy]));
     await Future.wait(items.map(
         (e) => cacheDatasource.update(UpdateParams(item: e.item, id: e.id))));

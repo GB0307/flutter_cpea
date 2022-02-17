@@ -24,7 +24,7 @@ class DResponse<T> {
         : DResponse<V>.from(failure);
   }
 
-  dynamic on({Function(T data)? success, Function(IFailure failure)? failure}) {
+  R on<R>({Function(T data)? success, Function(IFailure failure)? failure}) {
     if (didFail) {
       return failure?.call(this.failure);
     } else {

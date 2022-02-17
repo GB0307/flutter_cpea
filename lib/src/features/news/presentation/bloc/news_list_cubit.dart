@@ -18,7 +18,7 @@ class NewsListCubit extends Cubit<List<News>> {
 
   void loadNews() async {
     var resp = await NewsModule.instance.query(
-        const QueryParams(orderBy: "publishDate", ascendingOrder: false));
+        const QueryParams<News>(orderBy: "publishDate", ascendingOrder: false));
     if (resp.didSuccess) emit(resp.data);
   }
 }

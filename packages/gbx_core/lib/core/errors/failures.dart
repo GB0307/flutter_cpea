@@ -17,6 +17,6 @@ class InvalidDataFailure extends GeneralFailure {
 
 class NoDataFailure extends IFailure {}
 
-class NoCachedDataFailure extends IFailure {}
+class NoCachedDataFailure extends NoDataFailure {}
 
 class UnauthorizedFailure extends IFailure {}
